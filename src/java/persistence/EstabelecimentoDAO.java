@@ -29,16 +29,16 @@ public class EstabelecimentoDAO {
             rs.first();
             while (rs.next()) {
                 Estabelecimento estabelecimento = new Estabelecimento(rs.getInt("estabelecimento.id"),
-                    rs.getString("nome"),
-                    rs.getString("cnpj"),
-                    rs.getString("descricao"),
-                    rs.getInt("usuarioId"),
-                    rs.getString("login"),
-                    rs.getString("senha"),
-                    rs.getString("email"),
-                    rs.getString("tipo"),
-                    rs.getString("telefone"),
-                    rs.getString("celular"));
+                        rs.getString("nome"),
+                        rs.getString("cnpj"),
+                        rs.getString("descricao"),
+                        rs.getInt("usuarioId"),
+                        rs.getString("login"),
+                        rs.getString("senha"),
+                        rs.getString("email"),
+                        rs.getString("tipo"),
+                        rs.getString("telefone"),
+                        rs.getString("celular"));
                 //setar categoria aqui
                 estabelecimentos.add(estabelecimento);
 
@@ -76,6 +76,36 @@ public class EstabelecimentoDAO {
 
         } catch (SQLException e) {
             throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return estabelecimento;
+    }
+
+    public Estabelecimento getEstabelecimento(String login) throws SQLException, ClassNotFoundException {
+        Connection conn = null;
+        Statement st = null;
+        Estabelecimento estabelecimento = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("select * from estabelecimento,usuario where login ='" + login + "' and estabelecimento.usuario_id=usuario.id");
+            rs.first();
+
+            estabelecimento = new Estabelecimento(rs.getInt("estabelecimento.id"),
+                    rs.getString("nome"),
+                    rs.getString("cnpj"),
+                    rs.getString("descricao"),
+                    rs.getInt("usuario_id"),
+                    rs.getString("login"),
+                    rs.getString("senha"),
+                    rs.getString("email"),
+                    rs.getString("tipo"),
+                    rs.getString("telefone"),
+                    rs.getString("celular"));
+
+        } catch (SQLException e) {
+            return null;
         } finally {
             closeResources(conn, st);
         }
@@ -149,7 +179,7 @@ public class EstabelecimentoDAO {
             comando.setString(5, estabelecimento.getTelefone());
             comando.setString(6, estabelecimento.getCelular());
             comando.setInt(7, estabelecimento.getEndereco().getId());
-            comando.setInt(8, estabelecimento.getUsuarioId()); 
+            comando.setInt(8, estabelecimento.getUsuarioId());
             comando.execute();
 
             String sql2 = "UPDATE estabelecimento SET nome=?,cnpj=?,descricao=? WHERE id=?";

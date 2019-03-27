@@ -3,7 +3,7 @@ package model;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Usuario implements Observer{
+public class Usuario implements Observer {
 
     private int id;
     private String login;
@@ -23,7 +23,6 @@ public class Usuario implements Observer{
         this.telefone = telefone;
         this.celular = celular;
     }
-    
 
     public int getUsuarioId() {
         return id;
@@ -91,5 +90,5 @@ public class Usuario implements Observer{
 
     @Override
     public void update(Observable o, Object o1) {
-TODO    }
+    }
 }

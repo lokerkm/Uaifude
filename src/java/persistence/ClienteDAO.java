@@ -24,21 +24,21 @@ public class ClienteDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from cliente,usuario where usuario.id = cliente.id");
+            ResultSet rs = st.executeQuery("select * from cliente,usuario where usuario.id = cliente.usuario_id");
 
             rs.first();
             while (rs.next()) {
                 Cliente cliente = new Cliente(rs.getInt("cliente.id"),
-                    rs.getString("nome"),
-                    rs.getString("cpf"),
-                    rs.getString("nascimento"),
-                    rs.getInt("usuarioId"),
-                    rs.getString("login"),
-                    rs.getString("senha"),
-                    rs.getString("email"),
-                    rs.getString("tipo"),
-                    rs.getString("telefone"),
-                    rs.getString("celular"));
+                        rs.getString("nome"),
+                        rs.getString("cpf"),
+                        rs.getString("nascimento"),
+                        rs.getInt("usuarioId"),
+                        rs.getString("login"),
+                        rs.getString("senha"),
+                        rs.getString("email"),
+                        rs.getString("tipo"),
+                        rs.getString("telefone"),
+                        rs.getString("celular"));
                 clientes.add(cliente);
 
             }
@@ -75,6 +75,36 @@ public class ClienteDAO {
 
         } catch (SQLException e) {
             throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return cliente;
+    }
+
+    public Cliente getCliente(String login) throws SQLException, ClassNotFoundException {
+        Connection conn = null;
+        Statement st = null;
+        Cliente cliente = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("select * from cliente,usuario where login ='" + login + "' and cliente.id=usuario.id");
+            rs.first();
+
+            cliente = new Cliente(rs.getInt("cliente.id"),
+                    rs.getString("nome"),
+                    rs.getString("cpf"),
+                    rs.getString("nascimento"),
+                    rs.getInt("usuario_id"),
+                    rs.getString("login"),
+                    rs.getString("senha"),
+                    rs.getString("email"),
+                    rs.getString("tipo"),
+                    rs.getString("telefone"),
+                    rs.getString("celular"));
+
+        } catch (SQLException e) {
+            return null;
         } finally {
             closeResources(conn, st);
         }
@@ -148,7 +178,7 @@ public class ClienteDAO {
             comando.setString(5, cliente.getTelefone());
             comando.setString(6, cliente.getCelular());
             comando.setInt(7, cliente.getEndereco().getId());
-            comando.setInt(8, cliente.getUsuarioId()); 
+            comando.setInt(8, cliente.getUsuarioId());
             comando.execute();
 
             String sql2 = "UPDATE cliente SET nome=?,cpf=?,nascimento=? WHERE id=?";

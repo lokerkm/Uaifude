@@ -17,48 +17,48 @@ public class CategoriaDAO {
         return instance;
     }
 
-    public List<Categoria> getCategorias(int id) throws SQLException, ClassNotFoundException {
-        Connection conn = null;
-        Statement st = null;
-        List<Categoria> categorias = new ArrayList<Categoria>();
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from categoria");
-            
-            rs.first();
-             while (rs.next()) {
-                Categoria categoria = new Categoria(rs.getInt("id"), 
-                        rs.getString("nome"));
-                categorias.add(categoria);
-
-            }
-            
-        } catch (SQLException e) {
-            throw e;
-        } finally {
-            closeResources(conn, st);
-        }
-        return categorias;
-    }
-    
-    public Categoria getCategoria(int id) throws SQLException, ClassNotFoundException {
-        Connection conn = null;
-        Statement st = null;
-        Categoria categoria = null;
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from categoria where id ='" + id + "'");
-            rs.first();
-            categoria = new Categoria(rs.getInt("id"), rs.getString("nome"));
-        } catch (SQLException e) {
-            throw e;
-        } finally {
-            closeResources(conn, st);
-        }
-        return categoria;
-    }
+//    public List<Categoria> getCategorias(int id) throws SQLException, ClassNotFoundException {
+//        Connection conn = null;
+//        Statement st = null;
+//        List<Categoria> categorias = new ArrayList<Categoria>();
+//        try {
+//            conn = DatabaseLocator.getInstance().getConnection();
+//            st = conn.createStatement();
+//            ResultSet rs = st.executeQuery("select * from categoria");
+//            
+//            rs.first();
+//             while (rs.next()) {
+//                Categoria categoria = new Categoria(rs.getInt("id"), 
+//                        rs.getString("nome"));
+//                categorias.add(categoria);
+//
+//            }
+//            
+//        } catch (SQLException e) {
+//            throw e;
+//        } finally {
+//            closeResources(conn, st);
+//        }
+//        return categorias;
+//    }
+//    
+//    public Categoria getCategoria(int id) throws SQLException, ClassNotFoundException {
+//        Connection conn = null;
+//        Statement st = null;
+//        Categoria categoria = null;
+//        try {
+//            conn = DatabaseLocator.getInstance().getConnection();
+//            st = conn.createStatement();
+//            ResultSet rs = st.executeQuery("select * from categoria where id ='" + id + "'");
+//            rs.first();
+//            categoria = new Categoria(rs.getInt("id"), rs.getString("nome"));
+//        } catch (SQLException e) {
+//            throw e;
+//        } finally {
+//            closeResources(conn, st);
+//        }
+//        return categoria;
+//    }
 
     public void delete(int id) throws SQLException, ClassNotFoundException {
         Connection conn = null;
