@@ -9,13 +9,12 @@ public class Estabelecimento extends Usuario {
     private Categoria categoria;
  
 
-    public Estabelecimento(int id, String nome, String cnpj, String descricao, Categoria categoria, int usuarioId, String login, String senha, String email, String tipo, String telefone, String celular) {
+    public Estabelecimento(int id, String nome, String cnpj, String descricao,  int usuarioId, String login, String senha, String email, String tipo, String telefone, String celular) {
         super(usuarioId, login, senha, email, tipo, telefone, celular);
         this.id = id;
         this.nome = nome;
         this.cnpj = cnpj;
         this.descricao = descricao;
-        this.categoria = categoria;
        
     }
 

@@ -10,6 +10,11 @@ public class Pedido extends Observable{
     private PedidoEstado estado;
     private float total;
 
+    public Pedido(int id, float total) {
+        this.id = id;
+        this.total = total;
+    }
+
     public int getId() {
         return id;
     }

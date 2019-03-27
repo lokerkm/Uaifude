@@ -20,6 +20,15 @@ public class Produto {
     private boolean disponivel;
     private String descricao;
 
+    public Produto(int id, String nome, float preco, boolean disponivel, String descricao) {
+        this.id = id;
+        this.nome = nome;
+        this.preco = preco;
+        this.disponivel = disponivel;
+        this.descricao = descricao;
+    }
+
+    
     public int getId() {
         return id;
     }
