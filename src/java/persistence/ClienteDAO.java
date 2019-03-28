@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Cliente;
+import model.Endereco;
 
 public class ClienteDAO {
 
@@ -28,6 +29,7 @@ public class ClienteDAO {
 
             rs.first();
             while (rs.next()) {
+                Endereco endereco = EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id"));
                 Cliente cliente = new Cliente(rs.getInt("cliente.id"),
                         rs.getString("nome"),
                         rs.getString("cpf"),
@@ -38,7 +40,7 @@ public class ClienteDAO {
                         rs.getString("email"),
                         rs.getString("tipo"),
                         rs.getString("telefone"),
-                        rs.getString("celular"));
+                        rs.getString("celular"), endereco);
                 clientes.add(cliente);
 
             }
@@ -61,6 +63,7 @@ public class ClienteDAO {
             ResultSet rs = st.executeQuery("select * from cliente,usuario where id ='" + id + "' and cliente.id=usuario.id");
             rs.first();
 
+            Endereco endereco = EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id"));
             cliente = new Cliente(rs.getInt("cliente.id"),
                     rs.getString("nome"),
                     rs.getString("cpf"),
@@ -71,7 +74,7 @@ public class ClienteDAO {
                     rs.getString("email"),
                     rs.getString("tipo"),
                     rs.getString("telefone"),
-                    rs.getString("celular"));
+                    rs.getString("celular"), endereco);
 
         } catch (SQLException e) {
             throw e;
@@ -90,7 +93,7 @@ public class ClienteDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from cliente,usuario where login ='" + login + "' and cliente.id=usuario.id");
             rs.first();
-
+            Endereco endereco = EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id"));
             cliente = new Cliente(rs.getInt("cliente.id"),
                     rs.getString("nome"),
                     rs.getString("cpf"),
@@ -101,7 +104,7 @@ public class ClienteDAO {
                     rs.getString("email"),
                     rs.getString("tipo"),
                     rs.getString("telefone"),
-                    rs.getString("celular"));
+                    rs.getString("celular"), endereco);
 
         } catch (SQLException e) {
             return null;

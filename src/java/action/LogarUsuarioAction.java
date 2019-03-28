@@ -12,8 +12,11 @@ import model.Administrador;
 import model.Cliente;
 import model.Estabelecimento;
 import persistence.AdministradorDAO;
+import persistence.CategoriaDAO;
 import persistence.ClienteDAO;
 import persistence.EstabelecimentoDAO;
+import persistence.PedidoDAO;
+import persistence.ProdutoDAO;
 
 public class LogarUsuarioAction implements Action {
 
@@ -36,6 +39,10 @@ public class LogarUsuarioAction implements Action {
                         HttpSession sessao = request.getSession();
                         sessao.setAttribute("tipo", tipo);
                         sessao.setAttribute("usuario", cliente);
+                        sessao.setAttribute("estabelecimentos", EstabelecimentoDAO.getInstance().getEstabelecimentos());
+                        sessao.setAttribute("pedidos", PedidoDAO.getInstance().getPedidosCliente(cliente.getClienteId()));
+                        // assim que implementar sessao.setAttribute("categorias", CategoriaDAO.getInstance().getCategorias());
+                        // assim que implementar sessao.setAttribute("promocoes", PromocaoDAO.getInstance().getPromocoes());
                         response.sendRedirect("painelInicial.jsp");
                     }
                 } catch (SQLException ex) {
@@ -52,6 +59,9 @@ public class LogarUsuarioAction implements Action {
                         HttpSession sessao = request.getSession();
                         sessao.setAttribute("tipo", tipo);
                         sessao.setAttribute("usuario", estabelecimento);
+                        sessao.setAttribute("pedidos", PedidoDAO.getInstance().getPedidosEstabelecimento(estabelecimento.getEstabelecimentoId()));
+                        sessao.setAttribute("produtos", ProdutoDAO.getInstance().getProdutos(estabelecimento.getEstabelecimentoId()));
+                        // assim que implementar sessao.setAttribute("promocoes", PromocaoDAO.getInstance().getPromocoes(estabelecimento.getEstabelecimentoId()));
                         response.sendRedirect("painelInicial.jsp");
                     }
                 } catch (SQLException ex) {

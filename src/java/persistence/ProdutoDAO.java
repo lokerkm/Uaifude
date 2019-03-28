@@ -46,6 +46,35 @@ public class ProdutoDAO {
         return produtos;
     }
 
+    public ArrayList<Produto> getProdutos(int estabelecimentoId) throws ClassNotFoundException, SQLException {
+        Connection conn = null;
+        Statement st = null;
+        ArrayList<Produto> produtos = new ArrayList<>();
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("select * from produto where estabelecimento_id ='" + estabelecimentoId + "'");
+
+            rs.first();
+            while (rs.next()) {//faltaPromocao
+                Produto produto = new Produto(rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getFloat("preco"),
+                        rs.getBoolean("disponivel"),
+                        rs.getString("descricao")
+                );
+                produtos.add(produto);
+
+            }
+
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return produtos;
+    }
+
     public Produto getProduto(int id) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
@@ -56,12 +85,12 @@ public class ProdutoDAO {
             ResultSet rs = st.executeQuery("select * from produto where id ='" + id + "'");
             rs.first();
 
-           produto = new Produto(rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getFloat("preco"),
-                        rs.getBoolean("disponivel"),
-                        rs.getString("descricao")
-                );
+            produto = new Produto(rs.getInt("id"),
+                    rs.getString("nome"),
+                    rs.getFloat("preco"),
+                    rs.getBoolean("disponivel"),
+                    rs.getString("descricao")
+            );
 
         } catch (SQLException e) {
             throw e;
@@ -102,7 +131,7 @@ public class ProdutoDAO {
             comando.setFloat(2, produto.getPreco());
             comando.setBoolean(3, produto.isDisponivel());
             comando.setString(4, produto.getDescricao());
-           
+
             comando.execute();
 
         } catch (SQLException e) {
@@ -120,7 +149,7 @@ public class ProdutoDAO {
             conn = DatabaseLocator.getInstance().getConnection();
 
             String sql = "UPDATE produto SET nome=?,preco=?,disponivel=?,descricao=? WHERE id=?";
-           
+
             PreparedStatement comando = conn.prepareStatement(sql);
             comando.setString(1, produto.getNome());
             comando.setFloat(2, produto.getPreco());

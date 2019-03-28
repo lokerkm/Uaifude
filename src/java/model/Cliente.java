@@ -9,16 +9,14 @@ public class Cliente extends Usuario {
     private String nome;
     private String cpf;
     private String nascimento;
-    
- 
 
-    public Cliente(int id, String nome, String cpf, String nascimento, int usuarioId, String login, String senha, String email, String tipo, String telefone, String celular) {
-        super(usuarioId, login, senha, email, tipo, telefone, celular);
+    public Cliente(int id, String nome, String cpf, String nascimento, int usuarioId, String login, String senha, String email, String tipo, String telefone, String celular, Endereco endereco) {
+        super(usuarioId, login, senha, email, tipo, telefone, celular, endereco);
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.nascimento = nascimento;
-      
+
     }
 
     public int getClienteId() {
@@ -52,8 +50,5 @@ public class Cliente extends Usuario {
     public void setNascimento(String nascimento) {
         this.nascimento = nascimento;
     }
-
-   
-   
 
 }
