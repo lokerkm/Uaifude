@@ -17,7 +17,7 @@ public class EstabelecimentoDAO {
         return instance;
     }
 
-    public List<Estabelecimento> getEstabelecimentos(int id) throws SQLException, ClassNotFoundException {
+    public List<Estabelecimento> getEstabelecimentos() throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
         List<Estabelecimento> estabelecimentos = new ArrayList<Estabelecimento>();
@@ -32,7 +32,7 @@ public class EstabelecimentoDAO {
                         rs.getString("nome"),
                         rs.getString("cnpj"),
                         rs.getString("descricao"),
-                        rs.getInt("usuarioId"),
+                        rs.getInt("usuario_id"),
                         rs.getString("login"),
                         rs.getString("senha"),
                         rs.getString("email"),
@@ -59,14 +59,14 @@ public class EstabelecimentoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from estabelecimento,usuario where id =" + id + " and estabelecimento.id=usuario.id");
+            ResultSet rs = st.executeQuery("select * from estabelecimento,usuario where id ='" + id + "' and estabelecimento.id=usuario.id");
             rs.first();
 
             estabelecimento = new Estabelecimento(rs.getInt("estabelecimento.id"),
                     rs.getString("nome"),
                     rs.getString("cnpj"),
                     rs.getString("descricao"),
-                    rs.getInt("usuarioId"),
+                    rs.getInt("usuario_id"),
                     rs.getString("login"),
                     rs.getString("senha"),
                     rs.getString("email"),

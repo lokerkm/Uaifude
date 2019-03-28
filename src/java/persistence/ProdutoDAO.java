@@ -17,7 +17,7 @@ public class ProdutoDAO {
         return instance;
     }
 
-    public List<Produto> getProdutos(int id) throws SQLException, ClassNotFoundException {
+    public List<Produto> getProdutos() throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
         List<Produto> produtos = new ArrayList<Produto>();
@@ -53,7 +53,7 @@ public class ProdutoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from produto where id =" + id + "");
+            ResultSet rs = st.executeQuery("select * from produto where id ='" + id + "'");
             rs.first();
 
            produto = new Produto(rs.getInt("id"),

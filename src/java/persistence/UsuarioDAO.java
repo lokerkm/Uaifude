@@ -17,18 +17,18 @@ public class UsuarioDAO {
         return instance;
     }
 
-    public List<Usuario> getUsuarios(int id) throws SQLException, ClassNotFoundException {
+    public List<Usuario> getUsuarios() throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
         List<Usuario> usuarios = new ArrayList<Usuario>();
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from usuario where id =" + id + "");
+            ResultSet rs = st.executeQuery("select * from usuario");
 
             rs.first();
             while (rs.next()) {
-                Usuario usuario = new Usuario(rs.getInt("usuario.id"),
+                Usuario usuario = new Usuario(rs.getInt("id"),
                     
                     rs.getString("login"),
                     rs.getString("senha"),
@@ -55,10 +55,10 @@ public class UsuarioDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from usuario where id =" + id + "");
+            ResultSet rs = st.executeQuery("select * from usuario where id ='" + id + "'");
             rs.first();
 
-            usuario = new Usuario(rs.getInt("usuario.id"),
+            usuario = new Usuario(rs.getInt("id"),
                     
                     rs.getString("login"),
                     rs.getString("senha"),
@@ -82,7 +82,7 @@ public class UsuarioDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("DELETE FROM usuario WHERE usuario_id='" + id + "'");
+            st.execute("DELETE FROM usuario WHERE id='" + id + "'");
             
 
         } catch (SQLException e) {

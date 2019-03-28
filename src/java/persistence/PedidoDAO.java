@@ -17,7 +17,7 @@ public class PedidoDAO {
         return instance;
     }
 
-    public List<Pedido> getPedidos(int id) throws SQLException, ClassNotFoundException {
+    public List<Pedido> getPedidos() throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
         List<Pedido> pedidos = new ArrayList<Pedido>();
@@ -51,7 +51,7 @@ public class PedidoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from pedido where id =" + id + "");
+            ResultSet rs = st.executeQuery("select * from pedido where id ='" + id + "'");
             rs.first();
 
             pedido = new Pedido(rs.getInt("id"),

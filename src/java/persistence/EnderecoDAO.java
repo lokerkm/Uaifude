@@ -17,7 +17,7 @@ public class EnderecoDAO {
         return instance;
     }
 
-    public List<Endereco> getEnderecos(int id) throws SQLException, ClassNotFoundException {
+    public List<Endereco> getEnderecos() throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
         List<Endereco> enderecos = new ArrayList<Endereco>();
@@ -56,7 +56,7 @@ public class EnderecoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from endereco where id =" + id + "");
+            ResultSet rs = st.executeQuery("select * from endereco where id ='" + id + "'");
             rs.first();
 
            endereco = new Endereco(rs.getInt("id"),

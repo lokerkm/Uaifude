@@ -17,7 +17,7 @@ public class ClienteDAO {
         return instance;
     }
 
-    public List<Cliente> getClientes(int id) throws SQLException, ClassNotFoundException {
+    public List<Cliente> getClientes() throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
         List<Cliente> clientes = new ArrayList<Cliente>();
@@ -32,7 +32,7 @@ public class ClienteDAO {
                         rs.getString("nome"),
                         rs.getString("cpf"),
                         rs.getString("nascimento"),
-                        rs.getInt("usuarioId"),
+                        rs.getInt("usuario_id"),
                         rs.getString("login"),
                         rs.getString("senha"),
                         rs.getString("email"),
@@ -58,14 +58,14 @@ public class ClienteDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from cliente,usuario where id =" + id + " and cliente.id=usuario.id");
+            ResultSet rs = st.executeQuery("select * from cliente,usuario where id ='" + id + "' and cliente.id=usuario.id");
             rs.first();
 
             cliente = new Cliente(rs.getInt("cliente.id"),
                     rs.getString("nome"),
                     rs.getString("cpf"),
                     rs.getString("nascimento"),
-                    rs.getInt("usuarioId"),
+                    rs.getInt("usuario_id"),
                     rs.getString("login"),
                     rs.getString("senha"),
                     rs.getString("email"),
