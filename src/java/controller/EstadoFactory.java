@@ -15,7 +15,7 @@ public class EstadoFactory {
 
     public static PedidoEstado create(String estado) {
         PedidoEstado actionObject = null;
-        String nomeClasse = "model.pedidoEstado." + estado;
+        String nomeClasse = "model.pedidoEstado.PedidoEstado" + estado;
         Class classe = null;
         Object objeto = null;
         try {

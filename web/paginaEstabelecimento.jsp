@@ -1,17 +1,9 @@
-<%-- 
-    Document   : paginaRestaurante
-    Created on : 28/03/2019, 09:39:03
-    Author     : kevin
---%>
+<jsp:include page="header.jsp" />
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="painelInicial.jsp">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Estabelecimento ${estabelecimento.nome}</li>
+    </ol>
+</nav>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<jsp:include page="footer.jsp" />

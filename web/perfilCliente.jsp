@@ -1,38 +1,63 @@
 <jsp:include page="header.jsp" />
 
-<h1>Bem vindo, ${sessionScope.usuario.nome}!</h1>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="painelInicial.jsp">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Minha conta</li>
+    </ol>
+</nav>
+<form action="FrontController?action=LerCliente" method="post">
+    <div class="container">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="https://image.flaticon.com/icons/png/512/64/64096.png"  class="img-thumbnail">
+                        <div class="card-body">
+                            <p class="card-text">Dados pessoais de ${sessionScope.usuario.nome}</p>
 
-<h2>Dados da conta</h2>
-<h3>login</h3>
-${sessionScope.usuario.login}
-<h3>email</h3>
-${sessionScope.usuario.email}
-<h3>telefone</h3>
-${sessionScope.usuario.telefone}
-<h3>celular</h3>
-${sessionScope.usuario.celular}
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
 
-<h2>Dados pessoais</h2>
-<h3>nome</h3>
-${sessionScope.usuario.nome}
-<h3>cpf</h3>
-${sessionScope.usuario.cpf}
-<h3>Data de nascimento</h3>
-${sessionScope.usuario.nascimento}
+                                    <input type="hidden" name="clienteId" value="${sessionScope.usuario.getClienteId()}" >
+                                    <button type="submit"  class="btn btn-primary">Visitar</button>
 
-<h2>Endereco</h2>
-<h3>Estado</h3>
-${sessionScope.usuario.endereco.estado}
-<h3>Cidade</h3>
-${sessionScope.usuario.endereco.cidade}
-<h3>Bairro</h3>
-${sessionScope.usuario.endereco.bairro}
-<h3>Logradouro</h3>
-${sessionScope.usuario.endereco.logradouro}
-<h3>Numero</h3>
-${sessionScope.usuario.endereco.numero}
-<h3>Complemento</h3>
-${sessionScope.usuario.endereco.complemento}
+                                </div>
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form action="FrontController?action=LerEnderecoCliente" method="post">
+    <div class="container">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="https://petbamboo.com.br/wp-content/uploads/2018/07/icone-endere%C3%A7o-300x300-1.png"  class="img-thumbnail">
+                        <div class="card-body">
+                            <p class="card-text">Endereço de entrega de ${sessionScope.usuario.nome}</p>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+
+                                    <input type="hidden" name="clienteId" value="${sessionScope.usuario.getClienteId()}" >
+                                    <button type="submit"  class="btn btn-primary">Visitar</button>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 <jsp:include page="footer.jsp" />

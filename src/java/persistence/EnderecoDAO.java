@@ -26,7 +26,7 @@ public class EnderecoDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from endereco");
 
-            rs.first();
+       
             while (rs.next()) {
                 Endereco endereco = new Endereco(rs.getInt("id"),
                         rs.getString("cep"),

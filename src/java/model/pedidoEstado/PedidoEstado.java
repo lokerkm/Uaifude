@@ -10,5 +10,5 @@ package model.pedidoEstado;
  * @author Vitor
  */
 public interface PedidoEstado {
-    
+    String estadoString();
 }

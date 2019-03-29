@@ -27,7 +27,7 @@ public class ClienteDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from cliente,usuario where usuario.id = cliente.usuario_id");
 
-            rs.first();
+          
             while (rs.next()) {
                 Endereco endereco = EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id"));
                 Cliente cliente = new Cliente(rs.getInt("cliente.id"),

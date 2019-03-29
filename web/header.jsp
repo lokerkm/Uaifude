@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,7 +9,7 @@
         <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/custom.css" rel="stylesheet" type="text/css"/>
         <title>UAIFUDE</title>
-        
+
     </head>
     <body> 
 
@@ -49,24 +50,24 @@
                     </li>
                     <li class="nav-item">
                         <c:if test = "${sessionScope.tipo == 'Cliente'}">
-                            <a class="nav-link" href="estabelecimentos.jsp">Estabelecimentos</a></c:if>
+                            <a class="nav-link" href="promocoes.jsp">Promoções</a></c:if>
                         <c:if test = "${sessionScope.tipo == 'Estabelecimento'}">
                             <a class="nav-link" href="gerenciarPromocoes.jsp">Gerenciar Promoções</a></c:if>
                         <c:if test = "${sessionScope.tipo == 'Administrador'}">
                         </c:if>
                     </li>
-                    <li class="nav-item">
-                        <c:if test = "${sessionScope.tipo == 'Cliente'}">
-                            <a class="nav-link" href="promocoes.jsp">Promoções</a></c:if>
-                        <c:if test = "${sessionScope.tipo != 'Cliente'}">                    
-                        </c:if>
-                    </li>
-
 
 
                 </ul>
 
-            </div>
+            </div><span class="navbar-brand mb-0 h1">
+                <c:if test = "${sessionScope.tipo == 'Cliente'}">
+                    Bem vindo, ${sessionScope.usuario.nome}</c:if>
+                <c:if test = "${sessionScope.tipo == 'Estabelecimento'}">
+                    Conta estabelecimento, ${sessionScope.usuario.nome}</c:if>
+                <c:if test = "${sessionScope.tipo == 'Administrador'}">
+                    Adminstrador ${sessionScope.usuario.login}
+                </c:if></span>
 
             <button type="button" class="btn btn-danger" href="index.jsp" >Logout (Ainda nao funciona)</button>
         </nav>

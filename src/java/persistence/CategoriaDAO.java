@@ -26,7 +26,7 @@ public class CategoriaDAO {
 //            st = conn.createStatement();
 //            ResultSet rs = st.executeQuery("select * from categoria");
 //            
-//            rs.first();
+//          
 //             while (rs.next()) {
 //                Categoria categoria = new Categoria(rs.getInt("id"), 
 //                        rs.getString("nome"));

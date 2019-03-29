@@ -24,9 +24,8 @@ public class EstabelecimentoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from estabelecimento,usuario where usuario.id = estabelecimento.id");
+            ResultSet rs = st.executeQuery("select * from estabelecimento,usuario where usuario.id = estabelecimento.usuario_id");
 
-            rs.first();
             while (rs.next()) {
                 Estabelecimento estabelecimento = new Estabelecimento(rs.getInt("estabelecimento.id"),
                         rs.getString("nome"),
@@ -38,7 +37,8 @@ public class EstabelecimentoDAO {
                         rs.getString("email"),
                         rs.getString("tipo"),
                         rs.getString("telefone"),
-                        rs.getString("celular"));
+                        rs.getString("celular"),
+                        rs.getString("linkImagem"));
                 //setar categoria aqui
                 estabelecimentos.add(estabelecimento);
 
@@ -59,7 +59,7 @@ public class EstabelecimentoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from estabelecimento,usuario where id ='" + id + "' and estabelecimento.id=usuario.id");
+            ResultSet rs = st.executeQuery("select * from estabelecimento,usuario where estabelecimento.id ='" + id + "' and estabelecimento.id=usuario.id");
             rs.first();
 
             estabelecimento = new Estabelecimento(rs.getInt("estabelecimento.id"),
@@ -72,7 +72,8 @@ public class EstabelecimentoDAO {
                     rs.getString("email"),
                     rs.getString("tipo"),
                     rs.getString("telefone"),
-                    rs.getString("celular"));
+                    rs.getString("celular"),
+                    rs.getString("linkImagem"));
 
         } catch (SQLException e) {
             throw e;
@@ -102,7 +103,8 @@ public class EstabelecimentoDAO {
                     rs.getString("email"),
                     rs.getString("tipo"),
                     rs.getString("telefone"),
-                    rs.getString("celular"));
+                    rs.getString("celular"),
+                    rs.getString("linkImagem"));
 
         } catch (SQLException e) {
             return null;
@@ -148,13 +150,14 @@ public class EstabelecimentoDAO {
             comando.setInt(7, estabelecimento.getEndereco().getId());
             comando.execute();
 
-            String sql2 = "insert into estabelecimento (nome,cnpj,descricao,usuario_id)"
-                    + " VALUES (?,?,?,?)";
+            String sql2 = "insert into estabelecimento (nome,cnpj,descricao,usuario_id,linkImagem)"
+                    + " VALUES (?,?,?,?,?)";
             PreparedStatement comando2 = conn.prepareStatement(sql2);
             comando2.setString(1, estabelecimento.getNome());
             comando2.setString(2, estabelecimento.getCnpj());
             comando2.setString(3, estabelecimento.getDescricao());
             comando2.setInt(4, estabelecimento.getUsuarioId());
+            comando2.setString(5, estabelecimento.getLinkImagem());
             comando2.execute();
 
         } catch (SQLException e) {
@@ -182,12 +185,13 @@ public class EstabelecimentoDAO {
             comando.setInt(8, estabelecimento.getUsuarioId());
             comando.execute();
 
-            String sql2 = "UPDATE estabelecimento SET nome=?,cnpj=?,descricao=? WHERE id=?";
+            String sql2 = "UPDATE estabelecimento SET nome=?,cnpj=?,descricao=?, linkImagem=? WHERE id=?";
             PreparedStatement comando2 = conn.prepareStatement(sql2);
             comando2.setString(1, estabelecimento.getNome());
             comando2.setString(2, estabelecimento.getCnpj());
             comando2.setString(3, estabelecimento.getDescricao());
-            comando2.setInt(4, estabelecimento.getEstabelecimentoId());
+            comando2.setString(4, estabelecimento.getLinkImagem());
+            comando2.setInt(5, estabelecimento.getEstabelecimentoId());
 
             comando2.execute();
 

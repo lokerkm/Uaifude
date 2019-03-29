@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 import model.pedidoEstado.PedidoEstado;
@@ -10,6 +11,7 @@ public class Pedido extends Observable {
     private PedidoEstado estado;
     private Endereco endereco;
     private float total;
+    private ArrayList<Produto> produtos = new ArrayList<>();
 
     public Pedido(int id, float total, Endereco endereco, PedidoEstado estado) {
         this.id = id;
@@ -45,6 +47,22 @@ public class Pedido extends Observable {
 
     public void setTotal(float total) {
         this.total = total;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public ArrayList<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(ArrayList<Produto> produtos) {
+        this.produtos = produtos;
     }
 
 }
