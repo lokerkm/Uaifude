@@ -19,9 +19,9 @@
         <form class="form-signin" action="FrontController?action=LogarUsuario" method="post">
 
             <div class="text-center mb-4">
-                <!--<img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
-                <h1 class="h3 mb-3 font-weight-normal">UaiFude</h1>
-                <p>slogan</p>
+                <img class="mb-4" src="assets/img/uaifude.png" alt="" width="72" height="72">
+<!--                <h1 class="h3 mb-3 font-weight-normal">UaiFude</h1>
+                <p>slogan</p>-->
             </div>
             <div class="form-label-group">
                 <input type="text" id="txtLogin" name="txtLogin" class="form-control" required autofocus>
@@ -29,9 +29,11 @@
             </div>
 
             <div class="form-label-group">
-                <input type="password" id="txtSenha" name="txtSenha"  class="form-control"  required>
-                <label for="txtSenha">Senha</label>
+                <input type="password" id="inputPassword" name="txtSenha"  class="form-control"  required>
+                <label for="inputPassword">Senha</label>
             </div>
+            
+             
             
             <div class="form-label-group">
                 <select class="custom-select" name="txtTipo">
@@ -43,7 +45,8 @@
             
             
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block" style="background-color: #9d1a19;
+    border-color: #971d1c;" type="submit">Sign in</button>
 
         </form>
         
