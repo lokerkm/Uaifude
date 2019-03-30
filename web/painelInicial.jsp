@@ -2,6 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <jsp:include page="header.jsp" />
+
+<div class="container">
 <c:if test="${sessionScope.tipo == 'Cliente'}">
     <c:forEach items="${sessionScope.estabelecimentos}" var="estabelecimento">
         <form action="FrontController?action=LerEstabelecimento" method="post">
@@ -13,8 +15,8 @@
                                 <img src="${estabelecimento.linkImagem}"  class="img-thumbnail">
                                 <div class="card-body">
                                     <p class="card-text" >${estabelecimento.nome}</p>
-                                    <small class="text-muted">Categoria</small>
-                                    <div class="d-flex justify-content-between align-items-center">
+                                    <p class="text-muted">Categoria</p>
+                                    <div class="justify-content-between align-items-center">
                                         <div class="btn-group">
 
                                             <input type="hidden" name="estabelecimentoId" value="${estabelecimento.getEstabelecimentoId()}" >
@@ -45,7 +47,7 @@
                                 <div class="card-body">
                                     <p class="card-text" >${produto.nome}</p>
 
-                                    <div class="d-flex justify-content-between align-items-center">
+                                    <div class="justify-content-between align-items-center">
                                         <div class="btn-group">
 
                                             <input type="hidden" name="produtoId" value="${produto.id}" >
@@ -63,4 +65,6 @@
         </form>
     </c:forEach>
 </c:if>
+    </div>
+  
 <jsp:include page="footer.jsp" />

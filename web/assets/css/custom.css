@@ -104,4 +104,34 @@ body {
     box-shadow: 0 0 0 0.2rem rgb(222, 147, 146);
 }
 
+.card-body {
+    text-align: center;  
+}
 
+.card-body {
+    text-align: center;  
+}
+
+.btn-primary{
+    background-color: #9d1a19;
+    border-color: #971d1c;
+}
+.btn-primary:hover{
+    background-color: #e0201f;
+    border-color: #971d1c;
+}
+.btn-primary:active{
+    
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #e0201f;
+    border-color: #971d1c;
+}
+main{
+    width: 100%;
+}
+body {
+  padding-top: 3.5rem;
+}

@@ -45,8 +45,7 @@
             
             
 
-            <button class="btn btn-lg btn-primary btn-block" style="background-color: #9d1a19;
-    border-color: #971d1c;" type="submit">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block"  type="submit">Sign in</button>
 
         </form>
         

@@ -35,6 +35,7 @@ public class FrontController extends HttpServlet {
             response.sendRedirect("index.jsp");
         }
         actionObject = ActionFactory.create(action);
+        request.setAttribute("action", action);
         if (actionObject != null) {
             actionObject.execute(request, response);
         }
