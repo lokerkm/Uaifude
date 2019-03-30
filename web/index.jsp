@@ -9,7 +9,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/custom.css" rel="stylesheet" type="text/css"/>
-        <title>JSP Page</title>
+        <title>UaiFude</title>
     </head>
     <body> 
         <%--<jsp:include page="header.jsp" />--%>

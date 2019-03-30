@@ -1,6 +1,7 @@
 package action;
 
 import controller.Action;
+import controller.EstadoFactory;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import model.Administrador;
 import model.Cliente;
 import model.Estabelecimento;
+import model.Pedido;
 import persistence.AdministradorDAO;
 import persistence.CategoriaDAO;
 import persistence.ClienteDAO;
@@ -41,6 +43,8 @@ public class LogarUsuarioAction implements Action {
                         sessao.setAttribute("usuario", cliente);
                         sessao.setAttribute("estabelecimentos", EstabelecimentoDAO.getInstance().getEstabelecimentos());
                         sessao.setAttribute("pedidos", PedidoDAO.getInstance().getPedidosCliente(cliente.getClienteId()));
+                        Pedido pedidoCarrinho = new Pedido(1, 0, cliente.getEndereco(), EstadoFactory.create("Carrinho"));
+                        sessao.setAttribute("carrinho", pedidoCarrinho);
                         // assim que implementar sessao.setAttribute("categorias", CategoriaDAO.getInstance().getCategorias());
                         // assim que implementar sessao.setAttribute("promocoes", PromocaoDAO.getInstance().getPromocoes());
                         response.sendRedirect("painelInicial.jsp");

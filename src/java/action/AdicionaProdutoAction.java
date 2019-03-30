@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package action;
 
 import controller.Action;
@@ -17,28 +12,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Estabelecimento;
+import model.Pedido;
 import model.Produto;
-import persistence.ClienteDAO;
 import persistence.EstabelecimentoDAO;
 import persistence.ProdutoDAO;
 
-/**
- *
- * @author Aluno
- */
-public class LerEstabelecimentoAction implements Action {
+public class AdicionaProdutoAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int id = Integer.parseInt(request.getParameter("estabelecimentoId"));
+        int idProduto = Integer.parseInt(request.getParameter("produtoId"));
+        int idEstabelecimeto = Integer.parseInt(request.getParameter("estabelecimentoId"));
 
         try {
-            Estabelecimento estabelecimento = EstabelecimentoDAO.getInstance().getEstabelecimento(id);
-            ArrayList<Produto> produtos = ProdutoDAO.getInstance().getProdutosEstabelecimento(id);
+            Estabelecimento estabelecimento = EstabelecimentoDAO.getInstance().getEstabelecimento(idEstabelecimeto);
+            Produto produto = ProdutoDAO.getInstance().getProduto(idProduto);
+            HttpSession sessao = request.getSession();
+            Pedido pedidoCarrinho = (Pedido) sessao.getAttribute("carrinho");
+            pedidoCarrinho.addProduto(produto);
+            ArrayList<Produto> produtos = ProdutoDAO.getInstance().getProdutosEstabelecimento(idEstabelecimeto);
+
+            sessao.setAttribute("carrinho", pedidoCarrinho);
             request.setAttribute("estabelecimento", estabelecimento);
             request.setAttribute("produtosEstabelecimento", produtos);
-            HttpSession sessao = request.getSession();
-       
+
             RequestDispatcher view = request.getRequestDispatcher("paginaEstabelecimento.jsp");
             view.forward(request, response);
         } catch (SQLException ex) {
@@ -50,5 +47,4 @@ public class LerEstabelecimentoAction implements Action {
         }
 
     }
-
 }

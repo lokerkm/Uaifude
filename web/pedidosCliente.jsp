@@ -8,7 +8,36 @@
         <li class="breadcrumb-item active" aria-current="page">Meus pedidos</li>
     </ol>
 </nav>
+<c:if test="${sessionScope.carrinho.produtos.size() >0}">
+    <form action="FrontController?action=LerCarrinho" method="post">
+        <div class="container">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <img src="https://cdn.icon-icons.com/icons2/494/PNG/512/cart_icon-icons.com_48341.png"  class="img-thumbnail">
+                            <div class="card-body">
+                                <p class="card-text" >CARRINHO</p>
+                                <small class="text-muted">Valor: R$ ${carrinho.total}</small>
+                                <small class="text-muted">${pedido.estado.estadoString()}</small>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <c:if test="${pedido.estado.estadoString() != 'Entregue'}">
+                                        <div class="btn-group">
 
+
+                                            <button type="submit"  class="btn btn-primary">Acompanhar pedido</button>
+
+                                        </div></c:if>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+</c:if>
 <c:forEach items="${sessionScope.pedidos}" var="pedido">
     <form action="FrontController?action=LerPedido" method="post">
         <div class="container">

@@ -27,7 +27,6 @@ public class ClienteDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from cliente,usuario where usuario.id = cliente.usuario_id");
 
-          
             while (rs.next()) {
                 Endereco endereco = EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id"));
                 Cliente cliente = new Cliente(rs.getInt("cliente.id"),
@@ -60,7 +59,7 @@ public class ClienteDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from cliente,usuario where id ='" + id + "' and cliente.id=usuario.id");
+            ResultSet rs = st.executeQuery("select * from cliente,usuario where cliente.id ='" + id + "' and cliente.usuario_id=usuario.id");
             rs.first();
 
             Endereco endereco = EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id"));

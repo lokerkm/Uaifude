@@ -1,5 +1,13 @@
 <jsp:include page="header.jsp" />
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="painelInicial.jsp">Home</a></li>

@@ -10,6 +10,7 @@ public class Pedido extends Observable {
     private int id;
     private PedidoEstado estado;
     private Endereco endereco;
+    private Cliente cliente;
     private float total;
     private ArrayList<Produto> produtos = new ArrayList<>();
 
@@ -63,6 +64,19 @@ public class Pedido extends Observable {
 
     public void setProdutos(ArrayList<Produto> produtos) {
         this.produtos = produtos;
+    }
+
+    public void addProduto(Produto produto) {
+        this.produtos.add(produto);
+        this.total += produto.getPreco();
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
 }

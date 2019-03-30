@@ -21,7 +21,7 @@
                         <div class="card-body">
                             <p class="card-text" >Produto: ${produto.nome}</p>
                             <small class="text-muted">Preço: R$ ${produto.preco}</small>
-                            <small class="text-muted">Pedido numero: ${pedido.id}</small>
+                            
                             <small class="text-muted">${pedido.estado.estadoString()}</small>
 
                         </div>
