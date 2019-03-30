@@ -69,8 +69,8 @@
                 <c:if test = "${sessionScope.tipo == 'Administrador'}">
                     Adminstrador ${sessionScope.usuario.login}
                 </c:if></span>
-
-            <button type="button" class="btn btn-danger" href="index.jsp" >Logout (Ainda nao funciona)</button>
+            <form action="FrontController?action=Deslogar" method="post">
+                <button type="submit" class="btn btn-danger" >Logout</button></form>
         </nav>
         <main role="main">
             <div class="jumbotron">
