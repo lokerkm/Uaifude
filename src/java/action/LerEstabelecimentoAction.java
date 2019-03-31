@@ -37,8 +37,8 @@ public class LerEstabelecimentoAction implements Action {
             ArrayList<Produto> produtos = ProdutoDAO.getInstance().getProdutosEstabelecimento(id);
             request.setAttribute("estabelecimento", estabelecimento);
             request.setAttribute("produtosEstabelecimento", produtos);
-            HttpSession sessao = request.getSession();
-       
+            request.setAttribute("mensagemAddCarrinho", null);
+
             RequestDispatcher view = request.getRequestDispatcher("paginaEstabelecimento.jsp");
             view.forward(request, response);
         } catch (SQLException ex) {

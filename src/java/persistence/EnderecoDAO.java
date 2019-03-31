@@ -129,7 +129,7 @@ public class EnderecoDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             
 
-            String sql = "UPDATE endereco SET logradouro=?,numero=?,complemento=?,bairro=?,cidade=?,estado=? WHERE id=?";
+            String sql = "UPDATE endereco SET logradouro=?,numero=?,complemento=?,bairro=?,cidade=?,estado=?,cep=? WHERE id=?";
             PreparedStatement comando = conn.prepareStatement(sql);
             comando.setString(1, endereco.getLogradouro());
             comando.setString(2, endereco.getNumero());
@@ -137,7 +137,8 @@ public class EnderecoDAO {
             comando.setString(4, endereco.getBairro());
             comando.setString(5, endereco.getCidade());
             comando.setString(6, endereco.getEstado());
-            comando.setInt(7, endereco.getId());
+            comando.setString(7, endereco.getCep());
+            comando.setInt(8, endereco.getId());
             
             
 

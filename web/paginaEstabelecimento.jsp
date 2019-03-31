@@ -8,7 +8,12 @@
         <li class="breadcrumb-item active" aria-current="page">Estabelecimento ${estabelecimento.nome}</li>
     </ol>
 </nav>
-${produtosEstabelecimento}
+
+<div class="alert alert-success" role="alert" >
+    ${mensagemAddCarrinho}</div>
+<div class="alert alert-primary" role="alert">
+    Valor total do carrinho R$${carrinho.total}
+</div>
 <c:forEach items="${produtosEstabelecimento}" var="produto">
     <form action="FrontController?action=AdicionaProduto" method="post">
         <div class="container">

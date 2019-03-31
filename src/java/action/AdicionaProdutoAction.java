@@ -35,6 +35,7 @@ public class AdicionaProdutoAction implements Action {
             sessao.setAttribute("carrinho", pedidoCarrinho);
             request.setAttribute("estabelecimento", estabelecimento);
             request.setAttribute("produtosEstabelecimento", produtos);
+            request.setAttribute("mensagemAddCarrinho", "Você adicionou 1 "+produto.getNome()+" ao carrinho." );
 
             RequestDispatcher view = request.getRequestDispatcher("paginaEstabelecimento.jsp");
             view.forward(request, response);
