@@ -17,10 +17,11 @@
         <div class="col-md-8 order-md-1">
             <h4 class="mb-3">Dados do pedido</h4>
             <form  <c:if test="${sessionScope.tipo == 'Cliente'}">action="FrontController?action=FinalizarPedido"</c:if> method="post"  class="needs-validation" novalidate>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="firstName">Nome do Cliente</label>
-                            <input type="text" disabled="true" class="form-control" name="nome"  value="${sessionScope.usuario.nome}" >
+                <input type="hidden" name="enderecoEntrega" id="enderecoEntrega" value="${enderecoEntrega}" >
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName">Nome do Cliente</label>
+                        <input type="text" disabled="true" class="form-control" name="nome"  value="${sessionScope.usuario.nome}" >
 
                     </div>
                     <div class="col-md-6 mb-3">
@@ -43,11 +44,11 @@
 
                     </c:forEach>
                 </div>
-                <h4 class="mb-3">Pagamento</h4>
+                <h4 class="mb-3">Pagamento </h4>
                 <c:if test="${tipoPagamento == 'Cartao'}">Coisas de carta de credito</c:if>
                 <c:if test="${enderecoEntrega == 'padrao'}">Você optou por pagamento em dinheiro</c:if>
-                <input type="hidden" name="enderecoEntrega"  value="enderecoEntrega"  value="${enderecoEntrega}" >
-                <h4 class="mb-3">Endereço de entrega</h4>
+
+                    <h4 class="mb-3">Endereço de entrega ${enderecoEntrega}</h4>
                 <c:if test="${enderecoEntrega == 'outro'}">Endereço da entrega</c:if>
                 <c:if test="${enderecoEntrega == 'padrao'}">Utilizando endereço padrão</c:if>
 

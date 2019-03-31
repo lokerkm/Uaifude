@@ -55,7 +55,7 @@
                                         <div>
 
                                             <input type="hidden" name="pedidoId" value="${pedido.id}" >
-                                            <button type="submit"  class="btn btn-primary">Acompanhar pedido</button>
+                                            <button type="submit"  class="btn btn-primary">Ver pedido</button>
 
                                         </div></c:if>
 

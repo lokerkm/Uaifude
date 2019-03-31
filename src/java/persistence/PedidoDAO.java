@@ -21,6 +21,24 @@ public class PedidoDAO {
         return instance;
     }
 
+    public int getNextId() throws ClassNotFoundException, SQLException {
+        Connection conn = null;
+        Statement st = null;
+        int idNext;
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM `pedido` WHERE 1 ORDER BY `pedido`.`id` DESC");
+            rs.first();
+            idNext = rs.getInt("id");
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return idNext + 1;
+    }
+
     public List<Pedido> getPedidos() throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
@@ -181,6 +199,15 @@ public class PedidoDAO {
 
             comando.execute();
 
+            for (Produto produto : pedido.getProdutos()) {
+                String sql2 = "insert into lista_produtos (produto_id, pedido_id, quantidade)"
+                        + " VALUES (?,?,1)";
+                PreparedStatement comando2 = conn.prepareStatement(sql2);
+                comando2.setFloat(1, produto.getId());
+                comando2.setInt(2, pedido.getId());
+
+                comando2.execute();
+            }
         } catch (SQLException e) {
             throw e;
         } finally {

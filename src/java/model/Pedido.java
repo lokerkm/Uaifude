@@ -14,6 +14,13 @@ public class Pedido extends Observable {
     private float total;
     private ArrayList<Produto> produtos = new ArrayList<>();
 
+    public Pedido(float total, Endereco endereco, PedidoEstado estado) {
+
+        this.estado = estado;
+        this.endereco = endereco;
+        this.total = total;
+    }
+
     public Pedido(int id, float total, Endereco endereco, PedidoEstado estado) {
         this.id = id;
         this.estado = estado;

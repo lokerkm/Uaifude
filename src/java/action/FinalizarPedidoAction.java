@@ -9,6 +9,8 @@ import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Cliente;
 import model.Pedido;
 import persistence.PedidoDAO;
 
@@ -16,17 +18,25 @@ public class FinalizarPedidoAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String endercoEntrega = request.getParameter("endercoEntrega");
-        if (endercoEntrega.equals("outro")) {
+        String enderecoEntrega = request.getParameter("enderecoEntrega");
+        if (enderecoEntrega.equals("outro")) {
             //pegar treta de endereço
             //setar endereço no pedido
         }
-        Pedido pedido = (Pedido) request.getSession().getAttribute("carrinho");
-        pedido.setEstado(EstadoFactory.create("Confirmado"));
+
         try {
+            Pedido pedido = (Pedido) request.getSession().getAttribute("carrinho");
+            pedido.setId(PedidoDAO.getInstance().getNextId());
+            pedido.setEstado(EstadoFactory.create("Confirmado"));
+            HttpSession sessao = request.getSession();
+            Cliente cliente = (Cliente) sessao.getAttribute("usuario");
+            pedido.setCliente(cliente);
             PedidoDAO.getInstance().save(pedido, pedido.getEndereco());
             //mandar pedido pro estabelecimento
-             RequestDispatcher view = request.getRequestDispatcher("painelInicial.jsp");
+            Pedido pedidoCarrinho = new Pedido(0, cliente.getEndereco(), EstadoFactory.create("Carrinho"));
+            sessao.setAttribute("pedidos", PedidoDAO.getInstance().getPedidosCliente(cliente.getClienteId()));
+            sessao.setAttribute("carrinho", pedidoCarrinho);
+            response.sendRedirect("painelInicial.jsp");
         } catch (SQLException ex) {
             Logger.getLogger(FinalizarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
