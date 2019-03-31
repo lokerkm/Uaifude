@@ -20,9 +20,9 @@
                                 <p class="card-text" >CARRINHO</p>
                                 <small class="text-muted">Valor: R$ ${carrinho.total}</small>
                                 <small class="text-muted">${pedido.estado.estadoString()}</small>
-                                <div class="d-flex justify-content-between align-items-center">
+                                <div class="justify-content-between align-items-center">
                                     <c:if test="${pedido.estado.estadoString() != 'Entregue'}">
-                                        <div class="btn-group">
+                                        <div >
 
 
                                             <button type="submit"  class="btn btn-primary">Acompanhar pedido</button>
@@ -50,9 +50,9 @@
                                 <p class="card-text" >Pedido número: ${pedido.id}</p>
                                 <small class="text-muted">Valor: R$ ${pedido.total}</small>
                                 <small class="text-muted">${pedido.estado.estadoString()}</small>
-                                <div class="d-flex justify-content-between align-items-center">
+                                <div class="justify-content-between align-items-center">
                                     <c:if test="${pedido.estado.estadoString() != 'Entregue'}">
-                                        <div class="btn-group">
+                                        <div>
 
                                             <input type="hidden" name="pedidoId" value="${pedido.id}" >
                                             <button type="submit"  class="btn btn-primary">Acompanhar pedido</button>

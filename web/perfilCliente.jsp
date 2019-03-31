@@ -17,7 +17,7 @@
                                 <p class="card-text">Dados pessoais de ${sessionScope.usuario.nome}</p>
 
                                 <div class="justify-content-between align-items-center">
-                                    <div class="btn-group">
+                                    <div>
 
                                         <input type="hidden" name="clienteId" value="${sessionScope.usuario.getClienteId()}" >
                                         <button type="submit"  class="btn btn-primary">Visitar</button>
@@ -43,8 +43,8 @@
                             <div class="card-body">
                                 <p class="card-text">Endereço de entrega de ${sessionScope.usuario.nome}</p>
 
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
+                                <div class="justify-content-between align-items-center">
+                                    <div >
 
                                         <input type="hidden" name="clienteId" value="${sessionScope.usuario.getClienteId()}" >
                                         <button type="submit"  class="btn btn-primary">Visitar</button>

@@ -7,13 +7,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="assets/css/custom.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
         <title>UAIFUDE</title>
 
     </head>
     <body> 
 
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
             <img src="assets/img/uaifude.png" alt="" width="45" height="45" style="margin-right: 10px;">
             <a class="navbar-brand" href="painelInicial.jsp">UaiFude</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,4 +73,4 @@
                 <button type="submit" class="btn btn-danger" >Logout</button></form>
         </nav>
         <main role="main">
-            <div class="jumbotron">
+            <div class="container">

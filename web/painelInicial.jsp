@@ -3,10 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <jsp:include page="header.jsp" />
 
-<div class="container">
+
 <c:if test="${sessionScope.tipo == 'Cliente'}">
     <c:forEach items="${sessionScope.estabelecimentos}" var="estabelecimento">
-        <form action="FrontController?action=LerEstabelecimento" method="post">
+        <form action="FrontController?action=LerEstabelecimento" method="post" style="padding-top: 40px;">
             <div class="container">
                 <div class="container">
                     <div class="row">
@@ -17,7 +17,7 @@
                                     <p class="card-text" >${estabelecimento.nome}</p>
                                     <p class="text-muted">Categoria</p>
                                     <div class="justify-content-between align-items-center">
-                                        <div class="btn-group">
+                                        <div>
 
                                             <input type="hidden" name="estabelecimentoId" value="${estabelecimento.getEstabelecimentoId()}" >
                                             <button type="submit"  class="btn btn-primary">Visitar</button>
@@ -65,6 +65,6 @@
         </form>
     </c:forEach>
 </c:if>
-    </div>
+ 
   
 <jsp:include page="footer.jsp" />
