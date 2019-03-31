@@ -12,26 +12,55 @@
 </nav>
 
 <c:forEach items="${produtosPedido}" var="produto">
-
-    <div class="container">
+    <form action="FrontController?action=ExcluirProdutoPedido" method="post">
         <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <img src="${produto.linkImagem}"  class="img-thumbnail">
-                        <div class="card-body">
-                            <p class="card-text" >Produto: ${produto.nome}</p>
-                            <small class="text-muted">Preço: R$ ${produto.preco}</small>
-                            
-                            <small class="text-muted">${pedido.estado.estadoString()}</small>
-
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <img src="${produto.linkImagem}"  class="img-thumbnail">
+                            <div class="card-body">
+                                <p class="card-text" >Produto: ${produto.nome}</p>
+                                <small class="text-muted">Preço: R$ ${produto.preco}</small>
+                                <c:if test="${pedido.estado.estadoString()=='Carrinho'}">
+                                    <input type="hidden" name="produtoId" value="${produto.id}">
+                                    <button type="submit" class="btn btn-outline-danger">Remover do Carrinho</button>
+                                </c:if>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
+    </form>
 </c:forEach>
+<c:if test="${pedido.estado.estadoString()=='Carrinho'}">
+    <form action="FrontController?action=ConfirmarCarrinho" method="post">
+        Escolha o tipo de pagamento:
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="radio" name="tipoPagamento" id="Cartao" value="Cartao"> <label for="Cartao">Cartao</label>
+                </div>
+                <div class="input-group-text">
+                    <input type="radio" name="tipoPagamento" id="Dinheiro" value="Dinheiro"><label for="Dinheiro">Dinheiro</label>
+                </div>
+            </div>
 
+        </div>
+        Endereço de entrega, Deseja usar seu endereço padrão?
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="radio" name="enderecoEntrega" id="padrao" value="padrao"> <label for="padrao">Sim</label>
+                </div>
+                <div class="input-group-text">
+                    <input type="radio" name="enderecoEntrega" id="outro" value="outro"><label for="outro">Não</label>
+                </div>
+            </div>
+
+        </div>
+        <button type="submit"  class="btn btn-primary">Confirmar pedido</button>
+    </form>
+</c:if>
 <jsp:include page="footer.jsp" />

@@ -79,4 +79,16 @@ public class Pedido extends Observable {
         this.cliente = cliente;
     }
 
+    public void removeProduto(int idProduto) {
+        for (Produto produto : produtos) {
+            if (produto.getId() == idProduto) {
+                float precoAUX = produto.getPreco();
+                total -= precoAUX;
+                produtos.remove(produto);
+                break;
+            }
+
+        }
+    }
+
 }

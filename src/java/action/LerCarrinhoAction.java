@@ -24,6 +24,7 @@ public class LerCarrinhoAction implements Action {
             Pedido pedido = (Pedido) request.getSession().getAttribute("carrinho");
 
             request.setAttribute("pedido", pedido);
+            
             request.setAttribute("produtosPedido", pedido.getProdutos());
             RequestDispatcher view = request.getRequestDispatcher("paginaPedido.jsp");
             view.forward(request, response);
