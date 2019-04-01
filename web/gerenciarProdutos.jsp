@@ -13,7 +13,7 @@
 
 <div class="alert alert-success" role="alert" >
     ${mensagem}</div>
-<form action="FrontController?action=CadastrarProduto" method="post">
+<form action="FrontController?action=PrepararProduto" method="post">
     <div class="container">
         <div class="container">
             <div class="row">
@@ -39,86 +39,41 @@
         </div>
     </div>
 </form>
-<c:if test="${!sessionScope.usuario.produtos.isEmpty()}">
-    <form action="FrontController?action=EditarProduto" method="post">
+<c:forEach items="${sessionScope.produtos}" var="produto">
+
+    <div class="container">
         <div class="container">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card mb-4 shadow-sm">
-                            <img src="https://i.imgur.com/Vr1uYbr.jpg"  class="img-thumbnail">
-                            <div class="card-body">
-                                <p class="card-text" >Editar produto</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="${produto.linkImagem}"  class="img-thumbnail">
+                        <div class="card-body">
+                            <p class="card-text" >Produto: ${produto.nome}</p>
+                            <small class="text-muted">Preço: R$ ${produto.preco}</small>
 
-                                <div class="justify-content-between align-items-center">
-                                    <div class="btn-group">
-
-                                        <input type="hidden" name="acaoProduto" value="Editar" >
-                                        <button type="submit"  class="btn btn-primary">Gerenciar</button>
-
-                                    </div>
-
-                                </div>
-                            </div>
+                            <form action="FrontController?action=PrepararProduto" method="post">
+                                <input type="hidden" name="produtoId" value="${produto.id}" >
+                                <input type="hidden" name="acaoProduto" value="Ler" >
+                                <button type="submit"  class="btn btn-info">Consultar produto</button>
+                            </form>
+                            <form action="FrontController?action=PrepararProduto" method="post">
+                                <input type="hidden" name="produtoId" value="${produto.id}" >
+                                <input type="hidden" name="acaoProduto" value="Editar" >
+                                <button type="submit"  class="btn btn-secondary">Editar produto</button>
+                            </form> 
+                            <form action="FrontController?action=PrepararProduto" method="post">
+                                <input type="hidden" name="produtoId" value="${produto.id}" >
+                                <input type="hidden" name="acaoProduto" value="Excluir" >
+                                <button type="submit"  class="btn btn-danger">Excluir Produto</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
-    <form action="FrontController?action=ExcluirProduto" method="post">
-        <div class="container">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card mb-4 shadow-sm">
-                            <img src="https://i.imgur.com/JvejW9D.png"  class="img-thumbnail">
-                            <div class="card-body">
-                                <p class="card-text" >Excluir produto</p>
+    </div>
 
-                                <div class="justify-content-between align-items-center">
-                                    <div class="btn-group">
+</form>
+</c:forEach>
 
-                                        <input type="hidden" name="acaoProduto" value="Excluir" >
-                                        <button type="submit"  class="btn btn-primary">Gerenciar</button>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-
-    <form action="FrontController?action=LerProduto" method="post">
-        <div class="container">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card mb-4 shadow-sm">
-                            <img src="https://i.imgur.com/t9uerfY.png"  class="img-thumbnail">
-                            <div class="card-body">
-                                <p class="card-text" >Consultar Produto</p>
-
-                                <div class="justify-content-between align-items-center">
-                                    <div class="btn-group">
-
-                                        <input type="hidden" name="acaoProduto" value="Ler" >
-                                        <button type="submit"  class="btn btn-primary">Gerenciar</button>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-
-</c:if>
 <jsp:include page="footer.jsp" />
