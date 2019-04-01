@@ -31,9 +31,10 @@ public class FinalizarPedidoAction implements Action {
             HttpSession sessao = request.getSession();
             Cliente cliente = (Cliente) sessao.getAttribute("usuario");
             pedido.setCliente(cliente);
+            pedido.setEstabelecimentoId(pedido.getProdutos().get(0).getIdEstabelecimento());
             PedidoDAO.getInstance().save(pedido, pedido.getEndereco());
-            //mandar pedido pro estabelecimento
-            Pedido pedidoCarrinho = new Pedido(0, cliente.getEndereco(), EstadoFactory.create("Carrinho"));
+
+            Pedido pedidoCarrinho = new Pedido(0, cliente.getEndereco(), EstadoFactory.create("Carrinho"), 0);
             sessao.setAttribute("pedidos", PedidoDAO.getInstance().getPedidosCliente(cliente.getClienteId()));
             sessao.setAttribute("carrinho", pedidoCarrinho);
             response.sendRedirect("painelInicial.jsp");

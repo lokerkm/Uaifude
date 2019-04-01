@@ -20,6 +20,7 @@ public class Produto {
     private boolean disponivel;
     private String descricao;
     private String linkImagem;
+    private int idEstabelecimento;
 
     public Produto(int id, String nome, float preco, boolean disponivel, String descricao, String linkImagem) {
         this.id = id;
@@ -84,6 +85,14 @@ public class Produto {
 
     public void setLinkImagem(String linkImagem) {
         this.linkImagem = linkImagem;
+    }
+
+    public int getIdEstabelecimento() {
+        return idEstabelecimento;
+    }
+
+    public void setIdEstabelecimento(int idEstabelecimento) {
+        this.idEstabelecimento = idEstabelecimento;
     }
 
 }

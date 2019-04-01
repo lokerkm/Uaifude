@@ -1,5 +1,6 @@
 package model;
 
+import controller.EstadoFactory;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -13,15 +14,17 @@ public class Pedido extends Observable {
     private Cliente cliente;
     private float total;
     private ArrayList<Produto> produtos = new ArrayList<>();
+    private int estabelecimentoId;
 
-    public Pedido(float total, Endereco endereco, PedidoEstado estado) {
-
+    public Pedido(float total, Endereco endereco, PedidoEstado estado, int estabelecimentoId) {
+        this.estabelecimentoId = estabelecimentoId;
         this.estado = estado;
         this.endereco = endereco;
         this.total = total;
     }
 
-    public Pedido(int id, float total, Endereco endereco, PedidoEstado estado) {
+    public Pedido(int id, float total, Endereco endereco, PedidoEstado estado, int estabelecimentoId) {
+        this.estabelecimentoId = estabelecimentoId;
         this.id = id;
         this.estado = estado;
         this.endereco = endereco;
@@ -47,6 +50,11 @@ public class Pedido extends Observable {
 
     public void setEstado(PedidoEstado estado) {
         this.estado = estado;
+    }
+
+    public void setEstado(String estado) {
+
+        this.estado = EstadoFactory.create(estado);;
     }
 
     public float getTotal() {
@@ -96,6 +104,14 @@ public class Pedido extends Observable {
             }
 
         }
+    }
+
+    public int getEstabelecimentoId() {
+        return estabelecimentoId;
+    }
+
+    public void setEstabelecimentoId(int estabelecimentoId) {
+        this.estabelecimentoId = estabelecimentoId;
     }
 
 }

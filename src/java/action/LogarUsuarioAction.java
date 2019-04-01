@@ -43,7 +43,7 @@ public class LogarUsuarioAction implements Action {
                         sessao.setAttribute("usuario", cliente);
                         sessao.setAttribute("estabelecimentos", EstabelecimentoDAO.getInstance().getEstabelecimentos());
                         sessao.setAttribute("pedidos", PedidoDAO.getInstance().getPedidosCliente(cliente.getClienteId()));
-                        Pedido pedidoCarrinho = new Pedido( 0, cliente.getEndereco(), EstadoFactory.create("Carrinho"));
+                        Pedido pedidoCarrinho = new Pedido( 0, cliente.getEndereco(), EstadoFactory.create("Carrinho"),0);
                         sessao.setAttribute("carrinho", pedidoCarrinho);
                         // assim que implementar sessao.setAttribute("categorias", CategoriaDAO.getInstance().getCategorias());
                         // assim que implementar sessao.setAttribute("promocoes", PromocaoDAO.getInstance().getPromocoes());

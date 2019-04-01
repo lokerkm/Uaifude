@@ -29,13 +29,26 @@ public class AdicionaProdutoAction implements Action {
             Produto produto = ProdutoDAO.getInstance().getProduto(idProduto);
             HttpSession sessao = request.getSession();
             Pedido pedidoCarrinho = (Pedido) sessao.getAttribute("carrinho");
-            pedidoCarrinho.addProduto(produto);
+            if (pedidoCarrinho.getProdutos().isEmpty() || pedidoCarrinho.getProdutos().get(0).getIdEstabelecimento() == estabelecimento.getEstabelecimentoId()) {
+                pedidoCarrinho.addProduto(produto);
+            } else {
+                ArrayList<Produto> produtos = ProdutoDAO.getInstance().getProdutosEstabelecimento(idEstabelecimeto);
+
+                sessao.setAttribute("carrinho", pedidoCarrinho);
+                request.setAttribute("estabelecimento", estabelecimento);
+                request.setAttribute("produtosEstabelecimento", produtos);
+                request.setAttribute("mensagemAddCarrinho", "Você  nao pode adicionar produtos de lojas diferentes ao carrinho.");
+
+                RequestDispatcher view = request.getRequestDispatcher("paginaEstabelecimento.jsp");
+                view.forward(request, response);
+            }
+
             ArrayList<Produto> produtos = ProdutoDAO.getInstance().getProdutosEstabelecimento(idEstabelecimeto);
 
             sessao.setAttribute("carrinho", pedidoCarrinho);
             request.setAttribute("estabelecimento", estabelecimento);
             request.setAttribute("produtosEstabelecimento", produtos);
-            request.setAttribute("mensagemAddCarrinho", "Você adicionou 1 "+produto.getNome()+" ao carrinho." );
+            request.setAttribute("mensagemAddCarrinho", "Você adicionou 1 " + produto.getNome() + " ao carrinho.");
 
             RequestDispatcher view = request.getRequestDispatcher("paginaEstabelecimento.jsp");
             view.forward(request, response);

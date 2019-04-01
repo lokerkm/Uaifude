@@ -52,7 +52,8 @@ public class PedidoDAO {
                 Pedido pedido = new Pedido(rs.getInt("id"),
                         rs.getFloat("total"),
                         EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id")),
-                        EstadoFactory.create(rs.getString("estado"))
+                        EstadoFactory.create(rs.getString("estado")),
+                        rs.getInt("estabelecimento_id")
                 );
                 pedido.setCliente(ClienteDAO.getInstance().getCliente(rs.getInt("cliente_id")));
                 ArrayList<Produto> produtos = ProdutoDAO.getInstance().getProdutosPedido(rs.getInt("id"));
@@ -85,7 +86,8 @@ public class PedidoDAO {
                 Pedido pedido = new Pedido(rs.getInt("id"),
                         rs.getFloat("total"),
                         endereco,
-                        pedidoEstado
+                        pedidoEstado,
+                        rs.getInt("estabelecimento_id")
                 );
                 pedido.setCliente(ClienteDAO.getInstance().getCliente(rs.getInt("cliente_id")));
                 ArrayList<Produto> produtos = ProdutoDAO.getInstance().getProdutosPedido(rs.getInt("id"));
@@ -110,18 +112,19 @@ public class PedidoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from pedido,lista_produtos,produto,estabelecimento "
-                    + "where pedido.id=lista_produtos.pedido_id and lista_produtos.produto_id=produto.id "
-                    + "and produto.estabelecimento_id='" + estabelecimentoId + "'");
+            ResultSet rs = st.executeQuery("select * from pedido "
+                    + "where pedido.estabelecimento_id='" + estabelecimentoId + "'");
 
             while (rs.next()) {
                 PedidoEstado pedidoEstado = EstadoFactory.create(rs.getString("estado"));
                 Endereco endereco = EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id"));
                 Pedido pedido = new Pedido(rs.getInt("id"),
                         rs.getFloat("total"),
-                        EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id")),
-                        EstadoFactory.create(rs.getString("estado"))
+                        endereco,
+                        pedidoEstado,
+                        rs.getInt("estabelecimento_id")
                 );
+
                 pedido.setCliente(ClienteDAO.getInstance().getCliente(rs.getInt("cliente_id")));
                 ArrayList<Produto> produtos = ProdutoDAO.getInstance().getProdutosPedido(rs.getInt("id"));
                 pedido.setProdutos(produtos);
@@ -151,7 +154,7 @@ public class PedidoDAO {
             pedido = new Pedido(rs.getInt("id"),
                     rs.getFloat("total"),
                     EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id")),
-                    EstadoFactory.create(rs.getString("estado"))
+                    EstadoFactory.create(rs.getString("estado")), rs.getInt("estabelecimento_id")
             );
             pedido.setCliente(ClienteDAO.getInstance().getCliente(rs.getInt("cliente_id")));
             ArrayList<Produto> produtos = ProdutoDAO.getInstance().getProdutosPedido(rs.getInt("id"));
@@ -189,13 +192,14 @@ public class PedidoDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
 
-            String sql = "insert into pedido (total, estado,cliente_id,endereco_id)"
-                    + " VALUES (?,?,?,?)";
+            String sql = "insert into pedido (total, estado,cliente_id,endereco_id,estabelecimento_id)"
+                    + " VALUES (?,?,?,?,?)";
             PreparedStatement comando = conn.prepareStatement(sql);
             comando.setFloat(1, pedido.getTotal());
             comando.setString(2, pedido.getEstado().estadoString());
             comando.setInt(3, pedido.getCliente().getClienteId());
-            comando.setInt(4, endereco.getId());
+            comando.setInt(4, pedido.getEstabelecimentoId());
+            comando.setInt(5, endereco.getId());
 
             comando.execute();
 
@@ -222,10 +226,11 @@ public class PedidoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
 
-            String sql = "UPDATE pedido SET total=? WHERE id=?";
+            String sql = "UPDATE pedido SET total=?,estado=? WHERE id=?";
             PreparedStatement comando = conn.prepareStatement(sql);
             comando.setFloat(1, pedido.getTotal());
-            comando.setInt(2, pedido.getId());
+            comando.setString(2, pedido.getEstado().estadoString());
+            comando.setInt(3, pedido.getId());
 
             comando.execute();
 

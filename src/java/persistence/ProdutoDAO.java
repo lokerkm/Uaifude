@@ -26,7 +26,6 @@ public class ProdutoDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from produto");
 
-         
             while (rs.next()) {
                 Produto produto = new Produto(rs.getInt("id"),
                         rs.getString("nome"),
@@ -56,7 +55,6 @@ public class ProdutoDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from produto where estabelecimento_id ='" + estabelecimentoId + "'");
 
-        
             while (rs.next()) {//faltaPromocao
                 Produto produto = new Produto(rs.getInt("id"),
                         rs.getString("nome"),
@@ -94,7 +92,7 @@ public class ProdutoDAO {
                     rs.getString("descricao"),
                     rs.getString("linkImagem")
             );
-
+            produto.setIdEstabelecimento(rs.getInt("estabelecimento_id"));
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -180,7 +178,6 @@ public class ProdutoDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from produto where estabelecimento_id='" + idEstabelecimento + "'");
 
-      
             while (rs.next()) {
                 Produto produto = new Produto(rs.getInt("id"),
                         rs.getString("nome"),
@@ -210,7 +207,6 @@ public class ProdutoDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from produto,lista_produtos where lista_produtos.pedido_id='" + idPedido + "' and lista_produtos.produto_id=produto.id");
 
-          
             while (rs.next()) {
                 Produto produto = new Produto(rs.getInt("id"),
                         rs.getString("nome"),

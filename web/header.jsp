@@ -13,7 +13,7 @@
     </head>
     <body> 
 
-         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
             <img src="assets/img/uaifude.png" alt="" width="45" height="45" style="margin-right: 10px;">
             <a class="navbar-brand" href="painelInicial.jsp">UaiFude</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,7 +37,7 @@
                         <c:if test = "${sessionScope.tipo == 'Cliente'}">
                             <a class="nav-link" href="pedidosCliente.jsp">Meus Pedidos</a></c:if>
                         <c:if test = "${sessionScope.tipo == 'Estabelecimento'}">
-                            <a class="nav-link" href="pedidosEstabelecimento.jsp">Pedidos Recebidos</a></c:if>
+                            <a class="nav-link" href="gerenciarProdutos.jsp">Gerenciar Produtos</a></c:if>
                         <c:if test = "${sessionScope.tipo == 'Administrador'}">
                         </c:if>
                     </li>
@@ -45,7 +45,7 @@
                         <c:if test = "${sessionScope.tipo == 'Cliente'}">
                             <a class="nav-link" href="categorias.jsp">Categorias</a></c:if>
                         <c:if test = "${sessionScope.tipo == 'Estabelecimento'}">
-                            <a class="nav-link" href="gerenciarProdutos.jsp">Gerenciar Produtos</a></c:if>
+                            <a class="nav-link" href="gerenciarPromocoes.jsp">Gerenciar Promoções</a></c:if>
                         <c:if test = "${sessionScope.tipo == 'Administrador'}">
                         </c:if>
                     </li>
@@ -53,7 +53,7 @@
                         <c:if test = "${sessionScope.tipo == 'Cliente'}">
                             <a class="nav-link" href="promocoes.jsp">Promoções</a></c:if>
                         <c:if test = "${sessionScope.tipo == 'Estabelecimento'}">
-                            <a class="nav-link" href="gerenciarPromocoes.jsp">Gerenciar Promoções</a></c:if>
+                        </c:if>
                         <c:if test = "${sessionScope.tipo == 'Administrador'}">
                         </c:if>
                     </li>
