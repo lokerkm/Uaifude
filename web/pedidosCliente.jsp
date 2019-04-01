@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
-                            <img src="https://cdn.icon-icons.com/icons2/1305/PNG/512/shoppingcart_86089.png"  class="img-thumbnail">
+                            <img src="https://i.imgur.com/fyR1cVj.png"  class="img-thumbnail">
                             <div class="card-body">
                                 <p class="card-text" >CARRINHO</p>
                                 <small class="text-muted">Valor: R$ ${carrinho.total}</small>
@@ -45,7 +45,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
-                            <img src="https://img7.androidappsapk.co/poster/7/b/f/com.compilart.pedidoMobile_1.png"  class="img-thumbnail">
+                            <img src="https://i.imgur.com/E6aOelI.png"  class="img-thumbnail">
                             <div class="card-body">
                                 <p class="card-text" >Pedido número: ${pedido.id}</p>
                                 <small class="text-muted">Valor: R$ ${pedido.total}</small>

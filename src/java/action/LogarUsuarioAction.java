@@ -43,7 +43,7 @@ public class LogarUsuarioAction implements Action {
                         sessao.setAttribute("usuario", cliente);
                         sessao.setAttribute("estabelecimentos", EstabelecimentoDAO.getInstance().getEstabelecimentos());
                         sessao.setAttribute("pedidos", PedidoDAO.getInstance().getPedidosCliente(cliente.getClienteId()));
-                        Pedido pedidoCarrinho = new Pedido( 0, cliente.getEndereco(), EstadoFactory.create("Carrinho"),0);
+                        Pedido pedidoCarrinho = new Pedido(0, cliente.getEndereco(), EstadoFactory.create("Carrinho"), 0);
                         sessao.setAttribute("carrinho", pedidoCarrinho);
                         // assim que implementar sessao.setAttribute("categorias", CategoriaDAO.getInstance().getCategorias());
                         // assim que implementar sessao.setAttribute("promocoes", PromocaoDAO.getInstance().getPromocoes());
@@ -60,11 +60,12 @@ public class LogarUsuarioAction implements Action {
                     if (estabelecimento == null || !estabelecimento.getSenha().equals(senha)) {
                         response.sendRedirect("index.jsp");
                     } else {
+                        estabelecimento.setProdutos(ProdutoDAO.getInstance().getProdutos(estabelecimento.getEstabelecimentoId()));
                         HttpSession sessao = request.getSession();
                         sessao.setAttribute("tipo", tipo);
                         sessao.setAttribute("usuario", estabelecimento);
                         sessao.setAttribute("pedidos", PedidoDAO.getInstance().getPedidosEstabelecimento(estabelecimento.getEstabelecimentoId()));
-                        sessao.setAttribute("produtos", ProdutoDAO.getInstance().getProdutos(estabelecimento.getEstabelecimentoId()));
+                        sessao.setAttribute("produtos", estabelecimento.getProdutos());
                         // assim que implementar sessao.setAttribute("promocoes", PromocaoDAO.getInstance().getPromocoes(estabelecimento.getEstabelecimentoId()));
                         response.sendRedirect("painelInicial.jsp");
                     }

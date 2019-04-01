@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
-                            <img src="https://image.flaticon.com/icons/png/512/64/64096.png"  class="img-thumbnail">
+                            <img src="https://i.imgur.com/zPcHRDK.png"  class="img-thumbnail">
                             <div class="card-body">
                                 <p class="card-text">Dados pessoais de ${sessionScope.usuario.nome}</p>
 
@@ -39,7 +39,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
-                            <img src="https://petbamboo.com.br/wp-content/uploads/2018/07/icone-endere%C3%A7o-300x300-1.png"  class="img-thumbnail">
+                            <img src="https://i.imgur.com/3O4ZKHp.png"  class="img-thumbnail">
                             <div class="card-body">
                                 <p class="card-text">Endereço de entrega de ${sessionScope.usuario.nome}</p>
 

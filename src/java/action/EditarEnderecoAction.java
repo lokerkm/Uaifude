@@ -17,8 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Cliente;
 import model.Endereco;
+import model.Estabelecimento;
 import persistence.ClienteDAO;
 import persistence.EnderecoDAO;
+import persistence.EstabelecimentoDAO;
 
 /**
  *
@@ -48,11 +50,22 @@ public class EditarEnderecoAction implements Action {
             endereco.setNumero(numero);
             EnderecoDAO.getInstance().update(endereco);
             HttpSession sessao = request.getSession();
-            Cliente clienteSessao = (Cliente) sessao.getAttribute("usuario");
-            Cliente cliente = ClienteDAO.getInstance().getCliente(clienteSessao.getClienteId());
-            sessao.setAttribute("usuario", cliente);
-            RequestDispatcher view = request.getRequestDispatcher("perfilCliente.jsp");
-            view.forward(request, response);
+            String tipo = (String) sessao.getAttribute("tipo");
+            if (tipo.equalsIgnoreCase("Cliente")) {
+                Cliente clienteSessao = (Cliente) sessao.getAttribute("usuario");
+                Cliente cliente = ClienteDAO.getInstance().getCliente(clienteSessao.getClienteId());
+                sessao.setAttribute("usuario", cliente);
+                RequestDispatcher view = request.getRequestDispatcher("perfilCliente.jsp");
+                view.forward(request, response);
+            }
+            if (tipo.equalsIgnoreCase("Estabelecimento")) {
+                Estabelecimento estabelecimentoSessao = (Estabelecimento) sessao.getAttribute("usuario");
+                Estabelecimento estabelecimento = EstabelecimentoDAO.getInstance().getEstabelecimento(estabelecimentoSessao.getEstabelecimentoId());
+                sessao.setAttribute("usuario", estabelecimento);
+                RequestDispatcher view = request.getRequestDispatcher("perfilEstabelecimento.jsp");
+                view.forward(request, response);
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(EditarEnderecoAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

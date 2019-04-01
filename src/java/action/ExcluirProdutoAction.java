@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import model.Estabelecimento;
 import model.Produto;
 
-public class EditarProdutoAction implements Action {
+public class ExcluirProdutoAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {

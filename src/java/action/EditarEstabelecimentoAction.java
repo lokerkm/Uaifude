@@ -10,9 +10,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import persistence.ClienteDAO;
+import javax.servlet.http.HttpSession;
+import model.Estabelecimento;
+import persistence.EstabelecimentoDAO;
 
 /**
  *
@@ -22,7 +26,29 @@ public class EditarEstabelecimentoAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String nome = request.getParameter("nome");
+        String cpnj = request.getParameter("cpnj");
+        String descricao = request.getParameter("descricao");
+        String linkImagem = request.getParameter("linkImagem");
+        HttpSession sessao = request.getSession();
 
+        Estabelecimento estabelecimento = (Estabelecimento) sessao.getAttribute("usuario");
+        estabelecimento.setNome(nome);
+        estabelecimento.setDescricao(descricao);
+        estabelecimento.setCnpj(cpnj);
+        estabelecimento.setLinkImagem(linkImagem);
+
+        try {
+            EstabelecimentoDAO.getInstance().update(estabelecimento);
+            sessao.setAttribute("Usuario", estabelecimento);
+            RequestDispatcher view = request.getRequestDispatcher("perfilEstabelecimento.jsp");
+            view.forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(EditarEstabelecimentoAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EditarEstabelecimentoAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ServletException ex) {
+            Logger.getLogger(EditarEstabelecimentoAction.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-
 }
