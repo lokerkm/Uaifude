@@ -12,6 +12,17 @@ public class Estabelecimento extends Usuario {
     private Categoria categoria;
     private ArrayList<Produto> produtos = new ArrayList<>();
 
+    public Estabelecimento(String nome, String cnpj, String descricao, String linkImagem, Categoria categoria, String login, String senha, String email, String tipo, String telefone, String celular, Endereco endereco) {
+        super(login, senha, email, tipo, telefone, celular, endereco);
+        this.nome = nome;
+        this.cnpj = cnpj;
+        this.descricao = descricao;
+        this.linkImagem = linkImagem;
+        this.categoria = categoria;
+    }
+
+    
+    
     public Estabelecimento(int id, String nome, String cnpj, String descricao, int usuarioId, String login, String senha, String email, String tipo, String telefone, String celular, String linkImagem) {
         super(usuarioId, login, senha, email, tipo, telefone, celular);
         this.id = id;

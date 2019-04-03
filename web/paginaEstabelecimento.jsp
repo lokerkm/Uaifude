@@ -14,12 +14,14 @@
 <div class="alert alert-primary" role="alert">
     Valor total do carrinho R$${carrinho.total}
 </div>
-<c:forEach items="${produtosEstabelecimento}" var="produto">
-    <form action="FrontController?action=AdicionaProduto" method="post">
-        <div class="container">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <c:forEach items="${produtosEstabelecimento}" var="produto">
+
+
+                <div class="col-md-4">
+                    <form action="FrontController?action=AdicionaProduto" method="post">
                         <div class="card mb-4 shadow-sm">
                             <img src="${produto.linkImagem}"  class="img-thumbnail">
                             <div class="card-body">
@@ -32,10 +34,13 @@
 
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
-            </div>
+
+
+            </c:forEach>
+
         </div>
-    </form>
-</c:forEach>
+    </div>
+</div>
 <jsp:include page="footer.jsp" />

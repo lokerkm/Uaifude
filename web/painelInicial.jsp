@@ -3,14 +3,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <jsp:include page="header.jsp" />
 
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <c:if test="${sessionScope.tipo == 'Cliente'}">
+                <c:forEach items="${sessionScope.estabelecimentos}" var="estabelecimento">
 
-<c:if test="${sessionScope.tipo == 'Cliente'}">
-    <c:forEach items="${sessionScope.estabelecimentos}" var="estabelecimento">
-        <form action="FrontController?action=LerEstabelecimento" method="post" style="padding-top: 40px;">
-            <div class="container">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4">
+
+                    <div class="col-md-4">
+                        <form action="FrontController?action=LerEstabelecimento" method="post" style="padding-top: 40px;">
                             <div class="card mb-4 shadow-sm">
                                 <img src="${estabelecimento.linkImagem}"  class="img-thumbnail">
                                 <div class="card-body">
@@ -27,22 +28,19 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
-                </div>
-            </div>
-        </form>
-    </c:forEach>
-</c:if>
 
-<c:if test="${sessionScope.tipo == 'Estabelecimento'}">
-    <div class="alert alert-success" role="alert" >
-        ${mensagem}</div>
-    <form action="FrontController?action=LerPedidoEstabelecimento" method="post">
-        <div class="container">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
+                </c:forEach>
+            </c:if>
+
+            <c:if test="${sessionScope.tipo == 'Estabelecimento'}">
+                <div class="alert alert-success" role="alert" >
+                    ${mensagem}</div>
+
+
+                <div class="col-md-4">
+                    <form action="FrontController?action=LerPedidoEstabelecimento" method="post">
                         <div class="card mb-4 shadow-sm">
                             <img src="https://i.imgur.com/Bal96x3.png"  class="img-thumbnail">
                             <div class="card-body">
@@ -59,16 +57,12 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
-            </div>
-        </div>
-    </form>
-    <form action="FrontController?action=LerPedidoEstabelecimento" method="post">
-        <div class="container">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
+
+
+                <div class="col-md-4">
+                    <form action="FrontController?action=LerPedidoEstabelecimento" method="post">
                         <div class="card mb-4 shadow-sm">
                             <img src="https://i.imgur.com/U1JgY8D.png"  class="img-thumbnail">
                             <div class="card-body">
@@ -85,16 +79,12 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
-            </div>
-        </div>
-    </form>
-    <form action="FrontController?action=LerPedidoEstabelecimento" method="post">
-        <div class="container">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
+
+
+                <div class="col-md-4">
+                    <form action="FrontController?action=LerPedidoEstabelecimento" method="post">
                         <div class="card mb-4 shadow-sm">
                             <img src="https://i.imgur.com/wZc9gnT.png"  class="img-thumbnail">
                             <div class="card-body">
@@ -111,19 +101,15 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
-            </div>
-        </div>
-    </form>
 
 
 
-    <form action="FrontController?action=LerPedidoEstabelecimento" method="post">
-        <div class="container">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
+
+
+                <div class="col-md-4">
+                    <form action="FrontController?action=LerPedidoEstabelecimento" method="post">
                         <div class="card mb-4 shadow-sm">
                             <img src="https://i.imgur.com/dSn8vbA.jpg"  class="img-thumbnail">
                             <div class="card-body">
@@ -140,11 +126,17 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
+
+
+
+
+
             </div>
         </div>
-    </form>
+    </div>
+
 
 
 

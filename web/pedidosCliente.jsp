@@ -8,12 +8,14 @@
         <li class="breadcrumb-item active" aria-current="page">Meus pedidos</li>
     </ol>
 </nav>
-<c:if test="${sessionScope.carrinho.produtos.size() >0}">
-    <form action="FrontController?action=LerCarrinho" method="post">
-        <div class="container">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <c:if test="${sessionScope.carrinho.produtos.size() >0}">
+
+
+                <div class="col-md-4">
+                    <form action="FrontController?action=LerCarrinho" method="post">
                         <div class="card mb-4 shadow-sm">
                             <img src="https://i.imgur.com/fyR1cVj.png"  class="img-thumbnail">
                             <div class="card-body">
@@ -32,18 +34,15 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
-                </div>
-            </div>
-        </form>
-</c:if>
-<c:forEach items="${sessionScope.pedidos}" var="pedido">
-    <form action="FrontController?action=LerPedido" method="post">
-        <div class="container">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
+
+            </c:if>
+            <c:forEach items="${sessionScope.pedidos}" var="pedido">
+
+
+                <div class="col-md-4">
+                    <form action="FrontController?action=LerPedido" method="post">
                         <div class="card mb-4 shadow-sm">
                             <img src="https://i.imgur.com/E6aOelI.png"  class="img-thumbnail">
                             <div class="card-body">
@@ -62,11 +61,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
-                </div>
-            </div>
-        </form>
-</c:forEach>
 
+
+            </c:forEach>
+        </div>
+    </div>
+</div>
 <jsp:include page="footer.jsp" />

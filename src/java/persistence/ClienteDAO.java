@@ -155,7 +155,7 @@ public class ClienteDAO {
             comando2.setString(1, cliente.getNome());
             comando2.setString(2, cliente.getCpf());
             comando2.setString(3, cliente.getNascimento());
-            comando2.setInt(4, cliente.getUsuarioId());
+            comando2.setInt(4, getLastId());
             comando2.execute();
 
         } catch (SQLException e) {
@@ -214,6 +214,24 @@ public class ClienteDAO {
 
     public Cliente getCliente(Object attribute) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int getLastId() throws ClassNotFoundException, SQLException {
+        Connection conn = null;
+        Statement st = null;
+        int idNext;
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM `usuario` WHERE 1 ORDER BY `usuario`.`id` DESC");
+            rs.first();
+            idNext = rs.getInt("id");
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return idNext;
     }
 
 }

@@ -8,12 +8,14 @@
         <li class="breadcrumb-item active" aria-current="page">Pedidos ${tipoPedido} </li>
     </ol>
 </nav>
-<c:forEach items="${pedidosFiltrados}" var="pedido">
-    <form action="FrontController?action=EditarPedido" method="post">
-        <div class="container">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <c:forEach items="${pedidosFiltrados}" var="pedido">
+
+
+                <div class="col-md-4">
+                    <form action="FrontController?action=EditarPedido" method="post">
                         <div class="card mb-4 shadow-sm">
                             <img src="https://img7.androidappsapk.co/poster/7/b/f/com.compilart.pedidoMobile_1.png"  class="img-thumbnail">
                             <div class="card-body">
@@ -33,13 +35,14 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
-                </div>
-            </div>
-        </form>
-</c:forEach>
 
+
+            </c:forEach>
+        </div>
+    </div>
+</div>
 
 
 <jsp:include page="footer.jsp" />

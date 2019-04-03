@@ -10,13 +10,14 @@
         <li class="breadcrumb-item active" aria-current="page">Pedido ${pedido.id}</li>
     </ol>
 </nav>
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <c:forEach items="${produtosPedido}" var="produto">
 
-<c:forEach items="${produtosPedido}" var="produto">
-    <form action="FrontController?action=ExcluirProdutoPedido" method="post">
-        <div class="container">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
+
+                <div class="col-md-4">
+                    <form action="FrontController?action=ExcluirProdutoPedido" method="post">
                         <div class="card mb-4 shadow-sm">
                             <img src="${produto.linkImagem}"  class="img-thumbnail">
                             <div class="card-body">
@@ -28,12 +29,14 @@
                                 </c:if>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
-            </div>
+
+
+            </c:forEach>
         </div>
-    </form>
-</c:forEach>
+    </div>
+</div>
 <c:if test="${pedido.estado.estadoString()=='Carrinho'}">
     <form action="FrontController?action=ConfirmarCarrinho" method="post">
         Escolha o tipo de pagamento:

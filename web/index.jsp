@@ -20,8 +20,8 @@
 
             <div class="text-center mb-4">
                 <img class="mb-4" src="assets/img/uaifude.png" alt="" width="72" height="72">
-<!--                <h1 class="h3 mb-3 font-weight-normal">UaiFude</h1>
-                <p>slogan</p>-->
+                <!--                <h1 class="h3 mb-3 font-weight-normal">UaiFude</h1>
+                                <p>slogan</p>-->
             </div>
             <div class="form-label-group">
                 <input type="text" id="txtLogin" name="txtLogin" class="form-control" required autofocus>
@@ -32,22 +32,25 @@
                 <input type="password" id="inputPassword" name="txtSenha"  class="form-control"  required>
                 <label for="inputPassword">Senha</label>
             </div>
-            
-             
-            
+
+
+
             <div class="form-label-group">
                 <select class="custom-select" name="txtTipo">
-                            <option value="Administrador">Administrador</option>
-                            <option value="Cliente">Cliente</option>
-                            <option value="Estabelecimento">Estabelecimento</option>
-                        </select>
+                    <option value="Administrador">Administrador</option>
+                    <option value="Cliente">Cliente</option>
+                    <option value="Estabelecimento">Estabelecimento</option>
+                </select>
             </div>
-            
-            
+
+
 
             <button class="btn btn-lg btn-primary btn-block"  type="submit">Sign in</button>
-
+            <a href="cadastraCliente.jsp">Não tem conta? toma no cu</a></br>
+        <a href="cadastraEstabelecimento.jsp">Quer fazer parte da nossa rede? cadaste sua empresa</a>
         </form>
         
+
+
         <jsp:include page="footer.jsp" />
 
