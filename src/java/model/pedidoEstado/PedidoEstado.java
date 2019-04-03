@@ -1,14 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model.pedidoEstado;
 
-/**
- *
- * @author Vitor
- */
+import model.Pedido;
+
 public interface PedidoEstado {
+
+    String toCarrinho(Pedido pedido);
+
+    String toConfirmado(Pedido pedido);
+
+    String toEntregue(Pedido pedido);
+
+    String toProducao(Pedido pedido);
+
+    String toTransporte(Pedido pedido);
+
     String estadoString();
 }

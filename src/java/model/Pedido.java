@@ -21,6 +21,7 @@ public class Pedido extends Observable {
         this.estado = estado;
         this.endereco = endereco;
         this.total = total;
+        addObserver(cliente);
     }
 
     public Pedido(int id, float total, Endereco endereco, PedidoEstado estado, int estabelecimentoId) {
@@ -50,11 +51,6 @@ public class Pedido extends Observable {
 
     public void setEstado(PedidoEstado estado) {
         this.estado = estado;
-    }
-
-    public void setEstado(String estado) {
-
-        this.estado = EstadoFactory.create(estado);;
     }
 
     public float getTotal() {
@@ -92,6 +88,7 @@ public class Pedido extends Observable {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+        addObserver(cliente);
     }
 
     public void removeProduto(int idProduto) {
@@ -114,4 +111,31 @@ public class Pedido extends Observable {
         this.estabelecimentoId = estabelecimentoId;
     }
 
+    public String toCarrinho() {
+        return estado.toCarrinho(this);
+    }
+
+    public String toConfirmado() {
+        return estado.toConfirmado(this);
+    }
+
+    public String toEntregue() {
+        return estado.toEntregue(this);
+    }
+
+    public String toProducao() {
+        return estado.toProducao(this);
+    }
+
+    public String toTransporte() {
+        return estado.toTransporte(this);
+
+    }
+
+    public void setChange() {
+        setChanged();
+        notifyObservers();
+    }
+
+  
 }

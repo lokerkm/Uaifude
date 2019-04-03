@@ -27,7 +27,7 @@ public class FinalizarPedidoAction implements Action {
         try {
             Pedido pedido = (Pedido) request.getSession().getAttribute("carrinho");
             pedido.setId(PedidoDAO.getInstance().getNextId());
-            pedido.setEstado(EstadoFactory.create("Confirmado"));
+            pedido.toConfirmado();
             HttpSession sessao = request.getSession();
             Cliente cliente = (Cliente) sessao.getAttribute("usuario");
             pedido.setCliente(cliente);

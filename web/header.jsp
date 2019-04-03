@@ -15,16 +15,17 @@
 
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
             <img src="assets/img/uaifude.png" alt="" width="45" height="45" style="margin-right: 10px;">
-            <a class="navbar-brand" href="painelInicial.jsp">UaiFude</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <a class="navbar-brand" <c:if test="${!empty sessionScope.tipo}"> href="painelInicial.jsp" </c:if>>UaiFude</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="painelInicial.jsp">Home <span class="sr-only">(current)</span></a>
-                    </li>
+                <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                        <c:if test="${!empty sessionScope.tipo}">
+                            <a class="nav-link" href="painelInicial.jsp">Home <span class="sr-only">(current)</span></a>
+                        </c:if></li>
                     <li class="nav-item">
                         <c:if test = "${sessionScope.tipo == 'Cliente'}">
                             <a class="nav-link" href="perfilCliente.jsp">Minha Conta</a></c:if>
@@ -70,7 +71,8 @@
                     Adminstrador ${sessionScope.usuario.login}
                 </c:if></span>
             <form action="FrontController?action=Deslogar" method="post">
-                <button type="submit" class="btn btn-danger" >Logout</button></form>
+                <c:if test="${!empty sessionScope.tipo}">
+                    <button type="submit" class="btn btn-danger" >Logout</button></form></c:if>
         </nav>
         <main role="main">
             <div class="container">

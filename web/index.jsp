@@ -46,10 +46,10 @@
 
 
             <button class="btn btn-lg btn-primary btn-block"  type="submit">Sign in</button>
-            <a href="cadastraCliente.jsp">Não tem conta? toma no cu</a></br>
-        <a href="cadastraEstabelecimento.jsp">Quer fazer parte da nossa rede? cadaste sua empresa</a>
+            <a href="cadastraCliente.jsp">Não tem conta? Cadastre-se</a></br>
+            <a href="cadastraEstabelecimento.jsp">Quer fazer parte da nossa rede? Cadaste sua empresa</a>
         </form>
-        
+
 
 
         <jsp:include page="footer.jsp" />

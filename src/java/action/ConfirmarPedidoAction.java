@@ -14,33 +14,34 @@ import model.Estabelecimento;
 import model.Pedido;
 import persistence.PedidoDAO;
 
-public class AlterarEstadoPedidoAction implements Action {
-
+public class ConfirmarPedidoAction implements Action {
+    
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int pedidoId = Integer.parseInt(request.getParameter("pedidoId"));
-        String tipoPedido = request.getParameter("tipoPedido");
+        
         Pedido pedido;
         try {
             pedido = PedidoDAO.getInstance().getPedido(pedidoId);
-            request.setAttribute("mensagem", "Pedido " + pedidoId + " alterado de "
-                    + pedido.getEstado().estadoString() + " para " + tipoPedido);
-            pedido.setEstado(tipoPedido);
-            PedidoDAO.getInstance().update(pedido);
+            String tipoPedido = pedido.getEstado().estadoString();
+            request.setAttribute("mensagem", pedido.toConfirmado());
+            if (!tipoPedido.equals(pedido.getEstado().estadoString())) {
+                PedidoDAO.getInstance().update(pedido);
+            }
             HttpSession sessao = request.getSession();
             Estabelecimento estabelecimento = (Estabelecimento) sessao.getAttribute("usuario");
             sessao.setAttribute("pedidos", PedidoDAO.getInstance().getPedidosEstabelecimento(estabelecimento.getEstabelecimentoId()));
-
+            
             RequestDispatcher view = request.getRequestDispatcher("painelInicial.jsp");
             view.forward(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(AlterarEstadoPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AlterarEstadoPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ServletException ex) {
-            Logger.getLogger(AlterarEstadoPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConfirmarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ConfirmarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ConfirmarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
     }
-
+    
 }

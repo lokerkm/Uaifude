@@ -30,22 +30,29 @@
 
 </c:forEach>
 
-<form action="FrontController?action=AlterarEstadoPedido" method="post">
+<form action="FrontController?action=ColocarCarrinhoPedido" method="post">
     <input type="hidden" name="pedidoId" value="${pedido.id}" >
+    <button type="submit"  class="btn btn-primary">Colocar no Carrinho o pedido</button>
+</form>
 
-    <c:if test="${tipoPedido == 'Confirmado'}">
-        <input type="hidden" name="tipoPedido" value="Producao" >
-        <button type="submit"  class="btn btn-primary">Colocar em produção o pedido</button></c:if>
-    <c:if test="${tipoPedido == 'Producao'}">
-        <input type="hidden" name="tipoPedido" value="Transporte" >
-        <button type="submit"  class="btn btn-primary">Colocar em transporte o pedido</button></c:if>
-    <c:if test="${tipoPedido == 'Transporte'}">
-        <input type="hidden" name="tipoPedido" value="Entregue" >
-        <button type="submit"  class="btn btn-primary">Declarar como entregue o pedido</button></c:if>
+<form action="FrontController?action=ConfirmarPedido" method="post">
+    <input type="hidden" name="pedidoId" value="${pedido.id}" >
+    <button type="submit"  class="btn btn-primary">Confirmar o pedido</button>
+</form>
 
-    </form>
+<form action="FrontController?action=ProduzirPedido" method="post">
+    <input type="hidden" name="pedidoId" value="${pedido.id}" >
+    <button type="submit"  class="btn btn-primary">Colocar em produção o pedido</button>
+</form>
 
+<form action="FrontController?action=TransportarPedido" method="post">
+    <input type="hidden" name="pedidoId" value="${pedido.id}" >
+    <button type="submit"  class="btn btn-primary">Colocar em transporte o pedido</button>
+</form>
 
+<form action="FrontController?action=EntregarPedido" method="post">
+    <input type="hidden" name="pedidoId" value="${pedido.id}" >
+    <button type="submit"  class="btn btn-primary">Declarar como entregue o pedido</button>
+</form>
 
-
-<jsp:include page="footer.jsp" />
+    <jsp:include page="footer.jsp" />

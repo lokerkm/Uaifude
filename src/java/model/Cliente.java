@@ -60,4 +60,8 @@ public class Cliente extends Usuario {
         this.nascimento = nascimento;
     }
 
+    @Override
+    public void update(Observable pedido, Object arg1) {
+
+    }
 }

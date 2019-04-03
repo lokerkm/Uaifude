@@ -35,9 +35,11 @@
             </c:if>
 
             <c:if test="${sessionScope.tipo == 'Estabelecimento'}">
-                <div class="alert alert-success" role="alert" >
-                    ${mensagem}</div>
-
+                <c:if test="${!empty mensagem}">
+                    <div class="alert alert-success" role="alert" >
+gfhdghdhf
+                        ${mensagem}</div>
+                    </c:if>
 
                 <div class="col-md-4">
                     <form action="FrontController?action=LerPedidoEstabelecimento" method="post">

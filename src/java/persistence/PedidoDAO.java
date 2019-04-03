@@ -198,8 +198,8 @@ public class PedidoDAO {
             comando.setFloat(1, pedido.getTotal());
             comando.setString(2, pedido.getEstado().estadoString());
             comando.setInt(3, pedido.getCliente().getClienteId());
-            comando.setInt(4, pedido.getEstabelecimentoId());
-            comando.setInt(5, endereco.getId());
+            comando.setInt(4,endereco.getId());
+            comando.setInt(5,pedido.getEstabelecimentoId());
 
             comando.execute();
 

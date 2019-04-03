@@ -8,15 +8,15 @@
         <li class="breadcrumb-item active" aria-current="page">Estabelecimento ${estabelecimento.nome}</li>
     </ol>
 </nav>
-
-<div class="alert alert-success" role="alert" >
-    ${mensagemAddCarrinho}</div>
-<div class="alert alert-primary" role="alert">
-    Valor total do carrinho R$${carrinho.total}
-</div>
-<div class="container">
+<c:if test="${!empty mensagemAddCarrinho}">
+    <div class="alert alert-success" role="alert" >
+        ${mensagemAddCarrinho}</div>
+    <div class="alert alert-primary" role="alert">
+        Valor total do carrinho R$${carrinho.total}
+    </div></c:if>
     <div class="container">
-        <div class="row">
+        <div class="container">
+            <div class="row">
             <c:forEach items="${produtosEstabelecimento}" var="produto">
 
 
