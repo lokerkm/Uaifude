@@ -13,6 +13,7 @@ import model.Estabelecimento;
 import model.Produto;
 import persistence.EstabelecimentoDAO;
 import persistence.ProdutoDAO;
+import persistence.PromocaoDAO;
 
 public class EditarProdutoAction implements Action {
 
@@ -23,12 +24,14 @@ public class EditarProdutoAction implements Action {
         float preco = Float.parseFloat(request.getParameter("preco"));
         int id = Integer.parseInt(request.getParameter("id"));
         String linkImagem = request.getParameter("linkImagem");
+        int promocao = Integer.parseInt(request.getParameter("promocao"));
 
         Produto produto = new Produto(id, nome, preco, true, descricao, linkImagem);
         HttpSession sessao = request.getSession();
         Estabelecimento estabelecimento = (Estabelecimento) sessao.getAttribute("usuario");
         produto.setIdEstabelecimento(estabelecimento.getEstabelecimentoId());
         try {
+            produto.setPromocao(PromocaoDAO.getInstance().getPromocao(promocao));
             ProdutoDAO.getInstance().update(produto);
             estabelecimento = EstabelecimentoDAO.getInstance().getEstabelecimento(estabelecimento.getLogin());
             estabelecimento.setProdutos(ProdutoDAO.getInstance().getProdutos(estabelecimento.getEstabelecimentoId()));

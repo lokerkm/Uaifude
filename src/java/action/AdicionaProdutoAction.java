@@ -22,7 +22,7 @@ public class AdicionaProdutoAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int idProduto = Integer.parseInt(request.getParameter("produtoId"));
-        int idEstabelecimeto = Integer.parseInt(request.getParameter("estabelecimentoId"));
+        int idEstabelecimeto = Integer.parseInt(request.getParameter("idEstabelecimeto"));
 
         try {
             Estabelecimento estabelecimento = EstabelecimentoDAO.getInstance().getEstabelecimento(idEstabelecimeto);

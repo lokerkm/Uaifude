@@ -53,8 +53,21 @@
                     </div>
                 </div>
 
+                <div class="col-md-6 mb-3">
+                    <label for="promocao">Promoção</label>
+                    <select <c:if test="${acaoProduto != 'EditarProduto' && acaoProduto != 'CadastrarProduto'}"> disabled="true" </c:if>   class="form-control" id="promocao" name="promocao">
 
-                <hr class="mb-4">
+                    <c:forEach items="${promocoes}" var="promocao">
+
+                        <option value="${promocao.getId()}" <c:if test="${promocao.getId() == produto.getPromocao().getId() }"> selected</c:if>>${promocao.getNome()}</option>  
+                    </c:forEach>
+                </select>
+                <div class="invalid-feedback">
+                    Insira um celular válido.
+                </div>
+            </div>
+
+            <hr class="mb-4">
             <c:if test="${acaoProduto != 'LerProduto'}">  <button class="btn btn-primary btn-lg btn-block" type="submit">Alterar</button></c:if>
             </form>
         </div>

@@ -27,6 +27,7 @@ public class PedidoEstadoConfirmado implements PedidoEstado {
     @Override
     public String toProducao(Pedido pedido) {
         pedido.setEstado(new PedidoEstadoProducao());
+          pedido.setChange();
         return "Pedido Confirmado pode passar para Produção";
     }@Override
     public String toTransporte(Pedido pedido) {

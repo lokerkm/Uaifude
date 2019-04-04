@@ -45,8 +45,8 @@
                     <li class="nav-item">
                         <c:if test = "${sessionScope.tipo == 'Cliente'}">
                             <a class="nav-link" href="categorias.jsp">Categorias</a></c:if>
-                        <c:if test = "${sessionScope.tipo == 'Estabelecimento'}">
-                            <a class="nav-link" href="gerenciarPromocoes.jsp">Gerenciar Promoções</a></c:if>
+
+
                         <c:if test = "${sessionScope.tipo == 'Administrador'}">
                         </c:if>
                     </li>
@@ -71,8 +71,8 @@
                     Adminstrador ${sessionScope.usuario.login}
                 </c:if></span>
                 <c:if test="${!empty sessionScope.tipo}">
-            <form action="FrontController?action=Deslogar" method="post">
-                
+                <form action="FrontController?action=Deslogar" method="post">
+
                     <button type="submit" class="btn btn-danger" >Logout</button></form></c:if>
         </nav>
         <main role="main">

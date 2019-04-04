@@ -4,6 +4,10 @@ import model.Pedido;
 
 public class PedidoEstadoTransporte implements PedidoEstado {
 
+    public PedidoEstadoTransporte() {
+        System.out.println("dskgnsd");
+    }
+
     @Override
     public String estadoString() {
         return "Transporte";
@@ -22,6 +26,7 @@ public class PedidoEstadoTransporte implements PedidoEstado {
     @Override
     public String toEntregue(Pedido pedido) {
         pedido.setEstado(new PedidoEstadoEntregue());
+        pedido.setChange();
         return "Pedido Transporte pode passar para Entregue";
     }
 

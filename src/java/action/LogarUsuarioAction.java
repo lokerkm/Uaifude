@@ -19,6 +19,7 @@ import persistence.ClienteDAO;
 import persistence.EstabelecimentoDAO;
 import persistence.PedidoDAO;
 import persistence.ProdutoDAO;
+import persistence.PromocaoDAO;
 
 public class LogarUsuarioAction implements Action {
 
@@ -43,10 +44,10 @@ public class LogarUsuarioAction implements Action {
                         sessao.setAttribute("usuario", cliente);
                         sessao.setAttribute("estabelecimentos", EstabelecimentoDAO.getInstance().getEstabelecimentos());
                         sessao.setAttribute("pedidos", PedidoDAO.getInstance().getPedidosCliente(cliente.getClienteId()));
+                        sessao.setAttribute("categorias", CategoriaDAO.getInstance().getCategorias());
                         Pedido pedidoCarrinho = new Pedido(0, cliente.getEndereco(), EstadoFactory.create("Carrinho"), 0);
                         sessao.setAttribute("carrinho", pedidoCarrinho);
-                        // assim que implementar sessao.setAttribute("categorias", CategoriaDAO.getInstance().getCategorias());
-                        // assim que implementar sessao.setAttribute("promocoes", PromocaoDAO.getInstance().getPromocoes());
+                        sessao.setAttribute("promocoes", PromocaoDAO.getInstance().getPromocoes());
                         response.sendRedirect("painelInicial.jsp");
                     }
                 } catch (SQLException ex) {
@@ -66,7 +67,7 @@ public class LogarUsuarioAction implements Action {
                         sessao.setAttribute("usuario", estabelecimento);
                         sessao.setAttribute("pedidos", PedidoDAO.getInstance().getPedidosEstabelecimento(estabelecimento.getEstabelecimentoId()));
                         sessao.setAttribute("produtos", estabelecimento.getProdutos());
-                        // assim que implementar sessao.setAttribute("promocoes", PromocaoDAO.getInstance().getPromocoes(estabelecimento.getEstabelecimentoId()));
+                        sessao.setAttribute("promocoes", PromocaoDAO.getInstance().getPromocoes());
                         response.sendRedirect("painelInicial.jsp");
                     }
                 } catch (SQLException ex) {

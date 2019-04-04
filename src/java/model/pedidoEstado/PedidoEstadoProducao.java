@@ -1,6 +1,8 @@
 package model.pedidoEstado;
 
 import model.Pedido;
+import model.pedidoEstado.*;
+import model.pedidoEstado.PedidoEstadoTransporte;
 
 public class PedidoEstadoProducao implements PedidoEstado {
 
@@ -31,7 +33,9 @@ public class PedidoEstadoProducao implements PedidoEstado {
 
     @Override
     public String toTransporte(Pedido pedido) {
-        pedido.setEstado(new PedidoEstadoTransporte());
+        PedidoEstadoTransporte pedidoTransporte = new PedidoEstadoTransporte();
+        pedido.setEstado(pedidoTransporte);
+        pedido.setChange();
         return "Pedido Produção pode passar para Transporte";
     }
 }

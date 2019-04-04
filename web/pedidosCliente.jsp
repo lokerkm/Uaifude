@@ -50,19 +50,19 @@
                                 <small class="text-muted">Valor: R$ ${pedido.total}</small>
                                 <small class="text-muted">${pedido.estado.estadoString()}</small>
                                 <div class="justify-content-between align-items-center">
-                                    <c:if test="${pedido.estado.estadoString() != 'Entregue'}">
-                                        <div>
 
-                                            <input type="hidden" name="pedidoId" value="${pedido.id}" >
-                                            <button type="submit"  class="btn btn-primary">Ver pedido</button>
+                                    <div>
 
-                                        </div></c:if>
+                                        <input type="hidden" name="pedidoId" value="${pedido.id}" >
+                                        <button type="submit"  class="btn btn-primary">Ver pedido</button>
 
                                     </div>
+
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
+                </div>
 
 
             </c:forEach>

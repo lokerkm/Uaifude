@@ -18,10 +18,10 @@ public class PromocaoDAO {
         return instance;
     }
 
-    public List<Promocao> getPromocoes() throws SQLException, ClassNotFoundException {
+    public ArrayList<Promocao> getPromocoes() throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
-        List<Promocao> promocoes = new ArrayList<Promocao>();
+        ArrayList<Promocao> promocoes = new ArrayList<Promocao>();
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
@@ -41,6 +41,29 @@ public class PromocaoDAO {
             closeResources(conn, st);
         }
         return promocoes;
+    }
+
+    public Promocao getPromocao(int promocaoId) throws SQLException, ClassNotFoundException {
+        Connection conn = null;
+        Statement st = null;
+        Promocao promocao = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("select * from promocao where promocao.id ='" + promocaoId + "'");
+
+            while (rs.next()) {
+                promocao
+                        = PromocaoFactory.create(rs.getString("nome"));
+
+            }
+
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return promocao;
     }
 
     private void closeResources(Connection conn, Statement st) {

@@ -31,6 +31,16 @@ public class Produto {
         this.linkImagem = linkImagem;
     }
 
+    public Produto(int id, String nome, float preco, boolean disponivel, String descricao, String linkImagem, Promocao promocao) {
+        this.id = id;
+        this.nome = nome;
+        this.preco = preco;
+        this.disponivel = disponivel;
+        this.descricao = descricao;
+        this.linkImagem = linkImagem;
+        this.promocao = promocao;
+    }
+
     public Produto(String nome, float preco, boolean disponivel, String descricao, String linkImagem) {
 
         this.nome = nome;

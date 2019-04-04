@@ -1,6 +1,5 @@
 package controller;
 
-import controller.Action;
 import model.promocao.*;
 
 public class PromocaoFactory {
@@ -16,7 +15,7 @@ public class PromocaoFactory {
         } catch (Exception ex) {
             return null;
         }
-        if (!(objeto instanceof Action)) {
+        if (!(objeto instanceof Promocao)) {
             return null;
         }
         nomeObject = (Promocao) objeto;

@@ -12,6 +12,7 @@ import model.Estabelecimento;
 import model.Produto;
 import persistence.EstabelecimentoDAO;
 import persistence.ProdutoDAO;
+import persistence.PromocaoDAO;
 
 public class CadastrarProdutoAction implements Action {
 
@@ -19,15 +20,18 @@ public class CadastrarProdutoAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String nome = request.getParameter("nome");
         String descricao = request.getParameter("descricao");
+        int promocao = Integer.parseInt(request.getParameter("promocao"));
         float preco = Float.parseFloat(request.getParameter("preco"));
 
         String linkImagem = request.getParameter("linkImagem");
 
         Produto produto = new Produto(nome, preco, true, descricao, linkImagem);
+
         HttpSession sessao = request.getSession();
         Estabelecimento estabelecimento = (Estabelecimento) sessao.getAttribute("usuario");
         produto.setIdEstabelecimento(estabelecimento.getEstabelecimentoId());
         try {
+            produto.setPromocao(PromocaoDAO.getInstance().getPromocao(promocao));
             ProdutoDAO.getInstance().save(produto);
             estabelecimento = EstabelecimentoDAO.getInstance().getEstabelecimento(estabelecimento.getLogin());
             estabelecimento.setProdutos(ProdutoDAO.getInstance().getProdutos(estabelecimento.getEstabelecimentoId()));

@@ -1,5 +1,6 @@
 package persistence;
 
+import controller.PromocaoFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,6 +35,7 @@ public class ProdutoDAO {
                         rs.getString("descricao"),
                         rs.getString("linkImagem")
                 );
+                produto.setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")));
                 produtos.add(produto);
 
             }
@@ -55,7 +57,7 @@ public class ProdutoDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from produto where estabelecimento_id ='" + estabelecimentoId + "'");
 
-            while (rs.next()) {//faltaPromocao
+            while (rs.next()) {
                 Produto produto = new Produto(rs.getInt("id"),
                         rs.getString("nome"),
                         rs.getFloat("preco"),
@@ -63,6 +65,38 @@ public class ProdutoDAO {
                         rs.getString("descricao"),
                         rs.getString("linkImagem")
                 );
+                produto.setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")));
+                produtos.add(produto);
+
+            }
+
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return produtos;
+    }
+
+    public ArrayList<Produto> getProdutoPromocao(int promocaoId) throws ClassNotFoundException, SQLException {
+        Connection conn = null;
+        Statement st = null;
+        ArrayList<Produto> produtos = new ArrayList<>();
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("select * from produto where produto.promocao_id ='" + promocaoId + "'");
+
+            while (rs.next()) {
+                Produto produto = new Produto(rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getFloat("preco"),
+                        rs.getBoolean("disponivel"),
+                        rs.getString("descricao"),
+                        rs.getString("linkImagem")
+                );
+                produto.setIdEstabelecimento(rs.getInt("estabelecimento_id"));
+                produto.setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")));
                 produtos.add(produto);
 
             }
@@ -83,6 +117,7 @@ public class ProdutoDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from produto where id ='" + id + "'");
+
             rs.first();
 
             produto = new Produto(rs.getInt("id"),
@@ -92,6 +127,7 @@ public class ProdutoDAO {
                     rs.getString("descricao"),
                     rs.getString("linkImagem")
             );
+            produto.setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")));
             produto.setIdEstabelecimento(rs.getInt("estabelecimento_id"));
         } catch (SQLException e) {
             throw e;
@@ -125,7 +161,7 @@ public class ProdutoDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
 
-            String sql = "INSERT INTO produto (nome, preco, disponivel, linkImagem, descricao, estabelecimento_id) "
+            String sql = "INSERT INTO produto (nome, preco, disponivel, linkImagem, descricao, estabelecimento_id, promocao_id) "
                     + "VALUES (?,?,?,?,?,?)";
             PreparedStatement comando = conn.prepareStatement(sql);
             comando.setString(1, produto.getNome());
@@ -134,6 +170,7 @@ public class ProdutoDAO {
             comando.setString(4, produto.getLinkImagem());
             comando.setString(5, produto.getDescricao());
             comando.setInt(6, produto.getIdEstabelecimento());
+            comando.setInt(7, produto.getPromocao().getId());
 
             comando.execute();
 
@@ -151,7 +188,7 @@ public class ProdutoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
 
-            String sql = "UPDATE produto SET nome=?,preco=?,disponivel=?,descricao=?,linkImagem=? WHERE id=?";
+            String sql = "UPDATE produto SET nome=?,preco=?,disponivel=?,descricao=?,linkImagem=?,promocao_id =? WHERE id=?";
 
             PreparedStatement comando = conn.prepareStatement(sql);
             comando.setString(1, produto.getNome());
@@ -159,7 +196,8 @@ public class ProdutoDAO {
             comando.setBoolean(3, produto.isDisponivel());
             comando.setString(4, produto.getDescricao());
             comando.setString(5, produto.getLinkImagem());
-            comando.setInt(6, produto.getId());
+            comando.setInt(6, produto.getPromocao().getId());
+            comando.setInt(7, produto.getId());
 
             comando.execute();
 
@@ -216,6 +254,7 @@ public class ProdutoDAO {
                         rs.getString("descricao"),
                         rs.getString("linkImagem")
                 );
+                produto.setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")));
                 produtos.add(produto);
 
             }

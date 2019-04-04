@@ -50,6 +50,7 @@ public class Pedido extends Observable {
     }
 
     public void setEstado(PedidoEstado estado) {
+        System.out.println("ahrdjrydf");
         this.estado = estado;
     }
 

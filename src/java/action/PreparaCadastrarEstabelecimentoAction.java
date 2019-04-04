@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package action;
 
 import controller.Action;
@@ -22,19 +17,13 @@ import persistence.CategoriaDAO;
 import persistence.EnderecoDAO;
 import persistence.EstabelecimentoDAO;
 
-/**
- *
- * @author kevin
- */
 public class PreparaCadastrarEstabelecimentoAction implements Action {
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-       
-        
-       
         try {
 
-           List<Categoria> categorias = CategoriaDAO.getInstance().getCategorias();
+            List<Categoria> categorias = CategoriaDAO.getInstance().getCategorias();
             request.setAttribute("categorias", categorias);
 
             RequestDispatcher view = request.getRequestDispatcher("cadastraEstabelecimento.jsp");
