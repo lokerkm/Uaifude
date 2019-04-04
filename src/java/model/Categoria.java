@@ -13,7 +13,6 @@ public abstract class Categoria {
         this.nome = nome;
     }
 
-    
     public int getId() {
         return id;
     }
@@ -29,5 +28,5 @@ public abstract class Categoria {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
+    public String categoriaSring;
 }

@@ -37,7 +37,7 @@
             <c:if test="${sessionScope.tipo == 'Estabelecimento'}">
                 <c:if test="${!empty mensagem}">
                     <div class="alert alert-success" role="alert" >
-gfhdghdhf
+
                         ${mensagem}</div>
                     </c:if>
 

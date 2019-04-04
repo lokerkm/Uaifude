@@ -61,7 +61,9 @@ public class Cliente extends Usuario {
     }
 
     @Override
-    public void update(Observable pedido, Object arg1) {
-
+    public void update(Observable observable, Object arg1) {
+        Pedido pedido = (Pedido) observable;
+        System.out.println("Email enviado para o cliente " + this.nome + ", o pedido  numero"
+                + pedido.getId() + " está no estado de" + pedido.getEstado().estadoString());
     }
 }

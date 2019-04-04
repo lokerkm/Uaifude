@@ -21,7 +21,7 @@ public class Pedido extends Observable {
         this.estado = estado;
         this.endereco = endereco;
         this.total = total;
-        addObserver(cliente);
+        
     }
 
     public Pedido(int id, float total, Endereco endereco, PedidoEstado estado, int estabelecimentoId) {
@@ -137,5 +137,4 @@ public class Pedido extends Observable {
         notifyObservers();
     }
 
-  
 }
