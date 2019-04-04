@@ -70,8 +70,9 @@
                 <c:if test = "${sessionScope.tipo == 'Administrador'}">
                     Adminstrador ${sessionScope.usuario.login}
                 </c:if></span>
-            <form action="FrontController?action=Deslogar" method="post">
                 <c:if test="${!empty sessionScope.tipo}">
+            <form action="FrontController?action=Deslogar" method="post">
+                
                     <button type="submit" class="btn btn-danger" >Logout</button></form></c:if>
         </nav>
         <main role="main">

@@ -157,14 +157,15 @@ public class EstabelecimentoDAO {
             comando.setInt(7, estabelecimento.getEndereco().getId());
             comando.execute();
 
-            String sql2 = "insert into estabelecimento (nome,cnpj,descricao,usuario_id,linkImagem)"
-                    + " VALUES (?,?,?,?,?)";
+            String sql2 = "insert into estabelecimento (nome,cnpj,descricao,usuario_id,linkImagem,categoria_id)"
+                    + " VALUES (?,?,?,?,?,?)";
             PreparedStatement comando2 = conn.prepareStatement(sql2);
             comando2.setString(1, estabelecimento.getNome());
             comando2.setString(2, estabelecimento.getCnpj());
             comando2.setString(3, estabelecimento.getDescricao());
             comando2.setInt(4, estabelecimento.getUsuarioId());
             comando2.setString(5, estabelecimento.getLinkImagem());
+            comando2.setInt(6, estabelecimento.getCategoria().getId());
             comando2.execute();
 
         } catch (SQLException e) {

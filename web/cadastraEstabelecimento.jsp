@@ -93,9 +93,13 @@
                 <div class="col-md-6 mb-3">
                     <label for="categoria">Categoria</label>
                     <select class="form-control" id="categoria" name="categoria">
-                        <option value="1">Hamburgueria</option>
+                        <c:forEach items="${categorias}" var="categoria">
+                                        <option value="${categoria.id}">${categoria.nome}</option>  
+                        </c:forEach>
+                        
+<!--                        <option value="1">Hamburgueria</option>
                         <option value="2">Pizzaria</option>
-                        <option value="3">Restaurante</option>
+                        <option value="3">Restaurante</option>-->
 
                     </select>
                     <div class="invalid-feedback">

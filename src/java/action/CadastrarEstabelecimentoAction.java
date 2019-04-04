@@ -14,9 +14,11 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Categoria;
 import model.Cliente;
 import model.Endereco;
 import model.Estabelecimento;
+import persistence.CategoriaDAO;
 import persistence.ClienteDAO;
 import persistence.EnderecoDAO;
 import persistence.EstabelecimentoDAO;
@@ -33,7 +35,7 @@ public class CadastrarEstabelecimentoAction  implements Action{
         String descricao = request.getParameter("descricao");
         String linkImagem = request.getParameter("linkImagem");
         String login = request.getParameter("login");
-        String categoria = request.getParameter("categoria");
+        int categoriaId = Integer.parseInt(request.getParameter("categoria"));
         String senha = request.getParameter("senha");
         String email = request.getParameter("email");
         String telefone = request.getParameter("telefone");
@@ -45,11 +47,12 @@ public class CadastrarEstabelecimentoAction  implements Action{
         String estado = request.getParameter("estado");
         String cidade = request.getParameter("cidade");
         String bairro = request.getParameter("bairro");
-        Endereco endereco = new Endereco(cep, logradouro, numero, complemento, bairro, cidade, estado);
-        Estabelecimento estabelecimento = new Estabelecimento(nome, cnpj, descricao,linkImagem,null ,login, email, senha,"Estabelecimento", telefone, celular, null);
+       
 
         try {
-
+            Categoria categoria = CategoriaDAO.getInstance().getCategoria(categoriaId);
+            Endereco endereco = new Endereco(cep, logradouro, numero, complemento, bairro, cidade, estado);
+            Estabelecimento estabelecimento = new Estabelecimento(nome, cnpj, descricao, linkImagem, categoria, login, email, senha, "Estabelecimento", telefone, celular, null);
             EnderecoDAO.getInstance().save(endereco);
             endereco.setId(EnderecoDAO.getInstance().getLastId());
             estabelecimento.setEndereco(endereco);

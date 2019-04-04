@@ -1,5 +1,6 @@
 package persistence;
 
+import controller.CategoriaFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,48 +18,52 @@ public class CategoriaDAO {
         return instance;
     }
 
-//    public List<Categoria> getCategorias(int id) throws SQLException, ClassNotFoundException {
-//        Connection conn = null;
-//        Statement st = null;
-//        List<Categoria> categorias = new ArrayList<Categoria>();
-//        try {
-//            conn = DatabaseLocator.getInstance().getConnection();
-//            st = conn.createStatement();
-//            ResultSet rs = st.executeQuery("select * from categoria");
-//            
-//          
-//             while (rs.next()) {
-//                Categoria categoria = new Categoria(rs.getInt("id"), 
-//                        rs.getString("nome"));
-//                categorias.add(categoria);
-//
-//            }
-//            
-//        } catch (SQLException e) {
-//            throw e;
-//        } finally {
-//            closeResources(conn, st);
-//        }
-//        return categorias;
-//    }
+    public List<Categoria> getCategorias() throws SQLException, ClassNotFoundException {
+        Connection conn = null;
+        Statement st = null;
+        List<Categoria> categorias = new ArrayList<Categoria>();
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("select * from categoria");
+
+            while (rs.next()) {
+                Categoria categoria = CategoriaFactory.create(rs.getString("nome"));
+                categoria.setNome(rs.getString("nome"));
+                categoria.setId(rs.getInt("id"));
+                categorias.add(categoria);
+
+            }
+
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return categorias;
+    }
+
+    ;
 //    
-//    public Categoria getCategoria(int id) throws SQLException, ClassNotFoundException {
-//        Connection conn = null;
-//        Statement st = null;
-//        Categoria categoria = null;
-//        try {
-//            conn = DatabaseLocator.getInstance().getConnection();
-//            st = conn.createStatement();
-//            ResultSet rs = st.executeQuery("select * from categoria where id ='" + id + "'");
-//            rs.first();
-//            categoria = new Categoria(rs.getInt("id"), rs.getString("nome"));
-//        } catch (SQLException e) {
-//            throw e;
-//        } finally {
-//            closeResources(conn, st);
-//        }
-//        return categoria;
-//    }
+    public Categoria getCategoria(int id) throws SQLException, ClassNotFoundException {
+        Connection conn = null;
+        Statement st = null;
+        Categoria categoria = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("select * from categoria where id ='" + id + "'");
+            rs.first();
+            categoria = CategoriaFactory.create(rs.getString("nome"));
+            categoria.setNome(rs.getString("nome"));
+            categoria.setId(rs.getInt("id"));
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return categoria;
+    }
 
     public void delete(int id) throws SQLException, ClassNotFoundException {
         Connection conn = null;
@@ -86,8 +91,8 @@ public class CategoriaDAO {
             String sql = "insert into categoria (nome)"
                     + " VALUES (?)";
             PreparedStatement comando = conn.prepareStatement(sql);
-            comando.setString(1, categoria.getNome() );
-            
+            comando.setString(1, categoria.getNome());
+
             comando.execute();
             comando.close();
         } catch (SQLException e) {
@@ -97,9 +102,9 @@ public class CategoriaDAO {
         }
 
     }
-    
-     public static void update(Categoria categoria) throws SQLException, ClassNotFoundException {
-         Connection conn = null;
+
+    public static void update(Categoria categoria) throws SQLException, ClassNotFoundException {
+        Connection conn = null;
         Statement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConnection();
@@ -116,7 +121,6 @@ public class CategoriaDAO {
             throw e;
         }
     }
-
 
     private void closeResources(Connection conn, Statement st) {
         try {
