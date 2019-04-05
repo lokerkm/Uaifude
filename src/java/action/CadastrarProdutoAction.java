@@ -22,7 +22,6 @@ public class CadastrarProdutoAction implements Action {
         String descricao = request.getParameter("descricao");
         int promocao = Integer.parseInt(request.getParameter("promocao"));
         float preco = Float.parseFloat(request.getParameter("preco"));
-
         String linkImagem = request.getParameter("linkImagem");
 
         Produto produto = new Produto(nome, preco, true, descricao, linkImagem);

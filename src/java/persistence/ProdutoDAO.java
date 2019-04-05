@@ -162,7 +162,7 @@ public class ProdutoDAO {
             st = conn.createStatement();
 
             String sql = "INSERT INTO produto (nome, preco, disponivel, linkImagem, descricao, estabelecimento_id, promocao_id) "
-                    + "VALUES (?,?,?,?,?,?)";
+                    + "VALUES (?,?,?,?,?,?,?)";
             PreparedStatement comando = conn.prepareStatement(sql);
             comando.setString(1, produto.getNome());
             comando.setFloat(2, produto.getPreco());
