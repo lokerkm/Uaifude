@@ -26,8 +26,12 @@
                             <img src="${produto.linkImagem}"  class="img-thumbnail">
                             <div class="card-body">
                                 <p class="card-text" >Produto: ${produto.nome}</p>
-                                <small class="text-muted">Preço: R$ ${produto.preco}</small>
+                                <c:if test="${produto.promocao.getNome() == 'SemPromocao'}">
+                                    <small class="text-muted">Preço: R$ ${produto.preco}</small></c:if>
 
+                                <c:if test="${produto.promocao.getNome() != 'SemPromocao'}">
+                                    <small class="text-muted">Preço: De:${produto.preco}
+                                        Por:${produto.getPrecoPosPromocao()}</small></c:if>
                                 <input type="hidden" name="produtoId" value="${produto.id}" >
                                 <input type="hidden" name="estabelecimentoId" value="${estabelecimento.getEstabelecimentoId()}" >
                                 <button type="submit"  class="btn btn-primary">Adicionar ao carrinho</button>

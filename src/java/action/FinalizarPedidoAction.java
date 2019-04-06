@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Cliente;
+import model.Endereco;
 import model.Pedido;
+import persistence.EnderecoDAO;
 import persistence.PedidoDAO;
 
 public class FinalizarPedidoAction implements Action {
@@ -19,17 +21,44 @@ public class FinalizarPedidoAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String enderecoEntrega = request.getParameter("enderecoEntrega");
+        String tipoPagamento = request.getParameter("tipoPagamento");
+        Pedido pedido = (Pedido) request.getSession().getAttribute("carrinho");
+        HttpSession sessao = request.getSession();
+        Cliente cliente = (Cliente) sessao.getAttribute("usuario");
+        Endereco endereco = null;
         if (enderecoEntrega.equals("outro")) {
-            //pegar treta de endereço
-            //setar endereço no pedido
-        }
+            String logradouro = request.getParameter("logradouro");
+            String cep = request.getParameter("cep");
+            String numero = request.getParameter("numero");
+            String complemento = request.getParameter("complemento");
+            String estado = request.getParameter("estado");
+            String cidade = request.getParameter("cidade");
+            String bairro = request.getParameter("bairro");
+            endereco = new Endereco(cep, logradouro, numero, complemento, bairro, cidade, estado);
 
+        }
+        if (tipoPagamento.equals("Cartao")) {
+            String numeroCartao = request.getParameter("numeroCartao");
+            String nomeTitular = request.getParameter("nomeTitular");
+            String validadeCartao = request.getParameter("validadeCartao");
+            String codigoSeguranca = request.getParameter("codigoSeguranca");
+            System.out.println("***************");
+            System.out.println("Verificando cartão:" + numeroCartao);
+            System.out.println("Nome do titular:" + nomeTitular);
+            System.out.println("Validade do cartão:" + validadeCartao);
+            System.out.println("Codigo de segurança:" + codigoSeguranca);
+            System.out.println("Transação aceita!");
+            System.out.println("Email enviado para " + cliente.getEmail());
+            System.out.println("***************");
+        }
         try {
-            Pedido pedido = (Pedido) request.getSession().getAttribute("carrinho");
+            if (endereco != null) {
+                EnderecoDAO.getInstance().save(endereco);
+                pedido.setEndereco(EnderecoDAO.getInstance().getEndereco(EnderecoDAO.getInstance().getLastId()));
+            }
             pedido.setId(PedidoDAO.getInstance().getNextId());
             pedido.toConfirmado();
-            HttpSession sessao = request.getSession();
-            Cliente cliente = (Cliente) sessao.getAttribute("usuario");
+
             pedido.setCliente(cliente);
             pedido.setEstabelecimentoId(pedido.getProdutos().get(0).getIdEstabelecimento());
             PedidoDAO.getInstance().save(pedido, pedido.getEndereco());

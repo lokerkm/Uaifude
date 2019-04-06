@@ -16,7 +16,9 @@ public class ConfirmarCarrinhoAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String tipoPagamento = request.getParameter("tipoPagamento");
+
         String enderecoEntrega = request.getParameter("enderecoEntrega");
+
         Pedido pedido = (Pedido) request.getSession().getAttribute("carrinho");
         request.setAttribute("pedido", pedido);
         request.setAttribute("produtosPedido", pedido.getProdutos());

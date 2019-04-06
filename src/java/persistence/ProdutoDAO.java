@@ -18,10 +18,10 @@ public class ProdutoDAO {
         return instance;
     }
 
-    public List<Produto> getProdutos() throws SQLException, ClassNotFoundException {
+    public ArrayList<Produto> getProdutos() throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
-        List<Produto> produtos = new ArrayList<Produto>();
+        ArrayList<Produto> produtos = new ArrayList<>();
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
@@ -225,6 +225,7 @@ public class ProdutoDAO {
                         rs.getString("descricao"),
                         rs.getString("linkImagem")
                 );
+                produto.setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")));
                 produtos.add(produto);
 
             }

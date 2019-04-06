@@ -21,7 +21,7 @@ public class Pedido extends Observable {
         this.estado = estado;
         this.endereco = endereco;
         this.total = total;
-        
+
     }
 
     public Pedido(int id, float total, Endereco endereco, PedidoEstado estado, int estabelecimentoId) {
@@ -50,7 +50,7 @@ public class Pedido extends Observable {
     }
 
     public void setEstado(PedidoEstado estado) {
-        System.out.println("ahrdjrydf");
+ 
         this.estado = estado;
     }
 
@@ -80,7 +80,7 @@ public class Pedido extends Observable {
 
     public void addProduto(Produto produto) {
         this.produtos.add(produto);
-        this.total += produto.getPreco();
+        this.total += produto.getPrecoPosPromocao();
     }
 
     public Cliente getCliente() {

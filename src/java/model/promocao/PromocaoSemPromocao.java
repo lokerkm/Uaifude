@@ -10,7 +10,7 @@ public class PromocaoSemPromocao implements Promocao {
 
     @Override
     public String getNome() {
-        return "Sem Promoçao";
+        return "SemPromocao";
     }
 
     @Override

@@ -5,6 +5,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="painelInicial.jsp">Home</a></li>
+        <li class="breadcrumb-item"><a href="promocoes.jsp">Promoções</a></li>
         <li class="breadcrumb-item active" aria-current="page">Produtos Promocao ${promocao.getNome()}</li>
     </ol>
 </nav>
@@ -26,7 +27,7 @@
                             <img src="${produto.linkImagem}"  class="img-thumbnail">
                             <div class="card-body">
                                 <p class="card-text" >Produto: ${produto.nome}</p>
-                                <small class="text-muted">Preço: R$ ${produto.preco}</small>
+                                <small class="text-muted">Preço: R$ ${produto.getPrecoPosPromocao()}</small>
 
                                 <input type="hidden" name="produtoId" value="${produto.id}" >
                                 <input type="hidden" name="idEstabelecimeto" value="${produto.getIdEstabelecimento()}" >

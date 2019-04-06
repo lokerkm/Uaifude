@@ -145,4 +145,52 @@
 </c:if>
 
 
+<c:if test="${sessionScope.tipo == 'Administrador'}">
+
+
+    <div class="col-md-4">
+        <form action="FrontController?action=PrepararProdutosAdm" method="post">
+            <div class="card mb-4 shadow-sm">
+                <img src="https://i.imgur.com/lKJutHx.jpg"  class="img-thumbnail">
+                <div class="card-body">
+                    <p class="card-text" >CRUD Produtos</p>
+
+                    <div class="justify-content-between align-items-center">
+                        <div class="btn-group">
+
+                            <input type="hidden" name="tipoPedido" value="Confirmado" >
+                            <button type="submit"  class="btn btn-primary">Gerenciar</button>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-4">
+        <form action="FrontController?action=PrepararPedidosAdm" method="post">
+            <div class="card mb-4 shadow-sm">
+                <img src="https://i.imgur.com/lz4Xdhw.jpg"  class="img-thumbnail">
+                <div class="card-body">
+                    <p class="card-text" >CRUD Pedidos</p>
+
+                    <div class="justify-content-between align-items-center">
+                        <div class="btn-group">
+
+                            <input type="hidden" name="tipoPedido" value="Confirmado" >
+                            <button type="submit"  class="btn btn-primary">Gerenciar</button>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</c:if>
+
 <jsp:include page="footer.jsp" />
