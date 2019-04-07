@@ -15,7 +15,7 @@
 
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
             <img src="assets/img/uaifude.png" alt="" width="45" height="45" style="margin-right: 10px;">
-            <a class="navbar-brand" <c:if test="${!empty sessionScope.tipo}"> href="painelInicial.jsp" </c:if>>UaiFude</a>
+            <a class="navbar-brand" style="color:#fff" <c:if test="${!empty sessionScope.tipo}"> href="painelInicial.jsp" </c:if>>UaiFude</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

@@ -142,3 +142,7 @@ footer.container {
     text-decoration: none;
     color: #a81617;
 }
+
+.btnpedido form{
+    padding:10px;
+}

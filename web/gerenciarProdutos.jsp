@@ -13,11 +13,15 @@
 
 <div class="alert alert-success" role="alert" >
     ${mensagem}</div>
-<form action="FrontController?action=PrepararProduto" method="post">
+
     <div class="container">
         <div class="container">
             <div class="row">
+                
+                
+                
                 <div class="col-md-4">
+                    <form action="FrontController?action=PrepararProduto" method="post">
                     <div class="card mb-4 shadow-sm">
                         <img src="https://i.imgur.com/c4rzzki.png"  class="img-thumbnail">
                         <div class="card-body">
@@ -34,20 +38,20 @@
                             </div>
                         </div>
                     </div>
+                        </form>
                 </div>
-            </div>
-        </div>
-    </div>
-</form>
+                
+                
+                
+           
+
 <c:forEach items="${sessionScope.produtos}" var="produto">
 
-    <div class="container">
-        <div class="container">
-            <div class="row">
+    
                 <div class="col-md-4">
                     <div class="card mb-4 shadow-sm">
                         <img src="${produto.linkImagem}"  class="img-thumbnail">
-                        <div class="card-body">
+                        <div class="card-body btnpedido">
                             <p class="card-text" >Produto: ${produto.nome}</p>
                             <small class="text-muted">Preço: R$ ${produto.preco}</small>
 
@@ -73,7 +77,7 @@
         </div>
     </div>
 
-</form>
+
 </c:forEach>
 
 <jsp:include page="footer.jsp" />

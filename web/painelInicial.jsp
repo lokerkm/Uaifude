@@ -4,6 +4,11 @@
 <jsp:include page="header.jsp" />
 
 <div class="container">
+    <c:if test="${!empty mensagem}">
+                    <div class="alert alert-success" role="alert" >
+
+                        ${mensagem}</div>
+                    </c:if>
     <div class="container">
         <div class="row">
             <c:if test="${sessionScope.tipo == 'Cliente'}">
@@ -35,11 +40,7 @@
             </c:if>
 
             <c:if test="${sessionScope.tipo == 'Estabelecimento'}">
-                <c:if test="${!empty mensagem}">
-                    <div class="alert alert-success" role="alert" >
-
-                        ${mensagem}</div>
-                    </c:if>
+                
 
                 <div class="col-md-4">
                     <form action="FrontController?action=LerPedidoEstabelecimento" method="post">

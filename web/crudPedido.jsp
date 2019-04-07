@@ -9,11 +9,12 @@
         <li class="breadcrumb-item active" aria-current="page">Pedido ${tipoPedido}: ${pedido.id}</li>
     </ol>
 </nav>
-<c:forEach items="${produtosPedido}" var="produto">
-
+<div class="container">
     <div class="container">
-        <div class="container">
-            <div class="row">
+        <div class="row">
+            <c:forEach items="${produtosPedido}" var="produto">
+
+
                 <div class="col-md-4">
                     <div class="card mb-4 shadow-sm">
                         <img src="${produto.linkImagem}"  class="img-thumbnail">
@@ -24,35 +25,40 @@
                         </div>
                     </div>
                 </div>
+
+
+            </c:forEach>
+
+            <div class="col-md-4 btnpedido">
+
+                <form action="FrontController?action=ColocarCarrinhoPedido" method="post">
+                    <input type="hidden" name="pedidoId" value="${pedido.id}" >
+                    <button type="submit"  class="btn btn-primary">Colocar no Carrinho o pedido</button>
+                </form>
+
+                <form action="FrontController?action=ConfirmarPedido" method="post">
+                    <input type="hidden" name="pedidoId" value="${pedido.id}" >
+                    <button type="submit"  class="btn btn-primary">Confirmar o pedido</button>
+                </form>
+
+                <form action="FrontController?action=ProduzirPedido" method="post">
+                    <input type="hidden" name="pedidoId" value="${pedido.id}" >
+                    <button type="submit"  class="btn btn-primary">Colocar em produção o pedido</button>
+                </form>
+
+                <form action="FrontController?action=TransportarPedido" method="post">
+                    <input type="hidden" name="pedidoId" value="${pedido.id}" >
+                    <button type="submit"  class="btn btn-primary">Colocar em transporte o pedido</button>
+                </form>
+
+                <form action="FrontController?action=EntregarPedido" method="post">
+                    <input type="hidden" name="pedidoId" value="${pedido.id}" >
+                    <button type="submit"  class="btn btn-primary">Declarar como entregue o pedido</button>
+                </form>
+
             </div>
+
         </div>
     </div>
-
-</c:forEach>
-
-<form action="FrontController?action=ColocarCarrinhoPedido" method="post">
-    <input type="hidden" name="pedidoId" value="${pedido.id}" >
-    <button type="submit"  class="btn btn-primary">Colocar no Carrinho o pedido</button>
-</form>
-
-<form action="FrontController?action=ConfirmarPedido" method="post">
-    <input type="hidden" name="pedidoId" value="${pedido.id}" >
-    <button type="submit"  class="btn btn-primary">Confirmar o pedido</button>
-</form>
-
-<form action="FrontController?action=ProduzirPedido" method="post">
-    <input type="hidden" name="pedidoId" value="${pedido.id}" >
-    <button type="submit"  class="btn btn-primary">Colocar em produção o pedido</button>
-</form>
-
-<form action="FrontController?action=TransportarPedido" method="post">
-    <input type="hidden" name="pedidoId" value="${pedido.id}" >
-    <button type="submit"  class="btn btn-primary">Colocar em transporte o pedido</button>
-</form>
-
-<form action="FrontController?action=EntregarPedido" method="post">
-    <input type="hidden" name="pedidoId" value="${pedido.id}" >
-    <button type="submit"  class="btn btn-primary">Declarar como entregue o pedido</button>
-</form>
-
-    <jsp:include page="footer.jsp" />
+</div>
+<jsp:include page="footer.jsp" />

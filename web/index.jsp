@@ -46,16 +46,15 @@
 
 
             <button class="btn btn-lg btn-primary btn-block"  type="submit">Sign in</button>
-            <a href="cadastraCliente.jsp">Não tem conta? Cadastre-se</a></br>
-            <a href="cadastraEstabelecimento.jsp">Quer fazer parte da nossa rede? Cadaste sua empresa</a>
             
+           
         </form>
-        <form action="FrontController?action=PreparaCadastrarEstabelecimento" method="post">
-
-                <button type="submit"  class="btn btn-primary">Cadastrar empresa</button>
-
+        <div class="form-signin">
+        <a href="cadastraCliente.jsp">Não tem conta? Cadastre-se</a></br>
+        <form name="CadastrarEstabelecimento" action="FrontController?action=PreparaCadastrarEstabelecimento" method="post">
+                <a href="javascript:document.CadastrarEstabelecimento.submit()">Quer fazer parte da nossa rede? Cadaste sua empresa</a>    
             </form>
-
+        </div>
 
 
         <jsp:include page="footer.jsp" />
