@@ -5,10 +5,10 @@
 
 <div class="container">
     <c:if test="${!empty mensagem}">
-                    <div class="alert alert-success" role="alert" >
+        <div class="alert alert-success" role="alert" >
 
-                        ${mensagem}</div>
-                    </c:if>
+            ${mensagem}</div>
+        </c:if>
     <div class="container">
         <div class="row">
             <c:if test="${sessionScope.tipo == 'Cliente'}">
@@ -40,7 +40,7 @@
             </c:if>
 
             <c:if test="${sessionScope.tipo == 'Estabelecimento'}">
-                
+
 
                 <div class="col-md-4">
                     <form action="FrontController?action=LerPedidoEstabelecimento" method="post">
@@ -159,7 +159,7 @@
                     <div class="justify-content-between align-items-center">
                         <div class="btn-group">
 
-                            <input type="hidden" name="tipoPedido" value="Confirmado" >
+
                             <button type="submit"  class="btn btn-primary">Gerenciar</button>
 
                         </div>
@@ -169,18 +169,18 @@
             </div>
         </form>
     </div>
-    
+
     <div class="col-md-4">
-        <form action="FrontController?action=PrepararProdutosAdm" method="post">
+        <form action="FrontController?action=PrepararPedidosAdm" method="post">
             <div class="card mb-4 shadow-sm">
-                <img src="https://i.imgur.com/lKJutHx.jpg"  class="img-thumbnail">
+                <img src="https://i.imgur.com/lz4Xdhw.jpg"  class="img-thumbnail">
                 <div class="card-body">
-                    <p class="card-text" >CRUD Produtos</p>
+                    <p class="card-text" >CRUD Pedidos</p>
 
                     <div class="justify-content-between align-items-center">
                         <div class="btn-group">
 
-                            <input type="hidden" name="tipoPedido" value="Confirmado" >
+
                             <button type="submit"  class="btn btn-primary">Gerenciar</button>
 
                         </div>
@@ -195,14 +195,14 @@
     <div class="col-md-4">
         <form action="FrontController?action=PrepararEstabelecimentosAdm" method="post">
             <div class="card mb-4 shadow-sm">
-                <img src="https://i.imgur.com/lKJutHx.jpg"  class="img-thumbnail">
+                <img src="https://i.imgur.com/20OyrwJ.jpg"  class="img-thumbnail">
                 <div class="card-body">
                     <p class="card-text" >CRUD Estabelecimentos</p>
 
                     <div class="justify-content-between align-items-center">
                         <div class="btn-group">
 
-                            <input type="hidden" name="tipoPedido" value="Confirmado" >
+
                             <button type="submit"  class="btn btn-primary">Gerenciar</button>
 
                         </div>
