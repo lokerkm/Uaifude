@@ -31,7 +31,7 @@ public class EstabelecimentoDAO {
 
             while (rs.next()) {
                 Endereco endereco = EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id"));
-                Estabelecimento estabelecimento = new Estabelecimento(rs.getInt("estabelecimento.id"),
+                Estabelecimento estabelecimento = new Estabelecimento(rs.getInt("id"),
                         rs.getString("nome"),
                         rs.getString("cnpj"),
                         rs.getString("descricao"),
