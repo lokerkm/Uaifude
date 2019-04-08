@@ -36,6 +36,7 @@ public class ProdutoDAO {
                         rs.getString("linkImagem")
                 );
                 produto.setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")));
+                produto.setIdEstabelecimento(rs.getInt("estabelecimento_id"));
                 produtos.add(produto);
 
             }

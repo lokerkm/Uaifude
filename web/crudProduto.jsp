@@ -62,7 +62,20 @@
                         </div>
                     </div>
                 </div>
+            <c:if test="${sessionScope.tipo =='Administrador'}">
+                <div class="col-md-6 mb-3">
+                    <label for="estabelecimentoId">Estabelecimentos</label>
+                    <select <c:if test="${acaoProduto != 'EditarProduto' && acaoProduto != 'CadastrarProduto'}"> disabled="true" </c:if>   class="form-control" id="estabelecimentoId" name="estabelecimentoId">
 
+                        <c:forEach items="${estabelecimentos}" var="estabelecimento">
+
+                            <option value="${estabelecimento.getEstabelecimentoId()}" <c:if test="${estabelecimento.getEstabelecimentoId() == produto.getIdEstabelecimento()}"> selected</c:if>>${estabelecimento.getNome()}</option>  
+                        </c:forEach>
+                    </select>
+                    <div class="invalid-feedback">
+                        Insira um celular válido.
+                    </div>
+                </div></c:if>
                 <div class="col-md-6 mb-3">
                     <label for="promocao">Promoção</label>
                     <select <c:if test="${acaoProduto != 'EditarProduto' && acaoProduto != 'CadastrarProduto'}"> disabled="true" </c:if>   class="form-control" id="promocao" name="promocao">

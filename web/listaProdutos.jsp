@@ -21,7 +21,7 @@
                 <c:if test="${produto.promocao.getNome() != 'SemPromocao'}">
                     <small class="text-muted">Preço: De:${produto.preco}
                         Por:${produto.getPrecoPosPromocao()}</small></c:if>
-                <small class="text-muted">Estabelecimento: ${produto.getEstabelecimento()}</small>
+                <small class="text-muted">Estabelecimento: ${produto.getEstabelecimento().nome}</small>
                 <form action="FrontController?action=PrepararProduto" method="post">
                     <input type="hidden" name="produtoId" value="${produto.id}" >
                     <input type="hidden" name="acaoProduto" value="Ler" >
