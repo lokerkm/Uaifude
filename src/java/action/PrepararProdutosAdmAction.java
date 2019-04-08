@@ -19,8 +19,8 @@ public class PrepararProdutosAdmAction implements Action {
 
         try {
             request.setAttribute("produtos", ProdutoDAO.getInstance().getProdutos());
-            RequestDispatcher view = request.getRequestDispatcher("listaProdutos.jsp");
-              view.forward(request, response);
+            RequestDispatcher view = request.getRequestDispatcher("/listaProdutos.jsp");
+            view.forward(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(PrepararProdutosAdmAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

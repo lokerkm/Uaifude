@@ -20,10 +20,10 @@ public class EstabelecimentoDAO {
         return instance;
     }
 
-    public List<Estabelecimento> getEstabelecimentos() throws SQLException, ClassNotFoundException {
+    public ArrayList<Estabelecimento> getEstabelecimentos() throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
-        List<Estabelecimento> estabelecimentos = new ArrayList<Estabelecimento>();
+        ArrayList<Estabelecimento> estabelecimentos = new ArrayList<>();
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();

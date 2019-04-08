@@ -10,7 +10,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Produto;
+import persistence.EstabelecimentoDAO;
 import persistence.ProdutoDAO;
+import persistence.PromocaoDAO;
 
 public class PrepararProdutoAction implements Action {
 
@@ -34,6 +36,8 @@ public class PrepararProdutoAction implements Action {
             acaoProduto += "Produto";
             request.setAttribute("acaoProduto", acaoProduto);
             request.setAttribute("produto", produto);
+            request.setAttribute("promocoes", PromocaoDAO.getInstance().getPromocoes());
+            request.setAttribute("estabelecimentos", EstabelecimentoDAO.getInstance().getEstabelecimentos());
             RequestDispatcher view = request.getRequestDispatcher("crudProduto.jsp");
             view.forward(request, response);
         } catch (SQLException ex) {
