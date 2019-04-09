@@ -4,7 +4,7 @@ public abstract class Categoria {
 
     private int id;
     private String nome;
-
+public abstract String getDescricao();
     public Categoria() {
     }
 
@@ -28,5 +28,8 @@ public abstract class Categoria {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public String categoriaSring;
+
+    public String categoriaDescricao() {
+        return "A categoria " +this.getNome()+ " " + this.getDescricao();
+    }
 }

@@ -10,5 +10,8 @@ package model;
  * @author kevin
  */
 public class CategoriaRestaurante extends Categoria {
-    
+    @Override
+    public String getDescricao() {
+        return "Refeições em geral";
+    }
 }

@@ -19,6 +19,7 @@
                 <div class="card-body">
                     <p class="text-muted">Categoria</p>
                     <p class="card-text" >${categoria.nome}</p>
+                    <p class="card-text" >${categoria.categoriaDescricao()}</p>
 
                     <div class="justify-content-between align-items-center">
                         <div>

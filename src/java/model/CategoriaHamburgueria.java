@@ -10,5 +10,10 @@ package model;
  * @author kevin
  */
 public class CategoriaHamburgueria extends Categoria {
+
+    @Override
+    public String getDescricao() {
+        return "Vende hamburguer";
+    }
     
 }
