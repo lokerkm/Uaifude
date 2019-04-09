@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="descricao">Descrição dp produto</label>
+                        <label for="descricao">Descrição do produto</label>
                         <input type="text" <c:if test="${acaoProduto != 'EditarProduto' && acaoProduto != 'CadastrarProduto'}"> disabled="true" </c:if> class="form-control" id="descricao" name="descricao" placeholder="" value="${produto.descricao}" required>
                         <div class="invalid-feedback">
                             Insira uma data válida.

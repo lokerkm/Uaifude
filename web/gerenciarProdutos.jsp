@@ -10,44 +10,34 @@
         <li class="breadcrumb-item active" aria-current="page">Gerenciar Produtos</li>
     </ol>
 </nav>
-
-<div class="alert alert-success" role="alert" >
-    ${mensagem}</div>
+<c:if test="${!empty mensagem}">
+    <div class="alert alert-success" role="alert" >
+        ${mensagem}</div></c:if>
 
     <div class="container">
         <div class="container">
             <div class="row">
-                
-                
-                
                 <div class="col-md-4">
                     <form action="FrontController?action=PrepararProduto" method="post">
-                    <div class="card mb-4 shadow-sm">
-                        <img src="https://i.imgur.com/c4rzzki.png"  class="img-thumbnail">
-                        <div class="card-body">
-                            <p class="card-text" >Cadastrar produto</p>
+                        <div class="card mb-4 shadow-sm">
+                            <img src="https://i.imgur.com/c4rzzki.png"  class="img-thumbnail">
+                            <div class="card-body">
+                                <p class="card-text" >Cadastrar produto</p>
 
-                            <div class="justify-content-between align-items-center">
-                                <div class="btn-group">
+                                <div class="justify-content-between align-items-center">
+                                    <div class="btn-group">
 
-                                    <input type="hidden" name="acaoProduto" value="Cadastrar" >
-                                    <button type="submit"  class="btn btn-primary">Gerenciar</button>
+                                        <input type="hidden" name="acaoProduto" value="Cadastrar" >
+                                        <button type="submit"  class="btn btn-primary">Gerenciar</button>
+
+                                    </div>
 
                                 </div>
-
                             </div>
                         </div>
-                    </div>
-                        </form>
+                    </form>
                 </div>
-                
-                
-                
-           
-
-<c:forEach items="${sessionScope.produtos}" var="produto">
-
-    
+            <c:forEach items="${sessionScope.produtos}" var="produto">
                 <div class="col-md-4">
                     <div class="card mb-4 shadow-sm">
                         <img src="${produto.linkImagem}"  class="img-thumbnail">
@@ -73,11 +63,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+
+            </c:forEach>
         </div>
     </div>
-
-
-</c:forEach>
-
+</div>
 <jsp:include page="footer.jsp" />

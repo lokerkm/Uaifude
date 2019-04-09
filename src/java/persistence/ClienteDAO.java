@@ -90,7 +90,7 @@ public class ClienteDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from cliente,usuario where login ='" + login + "' and cliente.id=usuario.id");
+            ResultSet rs = st.executeQuery("select * from cliente,usuario where login ='" + login + "' and cliente.usuario_id=usuario.id");
             rs.first();
             Endereco endereco = EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id"));
             cliente = new Cliente(rs.getInt("cliente.id"),

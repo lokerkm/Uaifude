@@ -8,33 +8,37 @@
         <li class="breadcrumb-item active" aria-current="page">Categorias</li>
     </ol>
 </nav>
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <c:forEach items="${sessionScope.categorias}" var="categoria">
 
-<c:forEach items="${sessionScope.categorias}" var="categoria">
 
+                <div class="col-md-4">
+                    <form action="FrontController?action=LerCategoria" method="post" style="padding-top: 40px;">
+                        <div class="card mb-4 shadow-sm">
+                            <img src="https://i.imgur.com/X0muEhN.png"  class="img-thumbnail">
+                            <div class="card-body">
+                                <p class="text-muted">Categoria</p>
+                                <p class="card-text" >${categoria.nome}</p>
+                                <p class="card-text" >${categoria.categoriaDescricao()}</p>
 
-    <div class="col-md-4">
-        <form action="FrontController?action=LerCategoria" method="post" style="padding-top: 40px;">
-            <div class="card mb-4 shadow-sm">
-                <img src="https://i.imgur.com/X0muEhN.png"  class="img-thumbnail">
-                <div class="card-body">
-                    <p class="text-muted">Categoria</p>
-                    <p class="card-text" >${categoria.nome}</p>
-                    <p class="card-text" >${categoria.categoriaDescricao()}</p>
+                                <div class="justify-content-between align-items-center">
+                                    <div>
 
-                    <div class="justify-content-between align-items-center">
-                        <div>
+                                        <input type="hidden" name="categoriaId" value="${categoria.id}" >
+                                        <button type="submit"  class="btn btn-primary">Visitar</button>
 
-                            <input type="hidden" name="categoriaId" value="${categoria.id}" >
-                            <button type="submit"  class="btn btn-primary">Visitar</button>
+                                    </div>
 
+                                </div>
+                            </div>
                         </div>
-
-                    </div>
+                    </form>
                 </div>
-            </div>
-        </form>
+
+            </c:forEach>
+        </div>
     </div>
-
-</c:forEach>
-
+</div>
 <jsp:include page="footer.jsp" />

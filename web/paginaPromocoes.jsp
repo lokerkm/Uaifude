@@ -9,6 +9,7 @@
         <li class="breadcrumb-item active" aria-current="page">Produtos Promocao ${promocao.getNome()}</li>
     </ol>
 </nav>
+
 <c:if test="${!empty mensagemAddCarrinho}">
     <div class="alert alert-success" role="alert" >
         ${mensagemAddCarrinho}</div>
@@ -45,4 +46,5 @@
         </div>
     </div>
 </div>
+
 <jsp:include page="footer.jsp" />

@@ -9,31 +9,36 @@
     </ol>
 </nav>
 
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <c:forEach items="${sessionScope.promocoes}" var="promocao">
 
-<c:forEach items="${sessionScope.promocoes}" var="promocao">
 
+                <div class="col-md-4">
+                    <form action="FrontController?action=LerPromocoes" method="post" style="padding-top: 40px;">
+                        <div class="card mb-4 shadow-sm">
+                            <img src="https://i.imgur.com/ApCnBIo.png"  class="img-thumbnail">
+                            <div class="card-body">
+                                <p class="text-muted">Promoção</p>
+                                <p class="card-text" >${promocao.getNome()}</p>
 
-    <div class="col-md-4">
-        <form action="FrontController?action=LerPromocoes" method="post" style="padding-top: 40px;">
-            <div class="card mb-4 shadow-sm">
-                <img src="https://i.imgur.com/ApCnBIo.png"  class="img-thumbnail">
-                <div class="card-body">
-                    <p class="text-muted">Promoção</p>
-                    <p class="card-text" >${promocao.getNome()}</p>
+                                <div class="justify-content-between align-items-center">
+                                    <div>
 
-                    <div class="justify-content-between align-items-center">
-                        <div>
+                                        <input type="hidden" name="promocaoId" value="${promocao.getId()}" >
+                                        <button type="submit"  class="btn btn-primary">Visitar</button>
 
-                            <input type="hidden" name="promocaoId" value="${promocao.getId()}" >
-                            <button type="submit"  class="btn btn-primary">Visitar</button>
+                                    </div>
 
+                                </div>
+                            </div>
                         </div>
-
-                    </div>
+                    </form>
                 </div>
-            </div>
-        </form>
-    </div>
 
-</c:forEach>
+            </c:forEach>
+        </div>
+    </div>
+</div>
 <jsp:include page="footer.jsp" />
