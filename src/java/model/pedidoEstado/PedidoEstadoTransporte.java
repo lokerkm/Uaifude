@@ -5,7 +5,7 @@ import model.Pedido;
 public class PedidoEstadoTransporte implements PedidoEstado {
 
     public PedidoEstadoTransporte() {
-        System.out.println("dskgnsd");
+      
     }
 
     @Override
