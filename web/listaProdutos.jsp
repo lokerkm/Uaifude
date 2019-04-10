@@ -8,44 +8,49 @@
         <li class="breadcrumb-item active" aria-current="page">Lista de Produtos</li>
     </ol>
 </nav>
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <c:forEach items="${produtos}" var="produto">
 
-<c:forEach items="${produtos}" var="produto">
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="${produto.linkImagem}"  class="img-thumbnail">
+                        <div class="card-body">
+                            <p class="card-text" >Produto: ${produto.nome}</p>
+                            <c:if test="${produto.promocao.getNome() == 'SemPromocao'}">
+                                <small class="text-muted">Preço: R$ ${produto.preco}</small></c:if>
+                            <c:if test="${produto.promocao.getNome() != 'SemPromocao'}">
+                                <small class="text-muted">Preço: De:${produto.preco}
+                                    Por:${produto.getPrecoPosPromocao()}</small></c:if>
+                            <small class="text-muted">Estabelecimento: ${produto.getEstabelecimento().nome}</small>
+                            <form action="FrontController?action=PrepararProduto" method="post">
+                                <input type="hidden" name="produtoId" value="${produto.id}" >
+                                <input type="hidden" name="acaoProduto" value="Ler" >
+                                <button type="submit"  class="btn btn-primary">LER</button>
+                            </form>
 
-    <div class="col-md-4">
-        <div class="card mb-4 shadow-sm">
-            <img src="${produto.linkImagem}"  class="img-thumbnail">
-            <div class="card-body">
-                <p class="card-text" >Produto: ${produto.nome}</p>
-                <c:if test="${produto.promocao.getNome() == 'SemPromocao'}">
-                    <small class="text-muted">Preço: R$ ${produto.preco}</small></c:if>
-                <c:if test="${produto.promocao.getNome() != 'SemPromocao'}">
-                    <small class="text-muted">Preço: De:${produto.preco}
-                        Por:${produto.getPrecoPosPromocao()}</small></c:if>
-                <small class="text-muted">Estabelecimento: ${produto.getEstabelecimento().nome}</small>
-                <form action="FrontController?action=PrepararProduto" method="post">
-                    <input type="hidden" name="produtoId" value="${produto.id}" >
-                    <input type="hidden" name="acaoProduto" value="Ler" >
-                    <button type="submit"  class="btn btn-primary">LER</button>
-                </form>
+                            <form action="FrontController?action=PrepararProduto" method="post">
+                                <input type="hidden" name="produtoId" value="${produto.id}" >
+                                <input type="hidden" name="acaoProduto" value="Editar" >
+                                <button type="submit"  class="btn btn-primary">EDITAR</button>
+                            </form>
 
-                <form action="FrontController?action=PrepararProduto" method="post">
-                    <input type="hidden" name="produtoId" value="${produto.id}" >
-                    <input type="hidden" name="acaoProduto" value="Editar" >
-                    <button type="submit"  class="btn btn-primary">EDITAR</button>
-                </form>
+                            <form action="FrontController?action=PrepararProduto" method="post">
+                                <input type="hidden" name="produtoId" value="${produto.id}" >
+                                <input type="hidden" name="acaoProduto" value="Excluir" >
+                                <button type="submit"  class="btn btn-primary">APAGAR</button>
+                            </form>
+                        </div>
+                    </div>
 
-                <form action="FrontController?action=PrepararProduto" method="post">
-                    <input type="hidden" name="produtoId" value="${produto.id}" >
-                    <input type="hidden" name="acaoProduto" value="Excluir" >
-                    <button type="submit"  class="btn btn-primary">APAGAR</button>
-                </form>
-            </div>
+                </div>
+
+
+
+            </c:forEach>
+
         </div>
-
     </div>
-
-
-</c:forEach>
-
-
+</div>
 <jsp:include page="footer.jsp" />

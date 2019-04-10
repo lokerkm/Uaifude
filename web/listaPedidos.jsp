@@ -8,40 +8,49 @@
         <li class="breadcrumb-item active" aria-current="page">Lista de Pedidos</li>
     </ol>
 </nav>
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <c:if test="${!empty mensagem}">
+                <div class="alert alert-success" role="alert" >
 
-<c:forEach items="${pedidos}" var="pedido">
+                    ${mensagem}</div>
+                </c:if>
+                <c:forEach items="${pedidos}" var="pedido">
 
-    <div class="col-md-4">
-        <div class="card mb-4 shadow-sm">
-            <img src="https://i.imgur.com/E6aOelI.png"  class="img-thumbnail">
-            <div class="card-body">
-                <p class="card-text" >Pedido número: ${pedido.id}</p>
-                <small class="text-muted">Valor: R$ ${pedido.total}</small>
-                <small class="text-muted">Cliente: R$ ${pedido.cliente.nome}</small>
-                <small class="text-muted">${pedido.estado.estadoString()}</small>
-                <form action="FrontController?action=PrepararPedido" method="post">
-                    <input type="hidden" name="pedidoId" value="${pedido.id}" >
-                    <input type="hidden" name="acaoPedido" value="Ler" >
-                    <button type="submit"  class="btn btn-primary">LER</button>
-                </form>
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="https://i.imgur.com/E6aOelI.png"  class="img-thumbnail">
+                        <div class="card-body">
+                            <p class="card-text" >Pedido número: ${pedido.id}</p>
+                            <small class="text-muted">Valor: R$ ${pedido.total}</small>
+                            <small class="text-muted">Cliente:${pedido.cliente.nome}</small>
+                            <small class="text-muted">Estado: ${pedido.estado.estadoString()}</small>
+                             
+                            <form action="FrontController?action=PrepararPedido" method="post">
+                                <input type="hidden" name="pedidoId" value="${pedido.id}" >
+                                <input type="hidden" name="acaoPedido" value="Ler" >
+                                <button type="submit"  class="btn btn-primary">LER</button>
+                            </form>
 
-                <form action="FrontController?action=PrepararPedido" method="post">
-                    <input type="hidden" name="pedidoId" value="${pedido.id}" >
-                    <input type="hidden" name="acaoPedido" value="Editar" >
-                    <button type="submit"  class="btn btn-primary">EDITAR</button>
-                </form>
+                            <form action="FrontController?action=PrepararPedido" method="post">
+                                <input type="hidden" name="pedidoId" value="${pedido.id}" >
+                                <input type="hidden" name="acaoPedido" value="Editar" >
+                                <button type="submit"  class="btn btn-primary">EDITAR</button>
+                            </form>
 
-                <form action="FrontController?action=PrepararPedido" method="post">
-                    <input type="hidden" name="pedidoId" value="${pedido.id}" >
-                    <input type="hidden" name="acaoPedido" value="Excluir" >
-                    <button type="submit"  class="btn btn-primary">APAGAR</button>
-                </form>
-            </div>
-        </div>
+                            <form action="FrontController?action=PrepararPedido" method="post">
+                                <input type="hidden" name="pedidoId" value="${pedido.id}" >
+                                <input type="hidden" name="acaoPedido" value="Excluir" >
+                                <button type="submit"  class="btn btn-primary">APAGAR</button>
+                            </form>
+                           
+                        </div>
+                    </div>
 
-    </div>
+                </div>
 
 
-</c:forEach>
-
-<jsp:include page="footer.jsp" />
+            </c:forEach>
+        </div></div></div>
+        <jsp:include page="footer.jsp" />

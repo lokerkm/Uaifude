@@ -21,14 +21,9 @@ public class ExcluirProdutoAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String nome = request.getParameter("nome");
-        String descricao = request.getParameter("descricao");
-        float preco = Float.parseFloat(request.getParameter("preco"));
-        int id = Integer.parseInt(request.getParameter("id"));
-        String linkImagem = request.getParameter("linkImagem");
-        int promocao = Integer.parseInt(request.getParameter("promocao"));
 
-        Produto produto = new Produto(id, nome, preco, true, descricao, linkImagem);
+        int id = Integer.parseInt(request.getParameter("id"));
+
         HttpSession sessao = request.getSession();
         Estabelecimento estabelecimento = null;
         if (sessao.getAttribute("tipo").equals("Administrador")) {
@@ -43,10 +38,10 @@ public class ExcluirProdutoAction implements Action {
         } else {
             estabelecimento = (Estabelecimento) sessao.getAttribute("usuario");
         }
-        produto.setIdEstabelecimento(estabelecimento.getEstabelecimentoId());
+
         try {
-            produto.setPromocao(PromocaoDAO.getInstance().getPromocao(promocao));
-            ProdutoDAO.getInstance().delete(produto.getId());
+
+            ProdutoDAO.getInstance().delete(id);
             estabelecimento = EstabelecimentoDAO.getInstance().getEstabelecimento(estabelecimento.getLogin());
             estabelecimento.setProdutos(ProdutoDAO.getInstance().getProdutos(estabelecimento.getEstabelecimentoId()));
             sessao.setAttribute("produtos", estabelecimento.getProdutos());

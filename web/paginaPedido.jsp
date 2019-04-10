@@ -7,12 +7,12 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="painelInicial.jsp">Home</a></li>
         <li class="breadcrumb-item"><a href="pedidosCliente.jsp">Meus pedidos</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Pedido ${pedido.id}</li>
-    </ol>
-</nav>
-<div class="container">
+        <li class="breadcrumb-item active" aria-current="page"><c:if test="${pedido.estado.estadoString()=='Carrinho'}">Carrinho</c:if><c:if test="${pedido.estado.estadoString()!='Carrinho'}">Pedido ${pedido.id}</c:if></li>
+        </ol>
+    </nav>
     <div class="container">
-        <div class="row">
+        <div class="container">
+            <div class="row">
             <c:forEach items="${produtosPedido}" var="produto">
 
 

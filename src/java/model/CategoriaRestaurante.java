@@ -12,6 +12,6 @@ package model;
 public class CategoriaRestaurante extends Categoria {
     @Override
     public String getDescricao() {
-        return "Refeições em geral";
+        return "Vende refeições em geral.";
     }
 }

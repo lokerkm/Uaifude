@@ -22,10 +22,6 @@ import persistence.ClienteDAO;
 import persistence.EnderecoDAO;
 import persistence.EstabelecimentoDAO;
 
-/**
- *
- * @author Aluno
- */
 public class EditarEnderecoAction implements Action {
 
     @Override

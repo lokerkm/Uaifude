@@ -3,6 +3,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <jsp:include page="header.jsp" />
+<c:if test="${sessionScope.tipo == 'Cliente'}">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="painelInicial.jsp">Home</a></li>
+            <li class="breadcrumb-item"><a href="perfilCliente.jsp">Minha conta</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Editar dados ${sessionScope.usuario.nome}</li>
+        </ol>
+    </nav>
+</c:if>
+
+
 <div class="row">
     <div class="col-md-4 order-md-2 mb-4">
 

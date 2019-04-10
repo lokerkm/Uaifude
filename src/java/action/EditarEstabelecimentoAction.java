@@ -27,7 +27,7 @@ public class EditarEstabelecimentoAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String nome = request.getParameter("nome");
-        String cpnj = request.getParameter("cpnj");
+        String cnpj = request.getParameter("cnpj");
         String descricao = request.getParameter("descricao");
         String linkImagem = request.getParameter("linkImagem");
         HttpSession sessao = request.getSession();
@@ -35,7 +35,7 @@ public class EditarEstabelecimentoAction implements Action {
         Estabelecimento estabelecimento = (Estabelecimento) sessao.getAttribute("usuario");
         estabelecimento.setNome(nome);
         estabelecimento.setDescricao(descricao);
-        estabelecimento.setCnpj(cpnj);
+        estabelecimento.setCnpj(cnpj);
         estabelecimento.setLinkImagem(linkImagem);
 
         try {

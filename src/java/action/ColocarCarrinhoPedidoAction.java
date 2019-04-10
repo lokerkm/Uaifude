@@ -28,12 +28,21 @@ public class ColocarCarrinhoPedidoAction implements Action {
             if (!tipoPedido.equals(pedido.getEstado().estadoString())) {
                 PedidoDAO.getInstance().update(pedido);
             }
-            HttpSession sessao = request.getSession();
-            Estabelecimento estabelecimento = (Estabelecimento) sessao.getAttribute("usuario");
-            sessao.setAttribute("pedidos", PedidoDAO.getInstance().getPedidosEstabelecimento(estabelecimento.getEstabelecimentoId()));
 
-            RequestDispatcher view = request.getRequestDispatcher("painelInicial.jsp");
-            view.forward(request, response);
+            HttpSession sessao = request.getSession();
+            if (sessao.getAttribute("tipo").equals("Estabelecimento")) {
+                Estabelecimento estabelecimento = (Estabelecimento) sessao.getAttribute("usuario");
+                sessao.setAttribute("pedidos", PedidoDAO.getInstance().getPedidosEstabelecimento(estabelecimento.getEstabelecimentoId()));
+
+                RequestDispatcher view = request.getRequestDispatcher("painelInicial.jsp");
+                view.forward(request, response);
+            } else {
+
+                sessao.setAttribute("pedidos", PedidoDAO.getInstance().getPedidos());
+
+                RequestDispatcher view = request.getRequestDispatcher("listaPedidos.jsp");
+                view.forward(request, response);
+            }
         } catch (ServletException ex) {
             Logger.getLogger(ColocarCarrinhoPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

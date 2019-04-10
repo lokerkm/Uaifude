@@ -14,13 +14,12 @@ import model.Estabelecimento;
 import model.Pedido;
 import persistence.PedidoDAO;
 
-
-public class EntregarPedidoAction  implements Action {
+public class EntregarPedidoAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-       int pedidoId = Integer.parseInt(request.getParameter("pedidoId"));
-        
+        int pedidoId = Integer.parseInt(request.getParameter("pedidoId"));
+
         Pedido pedido;
         try {
             pedido = PedidoDAO.getInstance().getPedido(pedidoId);
@@ -30,18 +29,26 @@ public class EntregarPedidoAction  implements Action {
                 PedidoDAO.getInstance().update(pedido);
             }
             HttpSession sessao = request.getSession();
-            Estabelecimento estabelecimento = (Estabelecimento) sessao.getAttribute("usuario");
-            sessao.setAttribute("pedidos", PedidoDAO.getInstance().getPedidosEstabelecimento(estabelecimento.getEstabelecimentoId()));
+            if (sessao.getAttribute("tipo").equals("Estabelecimento")) {
+                Estabelecimento estabelecimento = (Estabelecimento) sessao.getAttribute("usuario");
+                sessao.setAttribute("pedidos", PedidoDAO.getInstance().getPedidosEstabelecimento(estabelecimento.getEstabelecimentoId()));
 
-            RequestDispatcher view = request.getRequestDispatcher("painelInicial.jsp");
-            view.forward(request, response);
+                RequestDispatcher view = request.getRequestDispatcher("painelInicial.jsp");
+                view.forward(request, response);
+            } else {
+
+                sessao.setAttribute("pedidos", PedidoDAO.getInstance().getPedidos());
+
+                RequestDispatcher view = request.getRequestDispatcher("listaPedidos.jsp");
+                view.forward(request, response);
+            }
         } catch (ServletException ex) {
             Logger.getLogger(EntregarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(EntregarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(EntregarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
 
     }
 
