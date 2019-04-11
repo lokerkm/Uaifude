@@ -17,6 +17,9 @@ public class EnderecoDAO {
         return instance;
     }
 
+    private EnderecoDAO() {
+    }
+
     public int getLastId() throws ClassNotFoundException, SQLException {
         Connection conn = null;
         Statement st = null;

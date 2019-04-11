@@ -36,6 +36,7 @@
                                         Por:${produto.getPrecoPosPromocao()}</small></c:if>
 
                                     <input type="hidden" name="produtoId" value="${produto.id}" >
+                                <input type="hidden" name="estabelecimentoId" value="${produto.idEstabelecimento}" >
                                 <input type="hidden" name="idEstabelecimeto" value="${produto.getIdEstabelecimento()}" >
 
                                 <button type="submit"  class="btn btn-primary">Adicionar ao carrinho</button>

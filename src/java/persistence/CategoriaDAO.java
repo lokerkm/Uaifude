@@ -1,6 +1,6 @@
 package persistence;
 
-import controller.CategoriaFactory;
+import controller.Factory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +18,9 @@ public class CategoriaDAO {
         return instance;
     }
 
+    private CategoriaDAO() {
+    }
+
     public List<Categoria> getCategorias() throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
@@ -28,7 +31,7 @@ public class CategoriaDAO {
             ResultSet rs = st.executeQuery("select * from categoria");
 
             while (rs.next()) {
-                Categoria categoria = CategoriaFactory.create(rs.getString("nome"));
+                Categoria categoria = Factory.createCategoria(rs.getString("nome"));
                 categoria.setNome(rs.getString("nome"));
                 categoria.setId(rs.getInt("id"));
                 categorias.add(categoria);
@@ -54,7 +57,7 @@ public class CategoriaDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from categoria where id ='" + id + "'");
             rs.first();
-            categoria = CategoriaFactory.create(rs.getString("nome"));
+            categoria = Factory.createCategoria(rs.getString("nome"));
             categoria.setNome(rs.getString("nome"));
             categoria.setId(rs.getInt("id"));
         } catch (SQLException e) {

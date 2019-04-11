@@ -1,6 +1,6 @@
 package persistence;
 
-import controller.PromocaoFactory;
+import controller.Factory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +18,9 @@ public class PromocaoDAO {
         return instance;
     }
 
+    private PromocaoDAO() {
+    }
+
     public ArrayList<Promocao> getPromocoes() throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
@@ -29,7 +32,7 @@ public class PromocaoDAO {
 
             while (rs.next()) {
                 Promocao promocao
-                        = PromocaoFactory.create(rs.getString("nome"));
+                        = Factory.createPromocao(rs.getString("nome"));
 
                 promocoes.add(promocao);
 
@@ -54,7 +57,7 @@ public class PromocaoDAO {
 
             while (rs.next()) {
                 promocao
-                        = PromocaoFactory.create(rs.getString("nome"));
+                        = Factory.createPromocao(rs.getString("nome"));
 
             }
 

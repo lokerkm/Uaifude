@@ -1,6 +1,6 @@
 package persistence;
 
-import controller.PromocaoFactory;
+import controller.Factory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +16,9 @@ public class ProdutoDAO {
 
     public static ProdutoDAO getInstance() {
         return instance;
+    }
+
+    private ProdutoDAO() {
     }
 
     public ArrayList<Produto> getProdutos() throws SQLException, ClassNotFoundException {

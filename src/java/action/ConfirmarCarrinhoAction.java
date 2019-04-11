@@ -1,7 +1,7 @@
 package action;
 
 import controller.Action;
-import controller.EstadoFactory;
+
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

@@ -17,6 +17,9 @@ public class UsuarioDAO {
         return instance;
     }
 
+    private UsuarioDAO() {
+    }
+
     public List<Usuario> getUsuarios() throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
@@ -26,16 +29,14 @@ public class UsuarioDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from usuario");
 
-          
             while (rs.next()) {
                 Usuario usuario = new Usuario(rs.getInt("id"),
-                    
-                    rs.getString("login"),
-                    rs.getString("senha"),
-                    rs.getString("email"),
-                    rs.getString("tipo"),
-                    rs.getString("telefone"),
-                    rs.getString("celular"));
+                        rs.getString("login"),
+                        rs.getString("senha"),
+                        rs.getString("email"),
+                        rs.getString("tipo"),
+                        rs.getString("telefone"),
+                        rs.getString("celular"));
                 usuarios.add(usuario);
 
             }
@@ -59,7 +60,6 @@ public class UsuarioDAO {
             rs.first();
 
             usuario = new Usuario(rs.getInt("id"),
-                    
                     rs.getString("login"),
                     rs.getString("senha"),
                     rs.getString("email"),
@@ -83,7 +83,6 @@ public class UsuarioDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             st.execute("DELETE FROM usuario WHERE id='" + id + "'");
-            
 
         } catch (SQLException e) {
             throw e;
@@ -111,8 +110,6 @@ public class UsuarioDAO {
             comando.setInt(7, usuario.getEndereco().getId());
             comando.execute();
 
-           
-
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -135,10 +132,8 @@ public class UsuarioDAO {
             comando.setString(5, usuario.getTelefone());
             comando.setString(6, usuario.getCelular());
             comando.setInt(7, usuario.getEndereco().getId());
-            comando.setInt(8, usuario.getUsuarioId()); 
+            comando.setInt(8, usuario.getUsuarioId());
             comando.execute();
-
-           
 
             comando.close();
             conn.close();

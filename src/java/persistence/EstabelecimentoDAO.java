@@ -20,6 +20,9 @@ public class EstabelecimentoDAO {
         return instance;
     }
 
+    private EstabelecimentoDAO() {
+    }
+
     public ArrayList<Estabelecimento> getEstabelecimentos() throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;

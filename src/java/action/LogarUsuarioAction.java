@@ -1,7 +1,7 @@
 package action;
 
 import controller.Action;
-import controller.EstadoFactory;
+import controller.Factory;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -45,7 +45,7 @@ public class LogarUsuarioAction implements Action {
                         sessao.setAttribute("estabelecimentos", EstabelecimentoDAO.getInstance().getEstabelecimentos());
                         sessao.setAttribute("pedidos", PedidoDAO.getInstance().getPedidosCliente(cliente.getClienteId()));
                         sessao.setAttribute("categorias", CategoriaDAO.getInstance().getCategorias());
-                        Pedido pedidoCarrinho = new Pedido(0, cliente.getEndereco(), EstadoFactory.create("Carrinho"), 0);
+                        Pedido pedidoCarrinho = new Pedido(0, cliente.getEndereco(), Factory.createPedidoEstado("Carrinho"), 0);
                         sessao.setAttribute("carrinho", pedidoCarrinho);
                         sessao.setAttribute("promocoes", PromocaoDAO.getInstance().getPromocoes());
                         response.sendRedirect("painelInicial.jsp");

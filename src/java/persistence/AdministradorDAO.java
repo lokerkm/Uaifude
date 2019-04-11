@@ -17,6 +17,9 @@ public class AdministradorDAO {
         return instance;
     }
 
+    private AdministradorDAO() {
+    }
+
     public Administrador getAdministrador(String login) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;

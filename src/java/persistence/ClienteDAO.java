@@ -17,7 +17,8 @@ public class ClienteDAO {
     public static ClienteDAO getInstance() {
         return instance;
     }
-
+ private ClienteDAO() {
+    }
     public List<Cliente> getClientes() throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;

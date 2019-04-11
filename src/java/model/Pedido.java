@@ -1,6 +1,6 @@
 package model;
 
-import controller.EstadoFactory;
+import controller.Factory;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -50,7 +50,7 @@ public class Pedido extends Observable {
     }
 
     public void setEstado(PedidoEstado estado) {
- 
+
         this.estado = estado;
     }
 

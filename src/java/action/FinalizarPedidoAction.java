@@ -1,7 +1,7 @@
 package action;
 
 import controller.Action;
-import controller.EstadoFactory;
+import controller.Factory;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -63,7 +63,7 @@ public class FinalizarPedidoAction implements Action {
             pedido.setEstabelecimentoId(pedido.getProdutos().get(0).getIdEstabelecimento());
             PedidoDAO.getInstance().save(pedido, pedido.getEndereco());
 
-            Pedido pedidoCarrinho = new Pedido(0, cliente.getEndereco(), EstadoFactory.create("Carrinho"), 0);
+            Pedido pedidoCarrinho = new Pedido(0, cliente.getEndereco(), Factory.createPedidoEstado("Carrinho"), 0);
             sessao.setAttribute("pedidos", PedidoDAO.getInstance().getPedidosCliente(cliente.getClienteId()));
             sessao.setAttribute("carrinho", pedidoCarrinho);
             response.sendRedirect("painelInicial.jsp");
