@@ -212,6 +212,48 @@
             </div>
         </form>
     </div>
+    
+    <div class="col-md-4">
+        <form action="FrontController?action=PrepararEnderecosAdm" method="post">
+            <div class="card mb-4 shadow-sm">
+                <img src="https://i.imgur.com/lKJutHx.jpg"  class="img-thumbnail">
+                <div class="card-body">
+                    <p class="card-text" >CRUD Endereços</p>
+
+                    <div class="justify-content-between align-items-center">
+                        <div class="btn-group">
+
+
+                            <button type="submit"  class="btn btn-primary">Gerenciar</button>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <div class="col-md-4">
+        <form action="FrontController?action=PrepararClientesAdm" method="post">
+            <div class="card mb-4 shadow-sm">
+                <img src="https://i.imgur.com/lKJutHx.jpg"  class="img-thumbnail">
+                <div class="card-body">
+                    <p class="card-text" >CRUD Clientes</p>
+
+                    <div class="justify-content-between align-items-center">
+                        <div class="btn-group">
+
+
+                            <button type="submit"  class="btn btn-primary">Gerenciar</button>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 
 
 </c:if>

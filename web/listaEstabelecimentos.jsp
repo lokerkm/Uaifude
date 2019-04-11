@@ -16,19 +16,19 @@
             <img src="${estabelecimento.linkImagem}"  class="img-thumbnail">
             <div class="card-body">
                 <p class="card-text" >${estabelecimento.nome}</p>               
-                <form action="FrontController?action=LerEstabelecimento" method="post">
+                <form action="FrontController?action=PrepararEstabelecimento" method="post">
                     <input type="hidden" name="estabelecimentoId" value="${estabelecimento.getEstabelecimentoId()}" >
                     <input type="hidden" name="acaoEstabelecimento" value="Ler" >
                     <button type="submit"  class="btn btn-primary">LER</button>
                 </form>
 
-                <form action="FrontController?action=EditarEstabelecimento" method="post">
+                <form action="FrontController?action=PrepararEstabelecimento" method="post">
                     <input type="hidden" name="estabelecimentoId" value="${estabelecimento.getEstabelecimentoId()}" >
                     <input type="hidden" name="acaoEstabelecimento" value="Editar" >
                     <button type="submit"  class="btn btn-primary">EDITAR</button>
                 </form>
 
-                <form action="FrontController?action=ExcluirEstabelecimento" method="post">
+                <form action="FrontController?action=PrepararEstabelecimento" method="post">
                     <input type="hidden" name="estabelecimentoId" value="${estabelecimento.getEstabelecimentoId()}" >
                     <input type="hidden" name="acaoEstabelecimento" value="Excluir" >
                     <button type="submit"  class="btn btn-primary">APAGAR</button>
