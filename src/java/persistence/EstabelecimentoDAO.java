@@ -192,7 +192,7 @@ public class EstabelecimentoDAO {
             st = conn.createStatement();
             String sql = "insert into usuario (login,senha,tipo,email,telefone,celular,endereco_id)"
                     + " VALUES (?,?,?,?,?,?,?)";
-            PreparedStatement comando = conn.prepareStatement(sql);
+            PreparedStatement comando = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             comando.setString(1, estabelecimento.getLogin());
             comando.setString(2, estabelecimento.getSenha());
             comando.setString(3, estabelecimento.getTipo());
@@ -202,13 +202,19 @@ public class EstabelecimentoDAO {
             comando.setInt(7, estabelecimento.getEndereco().getId());
             comando.execute();
 
+            ResultSet rs = comando.getGeneratedKeys();
+            int usuarioId = 0;
+            if (rs != null && rs.next()) {
+                usuarioId = rs.getInt(1);
+            }
+
             String sql2 = "insert into estabelecimento (nome,cnpj,descricao,usuario_id,linkImagem,categoria_id)"
                     + " VALUES (?,?,?,?,?,?)";
             PreparedStatement comando2 = conn.prepareStatement(sql2);
             comando2.setString(1, estabelecimento.getNome());
             comando2.setString(2, estabelecimento.getCnpj());
             comando2.setString(3, estabelecimento.getDescricao());
-            comando2.setInt(4, ClienteDAO.getInstance().getLastId());
+            comando2.setInt(4, usuarioId);
             comando2.setString(5, estabelecimento.getLinkImagem());
             comando2.setInt(6, estabelecimento.getCategoria().getId());
             comando2.execute();

@@ -23,11 +23,8 @@ import persistence.ClienteDAO;
 import persistence.EnderecoDAO;
 import persistence.EstabelecimentoDAO;
 
-/**
- *
- * @author kevin
- */
-public class CadastrarEstabelecimentoAction  implements Action{
+public class CadastrarEstabelecimentoAction implements Action {
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String nome = request.getParameter("nome");
@@ -47,14 +44,13 @@ public class CadastrarEstabelecimentoAction  implements Action{
         String estado = request.getParameter("estado");
         String cidade = request.getParameter("cidade");
         String bairro = request.getParameter("bairro");
-       
 
         try {
             Categoria categoria = CategoriaDAO.getInstance().getCategoria(categoriaId);
             Endereco endereco = new Endereco(cep, logradouro, numero, complemento, bairro, cidade, estado);
             Estabelecimento estabelecimento = new Estabelecimento(nome, cnpj, descricao, linkImagem, categoria, login, email, senha, "Estabelecimento", telefone, celular, null);
-            EnderecoDAO.getInstance().save(endereco);
-            endereco.setId(EnderecoDAO.getInstance().getLastId());
+            ;
+            endereco.setId(EnderecoDAO.getInstance().save(endereco));
             estabelecimento.setEndereco(endereco);
             EstabelecimentoDAO.getInstance().save(estabelecimento);
 

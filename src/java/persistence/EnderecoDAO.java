@@ -20,24 +20,6 @@ public class EnderecoDAO {
     private EnderecoDAO() {
     }
 
-    public int getLastId() throws ClassNotFoundException, SQLException {
-        Connection conn = null;
-        Statement st = null;
-        int idNext;
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM `endereco` WHERE 1 ORDER BY `endereco`.`id` DESC");
-            rs.first();
-            idNext = rs.getInt("id");
-        } catch (SQLException e) {
-            throw e;
-        } finally {
-            closeResources(conn, st);
-        }
-        return idNext;
-    }
-
     public List<Endereco> getEnderecos() throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
@@ -113,17 +95,17 @@ public class EnderecoDAO {
         }
     }
 
-    public void save(Endereco endereco) throws SQLException, ClassNotFoundException {
+    public int save(Endereco endereco) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
-
+        int enderecoId = 0;
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
 
             String sql = "insert into endereco (logradouro,numero,complemento,bairro,cidade,estado,cep)"
                     + " VALUES (?,?,?,?,?,?,?)";
-            PreparedStatement comando = conn.prepareStatement(sql);
+            PreparedStatement comando = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             comando.setString(1, endereco.getLogradouro());
             comando.setString(2, endereco.getNumero());
             comando.setString(3, endereco.getComplemento());
@@ -133,12 +115,18 @@ public class EnderecoDAO {
             comando.setString(7, endereco.getCep());
             comando.execute();
 
+            ResultSet rs = comando.getGeneratedKeys();
+
+            if (rs != null && rs.next()) {
+                enderecoId = rs.getInt(1);
+            }
         } catch (SQLException e) {
             throw e;
         } finally {
             closeResources(conn, st);
         }
 
+        return enderecoId;
     }
 
     public static void update(Endereco endereco) throws SQLException, ClassNotFoundException {

@@ -48,8 +48,7 @@ public class CadastrarClienteAction implements Action {
 
         try {
 
-            EnderecoDAO.getInstance().save(endereco);
-            endereco.setId(EnderecoDAO.getInstance().getLastId());
+            endereco.setId(EnderecoDAO.getInstance().save(endereco));
             cliente.setEndereco(endereco);
             ClienteDAO.getInstance().save(cliente);
 

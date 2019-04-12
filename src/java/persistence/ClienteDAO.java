@@ -17,8 +17,10 @@ public class ClienteDAO {
     public static ClienteDAO getInstance() {
         return instance;
     }
- private ClienteDAO() {
+
+    private ClienteDAO() {
     }
+
     public List<Cliente> getClientes() throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
@@ -140,7 +142,8 @@ public class ClienteDAO {
             st = conn.createStatement();
             String sql = "insert into usuario (login,senha,tipo,email,telefone,celular,endereco_id)"
                     + " VALUES (?,?,?,?,?,?,?)";
-            PreparedStatement comando = conn.prepareStatement(sql);
+            PreparedStatement comando = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
             comando.setString(1, cliente.getLogin());
             comando.setString(2, cliente.getSenha());
             comando.setString(3, cliente.getTipo());
@@ -149,6 +152,11 @@ public class ClienteDAO {
             comando.setString(6, cliente.getCelular());
             comando.setInt(7, cliente.getEndereco().getId());
             comando.execute();
+            ResultSet rs = comando.getGeneratedKeys();
+            int usuarioId = 0;
+            if (rs != null && rs.next()) {
+                usuarioId = rs.getInt(1);
+            }
 
             String sql2 = "insert into cliente (nome,cpf,nascimento,usuario_id)"
                     + " VALUES (?,?,?,?)";
@@ -156,7 +164,7 @@ public class ClienteDAO {
             comando2.setString(1, cliente.getNome());
             comando2.setString(2, cliente.getCpf());
             comando2.setString(3, cliente.getNascimento());
-            comando2.setInt(4, getLastId());
+            comando2.setInt(4, usuarioId);
             comando2.execute();
 
         } catch (SQLException e) {
@@ -211,28 +219,6 @@ public class ClienteDAO {
         } catch (SQLException e) {
 
         }
-    }
-
-    public Cliente getCliente(Object attribute) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public int getLastId() throws ClassNotFoundException, SQLException {
-        Connection conn = null;
-        Statement st = null;
-        int idNext;
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM `usuario` WHERE 1 ORDER BY `usuario`.`id` DESC");
-            rs.first();
-            idNext = rs.getInt("id");
-        } catch (SQLException e) {
-            throw e;
-        } finally {
-            closeResources(conn, st);
-        }
-        return idNext;
     }
 
 }

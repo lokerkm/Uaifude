@@ -53,10 +53,10 @@ public class FinalizarPedidoAction implements Action {
         }
         try {
             if (endereco != null) {
-                EnderecoDAO.getInstance().save(endereco);
-                pedido.setEndereco(EnderecoDAO.getInstance().getEndereco(EnderecoDAO.getInstance().getLastId()));
+                ;
+                pedido.setEndereco(EnderecoDAO.getInstance().getEndereco(EnderecoDAO.getInstance().save(endereco)));
             }
-            pedido.setId(PedidoDAO.getInstance().getNextId());
+//            pedido.setId(PedidoDAO.getInstance().getNextId());
             pedido.toConfirmado();
 
             pedido.setCliente(cliente);

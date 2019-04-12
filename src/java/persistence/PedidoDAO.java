@@ -24,24 +24,23 @@ public class PedidoDAO {
     private PedidoDAO() {
     }
 
-    public int getNextId() throws ClassNotFoundException, SQLException {
-        Connection conn = null;
-        Statement st = null;
-        int idNext;
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM `pedido` WHERE 1 ORDER BY `pedido`.`id` DESC");
-            rs.first();
-            idNext = rs.getInt("id");
-        } catch (SQLException e) {
-            throw e;
-        } finally {
-            closeResources(conn, st);
-        }
-        return idNext + 1;
-    }
-
+//    public int getNextId() throws ClassNotFoundException, SQLException {
+//        Connection conn = null;
+//        Statement st = null;
+//        int idNext;
+//        try {
+//            conn = DatabaseLocator.getInstance().getConnection();
+//            st = conn.createStatement();
+//            ResultSet rs = st.executeQuery("SELECT * FROM `pedido` WHERE 1 ORDER BY `pedido`.`id` DESC");
+//            rs.first();
+//            idNext = rs.getInt("id");
+//        } catch (SQLException e) {
+//            throw e;
+//        } finally {
+//            closeResources(conn, st);
+//        }
+//        return idNext + 1;
+//    }
     public ArrayList<Pedido> getPedidos() throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
@@ -197,7 +196,7 @@ public class PedidoDAO {
 
             String sql = "insert into pedido (total, estado,cliente_id,endereco_id,estabelecimento_id)"
                     + " VALUES (?,?,?,?,?)";
-            PreparedStatement comando = conn.prepareStatement(sql);
+            PreparedStatement comando = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             comando.setFloat(1, pedido.getTotal());
             comando.setString(2, pedido.getEstado().estadoString());
             comando.setInt(3, pedido.getCliente().getClienteId());
@@ -206,12 +205,18 @@ public class PedidoDAO {
 
             comando.execute();
 
+            ResultSet rs = comando.getGeneratedKeys();
+            int pedidoId = 0;
+            if (rs != null && rs.next()) {
+                pedidoId = rs.getInt(1);
+            }
+
             for (Produto produto : pedido.getProdutos()) {
                 String sql2 = "insert into lista_produtos (produto_id, pedido_id, quantidade)"
                         + " VALUES (?,?,1)";
                 PreparedStatement comando2 = conn.prepareStatement(sql2);
                 comando2.setFloat(1, produto.getId());
-                comando2.setInt(2, getLastId());
+                comando2.setInt(2, pedidoId);
 
                 comando2.execute();
             }
@@ -223,24 +228,23 @@ public class PedidoDAO {
 
     }
 
-    public int getLastId() throws ClassNotFoundException, SQLException {
-        Connection conn = null;
-        Statement st = null;
-        int idNext;
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM `pedido` WHERE 1 ORDER BY `pedido`.`id` DESC");
-            rs.first();
-            idNext = rs.getInt("id");
-        } catch (SQLException e) {
-            throw e;
-        } finally {
-            closeResources(conn, st);
-        }
-        return idNext;
-    }
-
+//    public int getLastId() throws ClassNotFoundException, SQLException {
+//        Connection conn = null;
+//        Statement st = null;
+//        int idNext;
+//        try {
+//            conn = DatabaseLocator.getInstance().getConnection();
+//            st = conn.createStatement();
+//            ResultSet rs = st.executeQuery("SELECT * FROM `pedido` WHERE 1 ORDER BY `pedido`.`id` DESC");
+//            rs.first();
+//            idNext = rs.getInt("id");
+//        } catch (SQLException e) {
+//            throw e;
+//        } finally {
+//            closeResources(conn, st);
+//        }
+//        return idNext;
+//    }
     public static void update(Pedido pedido) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
