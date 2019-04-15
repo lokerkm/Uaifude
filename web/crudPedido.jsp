@@ -36,28 +36,33 @@
             <c:if test="${acaoPedido !='LerPedido'}">
                 <div class="col-md-4 btnpedido">
 
-                    <form action="FrontController?action=ColocarCarrinhoPedido" method="post">
+                    <form action="FrontController?action=MudarEstadoPedido" method="post">
                         <input type="hidden" name="pedidoId" value="${pedido.id}" >
+                        <input type="hidden" name="acao" value="Carrinho" >
                         <button type="submit"  class="btn btn-primary">Colocar no Carrinho o pedido</button>
                     </form>
 
-                    <form action="FrontController?action=ConfirmarPedido" method="post">
+                    <form action="FrontController?action=MudarEstadoPedido" method="post">
                         <input type="hidden" name="pedidoId" value="${pedido.id}" >
+                        <input type="hidden" name="acao" value="Confirmado" >
                         <button type="submit"  class="btn btn-primary">Confirmar o pedido</button>
                     </form>
 
-                    <form action="FrontController?action=ProduzirPedido" method="post">
+                    <form action="FrontController?action=MudarEstadoPedido" method="post">
                         <input type="hidden" name="pedidoId" value="${pedido.id}" >
+                        <input type="hidden" name="acao" value="Producao" >
                         <button type="submit"  class="btn btn-primary">Colocar em produção o pedido</button>
                     </form>
 
-                    <form action="FrontController?action=TransportarPedido" method="post">
+                    <form action="FrontController?action=MudarEstadoPedido" method="post">
                         <input type="hidden" name="pedidoId" value="${pedido.id}" >
+                        <input type="hidden" name="acao" value="Transporte" >
                         <button type="submit"  class="btn btn-primary">Colocar em transporte o pedido</button>
                     </form>
 
-                    <form action="FrontController?action=EntregarPedido" method="post">
+                    <form action="FrontController?action=MudarEstadoPedido" method="post">
                         <input type="hidden" name="pedidoId" value="${pedido.id}" >
+                        <input type="hidden" name="acao" value="Entregue" >
                         <button type="submit"  class="btn btn-primary">Declarar como entregue o pedido</button>
                     </form>
 
