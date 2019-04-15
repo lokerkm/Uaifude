@@ -80,7 +80,7 @@
 
                             <c:forEach items="${promocoes}" var="promocao">
 
-                                <option value="${promocao.getId()}" <c:if test="${promocao.getId() == produto.getPromocao().getId() }"> selected</c:if>>${promocao.getNome()}</option>  
+                                <option value="${promocao.getId()}" <c:if test="${promocao.getId() == produto.getPromocao().getId() }"> selected</c:if>>${promocao.getNome()} - ${promocao.getDesconto()}% OFF </option>  
                             </c:forEach>
                         </select>
                         <div class="invalid-feedback">

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package action;
 
 import controller.Action;
@@ -21,10 +16,6 @@ import model.Estabelecimento;
 import model.Pedido;
 import persistence.PedidoDAO;
 
-/**
- *
- * @author kevin
- */
 public class MudarEstadoPedidoAction implements Action {
 
     @Override
@@ -32,13 +23,12 @@ public class MudarEstadoPedidoAction implements Action {
         int pedidoId = Integer.parseInt(request.getParameter("pedidoId"));
         String acao = "to" + request.getParameter("acao");
         Pedido pedido;
-        
-       
+
         try {
             pedido = PedidoDAO.getInstance().getPedido(pedidoId);
-            String tipoPedido = pedido.getEstado().estadoString();           
-            Method metodo = pedido.getClass().getMethod(acao, null);
-            request.setAttribute("mensagem", metodo.invoke(pedido, null));
+            String tipoPedido = pedido.getEstado().estadoString();
+            Method metodo = pedido.getClass().getMethod(acao);
+            request.setAttribute("mensagem", metodo.invoke(pedido));
             if (!tipoPedido.equals(pedido.getEstado().estadoString())) {
                 PedidoDAO.getInstance().update(pedido);
             }
@@ -57,26 +47,10 @@ public class MudarEstadoPedidoAction implements Action {
                 view.forward(request, response);
             }
 
-        
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(MudarEstadoPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoSuchMethodException ex) {
-            Logger.getLogger(MudarEstadoPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SecurityException ex) {
-            Logger.getLogger(MudarEstadoPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(MudarEstadoPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvocationTargetException ex) {
-            Logger.getLogger(MudarEstadoPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ServletException ex) {
-            Logger.getLogger(MudarEstadoPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MudarEstadoPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ServletException | SQLException | ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(MudarEstadoPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
 }
-

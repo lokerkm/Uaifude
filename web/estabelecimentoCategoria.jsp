@@ -22,6 +22,7 @@
                             <div class="card-body">
                                 <p class="card-text" >${estabelecimento.nome}</p>
                                 <p class="text-muted">Categoria</p>
+                                <p class="card-text" >${estabelecimento.categoria.getNome()}</p>
                                 <div class="justify-content-between align-items-center">
                                     <div>
 

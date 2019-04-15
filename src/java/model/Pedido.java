@@ -1,6 +1,6 @@
 package model;
 
-import controller.Factory;
+
 import java.util.ArrayList;
 import java.util.Observable;
 
