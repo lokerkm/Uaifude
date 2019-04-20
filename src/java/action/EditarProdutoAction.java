@@ -28,7 +28,8 @@ public class EditarProdutoAction implements Action {
         String linkImagem = request.getParameter("linkImagem");
         int promocao = Integer.parseInt(request.getParameter("promocao"));
 
-        Produto produto = new Produto(id, nome, preco, true, descricao, linkImagem);
+//        Produto produto = new Produto(id, nome, preco, true, descricao, linkImagem);
+        Produto produto = new Produto().setId(id).setNome(nome).setPreco(preco).setDisponivel(true).setDescricao(descricao).setLinkImagem(linkImagem);
         HttpSession sessao = request.getSession();
         Estabelecimento estabelecimento = null;
         if (sessao.getAttribute("tipo").equals("Administrador")) {

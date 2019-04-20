@@ -34,21 +34,36 @@ public class EstabelecimentoDAO {
 
             while (rs.next()) {
                 Endereco endereco = EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id"));
-                Estabelecimento estabelecimento = new Estabelecimento(rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getString("cnpj"),
-                        rs.getString("descricao"),
-                        rs.getInt("usuario_id"),
-                        rs.getString("login"),
-                        rs.getString("senha"),
-                        rs.getString("email"),
-                        rs.getString("tipo"),
-                        rs.getString("telefone"),
-                        rs.getString("celular"),
-                        rs.getString("linkImagem"));
-                estabelecimento.setCategoria(CategoriaDAO.getInstance().getCategoria(rs.getInt("categoria_id")));
+                Estabelecimento estabelecimento = new Estabelecimento();
+                estabelecimento.setEstabelecimentoId(rs.getInt("estabelecimento.id"))
+                        .setNome(rs.getString("nome"))
+                        .setCnpj(rs.getString("cnpj"))
+                        .setDescricao(rs.getString("descricao"))
+                        .setLinkImagem(rs.getString("linkImagem"))
+                        .setCategoria(CategoriaDAO.getInstance().getCategoria(rs.getInt("categoria_id")))
+                        .setUsuarioId(rs.getInt("usuario_id"))
+                        .setLogin(rs.getString("login"))
+                        .setSenha(rs.getString("senha"))
+                        .setEmail(rs.getString("email"))
+                        .setTipo(rs.getString("tipo"))
+                        .setTelefone(rs.getString("telefone"))
+                        .setCelular(rs.getString("celular"))
+                        .setEndereco(endereco);
+                //                Estabelecimento estabelecimento = new Estabelecimento(rs.getInt("id"),
+                //                        rs.getString("nome"),
+                //                        rs.getString("cnpj"),
+                //                        rs.getString("descricao"),
+                //                        rs.getInt("usuario_id"),
+                //                        rs.getString("login"),
+                //                        rs.getString("senha"),
+                //                        rs.getString("email"),
+                //                        rs.getString("tipo"),
+                //                        rs.getString("telefone"),
+                //                        rs.getString("celular"),
+                //                        rs.getString("linkImagem"));
+//                estabelecimento.setCategoria(CategoriaDAO.getInstance().getCategoria(rs.getInt("categoria_id")));
 
-                estabelecimento.setEndereco(endereco);
+//                estabelecimento.setEndereco(endereco);
                 estabelecimentos.add(estabelecimento);
 
             }
@@ -73,21 +88,36 @@ public class EstabelecimentoDAO {
 
             while (rs.next()) {
                 Endereco endereco = EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id"));
-                Estabelecimento estabelecimento = new Estabelecimento(rs.getInt("estabelecimento.id"),
-                        rs.getString("nome"),
-                        rs.getString("cnpj"),
-                        rs.getString("descricao"),
-                        rs.getInt("usuario_id"),
-                        rs.getString("login"),
-                        rs.getString("senha"),
-                        rs.getString("email"),
-                        rs.getString("tipo"),
-                        rs.getString("telefone"),
-                        rs.getString("celular"),
-                        rs.getString("linkImagem"));
-                estabelecimento.setCategoria(CategoriaDAO.getInstance().getCategoria(rs.getInt("categoria_id")));
-
-                estabelecimento.setEndereco(endereco);
+                Estabelecimento estabelecimento = new Estabelecimento();
+                estabelecimento.setEstabelecimentoId(rs.getInt("estabelecimento.id"))
+                        .setNome(rs.getString("nome"))
+                        .setCnpj(rs.getString("cnpj"))
+                        .setDescricao(rs.getString("descricao"))
+                        .setLinkImagem(rs.getString("linkImagem"))
+                        .setCategoria(CategoriaDAO.getInstance().getCategoria(rs.getInt("categoria_id")))
+                        .setUsuarioId(rs.getInt("usuario_id"))
+                        .setLogin(rs.getString("login"))
+                        .setSenha(rs.getString("senha"))
+                        .setEmail(rs.getString("email"))
+                        .setTipo(rs.getString("tipo"))
+                        .setTelefone(rs.getString("telefone"))
+                        .setCelular(rs.getString("celular"))
+                        .setEndereco(endereco);
+//                Estabelecimento estabelecimento = new Estabelecimento(rs.getInt("estabelecimento.id"),
+//                        rs.getString("nome"),
+//                        rs.getString("cnpj"),
+//                        rs.getString("descricao"),
+//                        rs.getInt("usuario_id"),
+//                        rs.getString("login"),
+//                        rs.getString("senha"),
+//                        rs.getString("email"),
+//                        rs.getString("tipo"),
+//                        rs.getString("telefone"),
+//                        rs.getString("celular"),
+//                        rs.getString("linkImagem"));
+//                estabelecimento.setCategoria(CategoriaDAO.getInstance().getCategoria(rs.getInt("categoria_id")));
+//
+//                estabelecimento.setEndereco(endereco);
                 estabelecimentos.add(estabelecimento);
 
             }
@@ -103,7 +133,7 @@ public class EstabelecimentoDAO {
     public Estabelecimento getEstabelecimento(int id) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
-        Estabelecimento estabelecimento = null;
+        Estabelecimento estabelecimento = new Estabelecimento();;
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
@@ -111,21 +141,36 @@ public class EstabelecimentoDAO {
                     + "' and estabelecimento.usuario_id=usuario.id");
             rs.first();
             Endereco endereco = EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id"));
-            estabelecimento = new Estabelecimento(rs.getInt("estabelecimento.id"),
-                    rs.getString("nome"),
-                    rs.getString("cnpj"),
-                    rs.getString("descricao"),
-                    rs.getInt("usuario_id"),
-                    rs.getString("login"),
-                    rs.getString("senha"),
-                    rs.getString("email"),
-                    rs.getString("tipo"),
-                    rs.getString("telefone"),
-                    rs.getString("celular"),
-                    rs.getString("linkImagem"));
-            estabelecimento.setCategoria(CategoriaDAO.getInstance().getCategoria(rs.getInt("categoria_id")));
-            estabelecimento.setEndereco(endereco);
-            estabelecimento.setProdutos(ProdutoDAO.getInstance().getProdutos(rs.getInt("estabelecimento.id")));
+            estabelecimento.setEstabelecimentoId(rs.getInt("estabelecimento.id"))
+                    .setNome(rs.getString("nome"))
+                    .setCnpj(rs.getString("cnpj"))
+                    .setDescricao(rs.getString("descricao"))
+                    .setLinkImagem(rs.getString("linkImagem"))
+                    .setCategoria(CategoriaDAO.getInstance().getCategoria(rs.getInt("categoria_id")))
+                    .setProdutos(ProdutoDAO.getInstance().getProdutos(rs.getInt("estabelecimento.id")))
+                    .setUsuarioId(rs.getInt("usuario_id"))
+                    .setLogin(rs.getString("login"))
+                    .setSenha(rs.getString("senha"))
+                    .setEmail(rs.getString("email"))
+                    .setTipo(rs.getString("tipo"))
+                    .setTelefone(rs.getString("telefone"))
+                    .setCelular(rs.getString("celular"))
+                    .setEndereco(endereco);
+//            estabelecimento = new Estabelecimento(rs.getInt("estabelecimento.id"),
+//                    rs.getString("nome"),
+//                    rs.getString("cnpj"),
+//                    rs.getString("descricao"),
+//                    rs.getInt("usuario_id"),
+//                    rs.getString("login"),
+//                    rs.getString("senha"),
+//                    rs.getString("email"),
+//                    rs.getString("tipo"),
+//                    rs.getString("telefone"),
+//                    rs.getString("celular"),
+//                    rs.getString("linkImagem"));
+//            estabelecimento.setCategoria(CategoriaDAO.getInstance().getCategoria(rs.getInt("categoria_id")));
+//            estabelecimento.setEndereco(endereco);
+//            estabelecimento.setProdutos(ProdutoDAO.getInstance().getProdutos(rs.getInt("estabelecimento.id")));
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -137,27 +182,42 @@ public class EstabelecimentoDAO {
     public Estabelecimento getEstabelecimento(String login) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
-        Estabelecimento estabelecimento = null;
+        Estabelecimento estabelecimento = new Estabelecimento();;
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from estabelecimento,usuario where login ='" + login + "' and estabelecimento.usuario_id=usuario.id");
             rs.first();
             Endereco endereco = EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id"));
-            estabelecimento = new Estabelecimento(rs.getInt("estabelecimento.id"),
-                    rs.getString("nome"),
-                    rs.getString("cnpj"),
-                    rs.getString("descricao"),
-                    rs.getInt("usuario_id"),
-                    rs.getString("login"),
-                    rs.getString("senha"),
-                    rs.getString("email"),
-                    rs.getString("tipo"),
-                    rs.getString("telefone"),
-                    rs.getString("celular"),
-                    rs.getString("linkImagem"));
-            estabelecimento.setCategoria(CategoriaDAO.getInstance().getCategoria(rs.getInt("categoria_id")));
-            estabelecimento.setEndereco(endereco);
+            estabelecimento.setEstabelecimentoId(rs.getInt("estabelecimento.id"))
+                    .setNome(rs.getString("nome"))
+                    .setCnpj(rs.getString("cnpj"))
+                    .setDescricao(rs.getString("descricao"))
+                    .setLinkImagem(rs.getString("linkImagem"))
+                    .setCategoria(CategoriaDAO.getInstance().getCategoria(rs.getInt("categoria_id")))
+                    .setProdutos(ProdutoDAO.getInstance().getProdutos(rs.getInt("estabelecimento.id")))
+                    .setUsuarioId(rs.getInt("usuario_id"))
+                    .setLogin(rs.getString("login"))
+                    .setSenha(rs.getString("senha"))
+                    .setEmail(rs.getString("email"))
+                    .setTipo(rs.getString("tipo"))
+                    .setTelefone(rs.getString("telefone"))
+                    .setCelular(rs.getString("celular"))
+                    .setEndereco(endereco);
+//            estabelecimento = new Estabelecimento(rs.getInt("estabelecimento.id"),
+//                    rs.getString("nome"),
+//                    rs.getString("cnpj"),
+//                    rs.getString("descricao"),
+//                    rs.getInt("usuario_id"),
+//                    rs.getString("login"),
+//                    rs.getString("senha"),
+//                    rs.getString("email"),
+//                    rs.getString("tipo"),
+//                    rs.getString("telefone"),
+//                    rs.getString("celular"),
+//                    rs.getString("linkImagem"));
+//            estabelecimento.setCategoria(CategoriaDAO.getInstance().getCategoria(rs.getInt("categoria_id")));
+//            estabelecimento.setEndereco(endereco);
         } catch (SQLException e) {
             return null;
         } finally {

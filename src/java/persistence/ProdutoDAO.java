@@ -31,16 +31,25 @@ public class ProdutoDAO {
             ResultSet rs = st.executeQuery("select * from produto");
 
             while (rs.next()) {
-                Produto produto = new Produto(rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getFloat("preco"),
-                        rs.getBoolean("disponivel"),
-                        rs.getString("descricao"),
-                        rs.getString("linkImagem")
-                );
-                produto.setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")));
-                produto.setIdEstabelecimento(rs.getInt("estabelecimento_id"));
-                produtos.add(produto);
+                Produto produto = new Produto();
+                produto.setId(rs.getInt("id"))
+                        .setNome(rs.getString("nome"))
+                        .setPreco(rs.getFloat("preco"))
+                        .setDisponivel(rs.getBoolean("disponivel"))
+                        .setDescricao(rs.getString("descricao"))
+                        .setLinkImagem(rs.getString("linkImagem"))
+                        .setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")))
+                        .setIdEstabelecimento(rs.getInt("estabelecimento_id"));
+//                Produto produto = new Produto(rs.getInt("id"),
+//                        rs.getString("nome"),
+//                        rs.getFloat("preco"),
+//                        rs.getBoolean("disponivel"),
+//                        rs.getString("descricao"),
+//                        rs.getString("linkImagem")
+//                );
+//                produto.setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")));
+//                produto.setIdEstabelecimento(rs.getInt("estabelecimento_id"));
+//                produtos.add(produto);
 
             }
 
@@ -62,14 +71,23 @@ public class ProdutoDAO {
             ResultSet rs = st.executeQuery("select * from produto where estabelecimento_id ='" + estabelecimentoId + "'");
 
             while (rs.next()) {
-                Produto produto = new Produto(rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getFloat("preco"),
-                        rs.getBoolean("disponivel"),
-                        rs.getString("descricao"),
-                        rs.getString("linkImagem")
-                );
-                produto.setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")));
+//                Produto produto = new Produto(rs.getInt("id"),
+//                        rs.getString("nome"),
+//                        rs.getFloat("preco"),
+//                        rs.getBoolean("disponivel"),
+//                        rs.getString("descricao"),
+//                        rs.getString("linkImagem")
+//                );
+//                produto.setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")));
+                Produto produto = new Produto();
+                produto.setId(rs.getInt("id"))
+                        .setNome(rs.getString("nome"))
+                        .setPreco(rs.getFloat("preco"))
+                        .setDisponivel(rs.getBoolean("disponivel"))
+                        .setDescricao(rs.getString("descricao"))
+                        .setLinkImagem(rs.getString("linkImagem"))
+                        .setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")))
+                        .setIdEstabelecimento(rs.getInt("estabelecimento_id"));
                 produtos.add(produto);
 
             }
@@ -92,15 +110,24 @@ public class ProdutoDAO {
             ResultSet rs = st.executeQuery("select * from produto where produto.promocao_id ='" + promocaoId + "'");
 
             while (rs.next()) {
-                Produto produto = new Produto(rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getFloat("preco"),
-                        rs.getBoolean("disponivel"),
-                        rs.getString("descricao"),
-                        rs.getString("linkImagem")
-                );
-                produto.setIdEstabelecimento(rs.getInt("estabelecimento_id"));
-                produto.setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")));
+//                Produto produto = new Produto(rs.getInt("id"),
+//                        rs.getString("nome"),
+//                        rs.getFloat("preco"),
+//                        rs.getBoolean("disponivel"),
+//                        rs.getString("descricao"),
+//                        rs.getString("linkImagem")
+//                );
+//                produto.setIdEstabelecimento(rs.getInt("estabelecimento_id"));
+//                produto.setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")));
+                Produto produto = new Produto();
+                produto.setId(rs.getInt("id"))
+                        .setNome(rs.getString("nome"))
+                        .setPreco(rs.getFloat("preco"))
+                        .setDisponivel(rs.getBoolean("disponivel"))
+                        .setDescricao(rs.getString("descricao"))
+                        .setLinkImagem(rs.getString("linkImagem"))
+                        .setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")))
+                        .setIdEstabelecimento(rs.getInt("estabelecimento_id"));
                 produtos.add(produto);
 
             }
@@ -116,7 +143,7 @@ public class ProdutoDAO {
     public Produto getProduto(int id) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
-        Produto produto = null;
+        Produto produto = new Produto();
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
@@ -124,15 +151,23 @@ public class ProdutoDAO {
 
             rs.first();
 
-            produto = new Produto(rs.getInt("id"),
-                    rs.getString("nome"),
-                    rs.getFloat("preco"),
-                    rs.getBoolean("disponivel"),
-                    rs.getString("descricao"),
-                    rs.getString("linkImagem")
-            );
-            produto.setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")));
-            produto.setIdEstabelecimento(rs.getInt("estabelecimento_id"));
+            produto.setId(rs.getInt("id"))
+                    .setNome(rs.getString("nome"))
+                    .setPreco(rs.getFloat("preco"))
+                    .setDisponivel(rs.getBoolean("disponivel"))
+                    .setDescricao(rs.getString("descricao"))
+                    .setLinkImagem(rs.getString("linkImagem"))
+                    .setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")))
+                    .setIdEstabelecimento(rs.getInt("estabelecimento_id"));
+//            produto = new Produto(rs.getInt("id"),
+//                    rs.getString("nome"),
+//                    rs.getFloat("preco"),
+//                    rs.getBoolean("disponivel"),
+//                    rs.getString("descricao"),
+//                    rs.getString("linkImagem")
+//            );
+//            produto.setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")));
+//            produto.setIdEstabelecimento(rs.getInt("estabelecimento_id"));
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -222,14 +257,23 @@ public class ProdutoDAO {
             ResultSet rs = st.executeQuery("select * from produto where estabelecimento_id='" + idEstabelecimento + "'");
 
             while (rs.next()) {
-                Produto produto = new Produto(rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getFloat("preco"),
-                        rs.getBoolean("disponivel"),
-                        rs.getString("descricao"),
-                        rs.getString("linkImagem")
-                );
-                produto.setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")));
+//                Produto produto = new Produto(rs.getInt("id"),
+//                        rs.getString("nome"),
+//                        rs.getFloat("preco"),
+//                        rs.getBoolean("disponivel"),
+//                        rs.getString("descricao"),
+//                        rs.getString("linkImagem")
+//                );
+//                produto.setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")));
+                Produto produto = new Produto();
+                produto.setId(rs.getInt("id"))
+                        .setNome(rs.getString("nome"))
+                        .setPreco(rs.getFloat("preco"))
+                        .setDisponivel(rs.getBoolean("disponivel"))
+                        .setDescricao(rs.getString("descricao"))
+                        .setLinkImagem(rs.getString("linkImagem"))
+                        .setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")))
+                        .setIdEstabelecimento(rs.getInt("estabelecimento_id"));
                 produtos.add(produto);
 
             }
@@ -252,14 +296,23 @@ public class ProdutoDAO {
             ResultSet rs = st.executeQuery("select * from produto,lista_produtos where lista_produtos.pedido_id='" + idPedido + "' and lista_produtos.produto_id=produto.id");
 
             while (rs.next()) {
-                Produto produto = new Produto(rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getFloat("preco"),
-                        rs.getBoolean("disponivel"),
-                        rs.getString("descricao"),
-                        rs.getString("linkImagem")
-                );
-                produto.setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")));
+//                Produto produto = new Produto(rs.getInt("id"),
+//                        rs.getString("nome"),
+//                        rs.getFloat("preco"),
+//                        rs.getBoolean("disponivel"),
+//                        rs.getString("descricao"),
+//                        rs.getString("linkImagem")
+//                );
+//                produto.setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")));
+                Produto produto = new Produto();
+                produto.setId(rs.getInt("id"))
+                        .setNome(rs.getString("nome"))
+                        .setPreco(rs.getFloat("preco"))
+                        .setDisponivel(rs.getBoolean("disponivel"))
+                        .setDescricao(rs.getString("descricao"))
+                        .setLinkImagem(rs.getString("linkImagem"))
+                        .setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")))
+                        .setIdEstabelecimento(rs.getInt("estabelecimento_id"));
                 produtos.add(produto);
 
             }

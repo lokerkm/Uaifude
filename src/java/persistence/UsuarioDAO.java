@@ -30,13 +30,21 @@ public class UsuarioDAO {
             ResultSet rs = st.executeQuery("select * from usuario");
 
             while (rs.next()) {
-                Usuario usuario = new Usuario(rs.getInt("id"),
-                        rs.getString("login"),
-                        rs.getString("senha"),
-                        rs.getString("email"),
-                        rs.getString("tipo"),
-                        rs.getString("telefone"),
-                        rs.getString("celular"));
+                Usuario usuario = new Usuario();
+                usuario.setUsuarioId(rs.getInt("id"))
+                        .setLogin(rs.getString("login"))
+                        .setSenha(rs.getString("senha"))
+                        .setEmail(rs.getString("email"))
+                        .setTipo(rs.getString("tipo"))
+                        .setTelefone(rs.getString("telefone"))
+                        .setCelular(rs.getString("celular"));
+//                Usuario usuario = new Usuario(rs.getInt("id"),
+//                        rs.getString("login"),
+//                        rs.getString("senha"),
+//                        rs.getString("email"),
+//                        rs.getString("tipo"),
+//                        rs.getString("telefone"),
+//                        rs.getString("celular"));
                 usuarios.add(usuario);
 
             }
@@ -52,20 +60,27 @@ public class UsuarioDAO {
     public Usuario getUsuario(int id) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
-        Usuario usuario = null;
+        Usuario usuario = new Usuario();
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from usuario where id ='" + id + "'");
             rs.first();
 
-            usuario = new Usuario(rs.getInt("id"),
-                    rs.getString("login"),
-                    rs.getString("senha"),
-                    rs.getString("email"),
-                    rs.getString("tipo"),
-                    rs.getString("telefone"),
-                    rs.getString("celular"));
+            usuario.setUsuarioId(rs.getInt("id"))
+                    .setLogin(rs.getString("login"))
+                    .setSenha(rs.getString("senha"))
+                    .setEmail(rs.getString("email"))
+                    .setTipo(rs.getString("tipo"))
+                    .setTelefone(rs.getString("telefone"))
+                    .setCelular(rs.getString("celular"));
+//            usuario = new Usuario(rs.getInt("id"),
+//                    rs.getString("login"),
+//                    rs.getString("senha"),
+//                    rs.getString("email"),
+//                    rs.getString("tipo"),
+//                    rs.getString("telefone"),
+//                    rs.getString("celular"));
 
         } catch (SQLException e) {
             throw e;

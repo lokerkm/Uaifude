@@ -30,15 +30,26 @@ public class EnderecoDAO {
             ResultSet rs = st.executeQuery("select * from endereco");
 
             while (rs.next()) {
-                Endereco endereco = new Endereco(rs.getInt("id"),
-                        rs.getString("cep"),
-                        rs.getString("logradouro"),
-                        rs.getString("numero"),
-                        rs.getString("complemento"),
-                        rs.getString("bairro"),
-                        rs.getString("cidade"),
-                        rs.getString("estado")
-                );
+
+                Endereco endereco = new Endereco();
+                endereco.setId(rs.getInt("id"))
+                        .setCep(rs.getString("cep"))
+                        .setLogradouro(rs.getString("logradouro"))
+                        .setNumero(rs.getString("numero"))
+                        .setComplemento(rs.getString("complemento"))
+                        .setBairro(rs.getString("bairro"))
+                        .setCidade(rs.getString("cidade"))
+                        .setEstado(rs.getString("estado"));
+
+//                Endereco endereco = new Endereco(rs.getInt("id"),
+//                        rs.getString("cep"),
+//                        rs.getString("logradouro"),
+//                        rs.getString("numero"),
+//                        rs.getString("complemento"),
+//                        rs.getString("bairro"),
+//                        rs.getString("cidade"),
+//                        rs.getString("estado")
+//                );
                 enderecos.add(endereco);
 
             }
@@ -54,22 +65,29 @@ public class EnderecoDAO {
     public Endereco getEndereco(int id) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
-        Endereco endereco = null;
+        Endereco endereco = new Endereco();
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from endereco where id ='" + id + "'");
             rs.first();
-
-            endereco = new Endereco(rs.getInt("id"),
-                    rs.getString("cep"),
-                    rs.getString("logradouro"),
-                    rs.getString("numero"),
-                    rs.getString("complemento"),
-                    rs.getString("bairro"),
-                    rs.getString("cidade"),
-                    rs.getString("estado")
-            );
+            endereco.setId(rs.getInt("id"))
+                    .setCep(rs.getString("cep"))
+                    .setLogradouro(rs.getString("logradouro"))
+                    .setNumero(rs.getString("numero"))
+                    .setComplemento(rs.getString("complemento"))
+                    .setBairro(rs.getString("bairro"))
+                    .setCidade(rs.getString("cidade"))
+                    .setEstado(rs.getString("estado"));
+//            endereco = new Endereco(rs.getInt("id"),
+//                    rs.getString("cep"),
+//                    rs.getString("logradouro"),
+//                    rs.getString("numero"),
+//                    rs.getString("complemento"),
+//                    rs.getString("bairro"),
+//                    rs.getString("cidade"),
+//                    rs.getString("estado")
+//            );
 
         } catch (SQLException e) {
             throw e;

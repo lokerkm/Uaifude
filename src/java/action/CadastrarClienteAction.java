@@ -43,9 +43,10 @@ public class CadastrarClienteAction implements Action {
         String estado = request.getParameter("estado");
         String cidade = request.getParameter("cidade");
         String bairro = request.getParameter("bairro");
-        Endereco endereco = new Endereco(cep, logradouro, numero, complemento, bairro, cidade, estado);
-        Cliente cliente = new Cliente(nome, cpf, dataNasciemnto, login, senha, email, "Cliente", telefone, celular, null);
-
+//        Endereco endereco = new Endereco(cep, logradouro, numero, complemento, bairro, cidade, estado);
+//        Cliente cliente = new Cliente(nome, cpf, dataNasciemnto, login, senha, email, "Cliente", telefone, celular, null);
+        Endereco endereco = new Endereco().setCep(cep).setLogradouro(logradouro).setNumero(numero).setComplemento(complemento).setBairro(bairro).setCidade(cidade).setEstado(estado);
+        Cliente cliente = (Cliente) new Cliente().setNome(nome).setCpf(cpf).setNascimento(dataNasciemnto).setLogin(login).setSenha(senha).setEmail(email).setTipo("Cliente").setTelefone(telefone).setCelular(celular);
         try {
 
             endereco.setId(EnderecoDAO.getInstance().save(endereco));

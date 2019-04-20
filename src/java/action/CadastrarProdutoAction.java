@@ -24,8 +24,8 @@ public class CadastrarProdutoAction implements Action {
         float preco = Float.parseFloat(request.getParameter("preco"));
         String linkImagem = request.getParameter("linkImagem");
 
-        Produto produto = new Produto(nome, preco, true, descricao, linkImagem);
-
+//        Produto produto = new Produto(nome, preco, true, descricao, linkImagem);
+        Produto produto = new Produto().setNome(nome).setPreco(preco).setDisponivel(true).setDescricao(descricao).setLinkImagem(linkImagem);
         HttpSession sessao = request.getSession();
         Estabelecimento estabelecimento = (Estabelecimento) sessao.getAttribute("usuario");
         produto.setIdEstabelecimento(estabelecimento.getEstabelecimentoId());

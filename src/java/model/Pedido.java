@@ -1,6 +1,5 @@
 package model;
 
-
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -16,66 +15,70 @@ public class Pedido extends Observable {
     private ArrayList<Produto> produtos = new ArrayList<>();
     private int estabelecimentoId;
 
-    public Pedido(float total, Endereco endereco, PedidoEstado estado, int estabelecimentoId) {
-        this.estabelecimentoId = estabelecimentoId;
-        this.estado = estado;
-        this.endereco = endereco;
-        this.total = total;
-
-    }
-
-    public Pedido(int id, float total, Endereco endereco, PedidoEstado estado, int estabelecimentoId) {
-        this.estabelecimentoId = estabelecimentoId;
-        this.id = id;
-        this.estado = estado;
-        this.endereco = endereco;
-        this.total = total;
-    }
-
-    public Pedido(int id, float total) {
-        this.id = id;
-        this.total = total;
-    }
-
+//    public Pedido(float total, Endereco endereco, PedidoEstado estado, int estabelecimentoId) {
+//        this.estabelecimentoId = estabelecimentoId;
+//        this.estado = estado;
+//        this.endereco = endereco;
+//        this.total = total;
+//
+//    }
+//
+//    public Pedido(int id, float total, Endereco endereco, PedidoEstado estado, int estabelecimentoId) {
+//        this.estabelecimentoId = estabelecimentoId;
+//        this.id = id;
+//        this.estado = estado;
+//        this.endereco = endereco;
+//        this.total = total;
+//    }
+//
+//    public Pedido(int id, float total) {
+//        this.id = id;
+//        this.total = total;
+//    }
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public Pedido setId(int id) {
         this.id = id;
+        return this;
     }
 
     public PedidoEstado getEstado() {
         return estado;
     }
 
-    public void setEstado(PedidoEstado estado) {
+    public Pedido setEstado(PedidoEstado estado) {
 
         this.estado = estado;
+        return this;
     }
 
     public float getTotal() {
         return total;
     }
 
-    public void setTotal(float total) {
+    public Pedido setTotal(float total) {
         this.total = total;
+        return this;
     }
 
     public Endereco getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(Endereco endereco) {
+    public Pedido setEndereco(Endereco endereco) {
         this.endereco = endereco;
+        return this;
     }
 
     public ArrayList<Produto> getProdutos() {
         return produtos;
     }
 
-    public void setProdutos(ArrayList<Produto> produtos) {
+    public Pedido setProdutos(ArrayList<Produto> produtos) {
         this.produtos = produtos;
+        return this;
     }
 
     public void addProduto(Produto produto) {
@@ -87,9 +90,10 @@ public class Pedido extends Observable {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public Pedido setCliente(Cliente cliente) {
         this.cliente = cliente;
         addObserver(cliente);
+        return this;
     }
 
     public void removeProduto(int idProduto) {
@@ -108,8 +112,9 @@ public class Pedido extends Observable {
         return estabelecimentoId;
     }
 
-    public void setEstabelecimentoId(int estabelecimentoId) {
+    public Pedido setEstabelecimentoId(int estabelecimentoId) {
         this.estabelecimentoId = estabelecimentoId;
+        return this;
     }
 
     public String toCarrinho() {

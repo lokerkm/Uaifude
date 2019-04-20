@@ -34,8 +34,8 @@ public class FinalizarPedidoAction implements Action {
             String estado = request.getParameter("estado");
             String cidade = request.getParameter("cidade");
             String bairro = request.getParameter("bairro");
-            endereco = new Endereco(cep, logradouro, numero, complemento, bairro, cidade, estado);
-
+//            endereco = new Endereco(cep, logradouro, numero, complemento, bairro, cidade, estado);
+            endereco.setCep(cep).setLogradouro(logradouro).setNumero(numero).setComplemento(complemento).setBairro(bairro).setCidade(cidade).setEstado(estado);
         }
         if (tipoPagamento.equals("Cartao")) {
             String numeroCartao = request.getParameter("numeroCartao");
@@ -63,7 +63,8 @@ public class FinalizarPedidoAction implements Action {
             pedido.setEstabelecimentoId(pedido.getProdutos().get(0).getIdEstabelecimento());
             PedidoDAO.getInstance().save(pedido, pedido.getEndereco());
 
-            Pedido pedidoCarrinho = new Pedido(0, cliente.getEndereco(), Factory.createPedidoEstado("Carrinho"), 0);
+//            Pedido pedidoCarrinho = new Pedido(0, cliente.getEndereco(), Factory.createPedidoEstado("Carrinho"), 0);
+            Pedido pedidoCarrinho = new Pedido().setId(0).setEndereco(cliente.getEndereco()).setEstado(Factory.createPedidoEstado("Carrinho")).setEstabelecimentoId(0);
             sessao.setAttribute("pedidos", PedidoDAO.getInstance().getPedidosCliente(cliente.getClienteId()));
             sessao.setAttribute("carrinho", pedidoCarrinho);
             response.sendRedirect("painelInicial.jsp");

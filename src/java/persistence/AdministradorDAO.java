@@ -23,17 +23,18 @@ public class AdministradorDAO {
     public Administrador getAdministrador(String login) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
-        Administrador administrador = null;
+        Administrador administrador = new Administrador();;
         try {
             DatabaseLocator.getInstance().getConnection();
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from administrador where login ='" + login + "'");
             rs.first();
-
-            administrador = new Administrador(rs.getInt("id"),
-                    rs.getString("login"),
-                    rs.getString("senha"));
+            administrador = new Administrador();
+            administrador.setId(rs.getInt("id")).setLogin(rs.getString("login")).setSenha(rs.getString("senha"));
+//            administrador = new Administrador(rs.getInt("id"),
+//                    rs.getString("login"),
+//                    rs.getString("senha"));
 
         } catch (SQLException e) {
 

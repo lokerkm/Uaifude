@@ -32,17 +32,31 @@ public class ClienteDAO {
 
             while (rs.next()) {
                 Endereco endereco = EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id"));
-                Cliente cliente = new Cliente(rs.getInt("cliente.id"),
-                        rs.getString("nome"),
-                        rs.getString("cpf"),
-                        rs.getString("nascimento"),
-                        rs.getInt("usuario_id"),
-                        rs.getString("login"),
-                        rs.getString("senha"),
-                        rs.getString("email"),
-                        rs.getString("tipo"),
-                        rs.getString("telefone"),
-                        rs.getString("celular"), endereco);
+                Cliente cliente = new Cliente();
+                cliente.setClienteId(rs.getInt("cliente.id"))
+                        .setNome(rs.getString("nome"))
+                        .setCpf(rs.getString("cpf"))
+                        .setNascimento(rs.getString("nascimento"))
+                        .setUsuarioId(rs.getInt("usuario_id"))
+                        .setLogin(rs.getString("login"))
+                        .setSenha(rs.getString("senha"))
+                        .setEmail(rs.getString("email"))
+                        .setTipo(rs.getString("tipo"))
+                        .setTelefone(rs.getString("telefone"))
+                        .setCelular(rs.getString("celular"))
+                        .setEndereco(endereco);
+
+//                Cliente cliente = new Cliente(rs.getInt("cliente.id"),
+//                        rs.getString("nome"),
+//                        rs.getString("cpf"),
+//                        rs.getString("nascimento"),
+//                        rs.getInt("usuario_id"),
+//                        rs.getString("login"),
+//                        rs.getString("senha"),
+//                        rs.getString("email"),
+//                        rs.getString("tipo"),
+//                        rs.getString("telefone"),
+//                        rs.getString("celular"), endereco);
                 clientes.add(cliente);
 
             }
@@ -58,7 +72,7 @@ public class ClienteDAO {
     public Cliente getCliente(int id) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
-        Cliente cliente = null;
+        Cliente cliente = new Cliente();;
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
@@ -66,17 +80,30 @@ public class ClienteDAO {
             rs.first();
 
             Endereco endereco = EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id"));
-            cliente = new Cliente(rs.getInt("cliente.id"),
-                    rs.getString("nome"),
-                    rs.getString("cpf"),
-                    rs.getString("nascimento"),
-                    rs.getInt("usuario_id"),
-                    rs.getString("login"),
-                    rs.getString("senha"),
-                    rs.getString("email"),
-                    rs.getString("tipo"),
-                    rs.getString("telefone"),
-                    rs.getString("celular"), endereco);
+
+            cliente.setClienteId(rs.getInt("cliente.id"))
+                    .setNome(rs.getString("nome"))
+                    .setCpf(rs.getString("cpf"))
+                    .setNascimento(rs.getString("nascimento"))
+                    .setUsuarioId(rs.getInt("usuario_id"))
+                    .setLogin(rs.getString("login"))
+                    .setSenha(rs.getString("senha"))
+                    .setEmail(rs.getString("email"))
+                    .setTipo(rs.getString("tipo"))
+                    .setTelefone(rs.getString("telefone"))
+                    .setCelular(rs.getString("celular"))
+                    .setEndereco(endereco);
+//            cliente = new Cliente(rs.getInt("cliente.id"),
+//                    rs.getString("nome"),
+//                    rs.getString("cpf"),
+//                    rs.getString("nascimento"),
+//                    rs.getInt("usuario_id"),
+//                    rs.getString("login"),
+//                    rs.getString("senha"),
+//                    rs.getString("email"),
+//                    rs.getString("tipo"),
+//                    rs.getString("telefone"),
+//                    rs.getString("celular"), endereco);
 
         } catch (SQLException e) {
             throw e;
@@ -89,24 +116,37 @@ public class ClienteDAO {
     public Cliente getCliente(String login) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
-        Cliente cliente = null;
+        Cliente cliente = new Cliente();
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from cliente,usuario where login ='" + login + "' and cliente.usuario_id=usuario.id");
             rs.first();
             Endereco endereco = EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id"));
-            cliente = new Cliente(rs.getInt("cliente.id"),
-                    rs.getString("nome"),
-                    rs.getString("cpf"),
-                    rs.getString("nascimento"),
-                    rs.getInt("usuario_id"),
-                    rs.getString("login"),
-                    rs.getString("senha"),
-                    rs.getString("email"),
-                    rs.getString("tipo"),
-                    rs.getString("telefone"),
-                    rs.getString("celular"), endereco);
+
+            cliente.setClienteId(rs.getInt("cliente.id"))
+                    .setNome(rs.getString("nome"))
+                    .setCpf(rs.getString("cpf"))
+                    .setNascimento(rs.getString("nascimento"))
+                    .setUsuarioId(rs.getInt("usuario_id"))
+                    .setLogin(rs.getString("login"))
+                    .setSenha(rs.getString("senha"))
+                    .setEmail(rs.getString("email"))
+                    .setTipo(rs.getString("tipo"))
+                    .setTelefone(rs.getString("telefone"))
+                    .setCelular(rs.getString("celular"))
+                    .setEndereco(endereco);
+//            cliente = new Cliente(rs.getInt("cliente.id"),
+//                    rs.getString("nome"),
+//                    rs.getString("cpf"),
+//                    rs.getString("nascimento"),
+//                    rs.getInt("usuario_id"),
+//                    rs.getString("login"),
+//                    rs.getString("senha"),
+//                    rs.getString("email"),
+//                    rs.getString("tipo"),
+//                    rs.getString("telefone"),
+//                    rs.getString("celular"), endereco);
 
         } catch (SQLException e) {
             return null;

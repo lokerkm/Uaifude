@@ -47,9 +47,10 @@ public class CadastrarEstabelecimentoAction implements Action {
 
         try {
             Categoria categoria = CategoriaDAO.getInstance().getCategoria(categoriaId);
-            Endereco endereco = new Endereco(cep, logradouro, numero, complemento, bairro, cidade, estado);
-            Estabelecimento estabelecimento = new Estabelecimento(nome, cnpj, descricao, linkImagem, categoria, login, email, senha, "Estabelecimento", telefone, celular, null);
-            ;
+//            Endereco endereco = new Endereco(cep, logradouro, numero, complemento, bairro, cidade, estado);
+//            Estabelecimento estabelecimento = new Estabelecimento(nome, cnpj, descricao, linkImagem, categoria, login, email, senha, "Estabelecimento", telefone, celular, null);
+            Endereco endereco = new Endereco().setCep(cep).setLogradouro(logradouro).setNumero(numero).setComplemento(complemento).setBairro(bairro).setCidade(cidade).setEstado(estado);
+            Estabelecimento estabelecimento = (Estabelecimento) new Estabelecimento().setNome(nome).setCnpj(cnpj).setDescricao(descricao).setLinkImagem(linkImagem).setCategoria(categoria).setLogin(login).setSenha(senha).setEmail(email).setTipo("Estbelecimento").setTelefone(telefone).setCelular(celular);
             endereco.setId(EnderecoDAO.getInstance().save(endereco));
             estabelecimento.setEndereco(endereco);
             EstabelecimentoDAO.getInstance().save(estabelecimento);

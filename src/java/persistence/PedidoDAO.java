@@ -51,16 +51,25 @@ public class PedidoDAO {
             ResultSet rs = st.executeQuery("select * from pedido");
 
             while (rs.next()) {
-                Pedido pedido = new Pedido(rs.getInt("id"),
-                        rs.getFloat("total"),
-                        EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id")),
-                        Factory.createPedidoEstado(rs.getString("estado")),
-                        rs.getInt("estabelecimento_id")
-                );
-                pedido.setCliente(ClienteDAO.getInstance().getCliente(rs.getInt("cliente_id")));
+                Pedido pedido = new Pedido();
                 ArrayList<Produto> produtos = ProdutoDAO.getInstance().getProdutosPedido(rs.getInt("id"));
-                pedido.setProdutos(produtos);
+                pedido.setId(rs.getInt("id"))
+                        .setTotal(rs.getFloat("total"))
+                        .setEndereco(EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id")))
+                        .setEstado(Factory.createPedidoEstado(rs.getString("estado")))
+                        .setEstabelecimentoId(rs.getInt("estabelecimento_id"))
+                        .setCliente(ClienteDAO.getInstance().getCliente(rs.getInt("cliente_id")))
+                        .setProdutos(produtos);
 
+//                Pedido pedido = new Pedido(rs.getInt("id"),
+//                        rs.getFloat("total"),
+//                        EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id")),
+//                        Factory.createPedidoEstado(rs.getString("estado")),
+//                        rs.getInt("estabelecimento_id")
+//                );
+//                pedido.setCliente(ClienteDAO.getInstance().getCliente(rs.getInt("cliente_id")));
+//                ArrayList<Produto> produtos = ProdutoDAO.getInstance().getProdutosPedido(rs.getInt("id"));
+//                pedido.setProdutos(produtos);
                 pedidos.add(pedido);
 
             }
@@ -83,18 +92,26 @@ public class PedidoDAO {
             ResultSet rs = st.executeQuery("select * from pedido where cliente_id ='" + clienteId + "'");
 
             while (rs.next()) {
-                PedidoEstado pedidoEstado = Factory.createPedidoEstado(rs.getString("estado"));
-                Endereco endereco = EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id"));
-                Pedido pedido = new Pedido(rs.getInt("id"),
-                        rs.getFloat("total"),
-                        endereco,
-                        pedidoEstado,
-                        rs.getInt("estabelecimento_id")
-                );
-                pedido.setCliente(ClienteDAO.getInstance().getCliente(rs.getInt("cliente_id")));
+//                PedidoEstado pedidoEstado = Factory.createPedidoEstado(rs.getString("estado"));
+//                Endereco endereco = EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id"));
+//                Pedido pedido = new Pedido(rs.getInt("id"),
+//                        rs.getFloat("total"),
+//                        endereco,
+//                        pedidoEstado,
+//                        rs.getInt("estabelecimento_id")
+//                );
+//                pedido.setCliente(ClienteDAO.getInstance().getCliente(rs.getInt("cliente_id")));
+//                ArrayList<Produto> produtos = ProdutoDAO.getInstance().getProdutosPedido(rs.getInt("id"));
+//                pedido.setProdutos(produtos);
+                Pedido pedido = new Pedido();
                 ArrayList<Produto> produtos = ProdutoDAO.getInstance().getProdutosPedido(rs.getInt("id"));
-                pedido.setProdutos(produtos);
-
+                pedido.setId(rs.getInt("id"))
+                        .setTotal(rs.getFloat("total"))
+                        .setEndereco(EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id")))
+                        .setEstado(Factory.createPedidoEstado(rs.getString("estado")))
+                        .setEstabelecimentoId(rs.getInt("estabelecimento_id"))
+                        .setCliente(ClienteDAO.getInstance().getCliente(rs.getInt("cliente_id")))
+                        .setProdutos(produtos);
                 pedidos.add(pedido);
 
             }
@@ -118,19 +135,27 @@ public class PedidoDAO {
                     + "where pedido.estabelecimento_id='" + estabelecimentoId + "'");
 
             while (rs.next()) {
-                PedidoEstado pedidoEstado = Factory.createPedidoEstado(rs.getString("estado"));
-                Endereco endereco = EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id"));
-                Pedido pedido = new Pedido(rs.getInt("id"),
-                        rs.getFloat("total"),
-                        endereco,
-                        pedidoEstado,
-                        rs.getInt("estabelecimento_id")
-                );
-
-                pedido.setCliente(ClienteDAO.getInstance().getCliente(rs.getInt("cliente_id")));
+//                PedidoEstado pedidoEstado = Factory.createPedidoEstado(rs.getString("estado"));
+//                Endereco endereco = EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id"));
+//                Pedido pedido = new Pedido(rs.getInt("id"),
+//                        rs.getFloat("total"),
+//                        endereco,
+//                        pedidoEstado,
+//                        rs.getInt("estabelecimento_id")
+//                );
+//
+//                pedido.setCliente(ClienteDAO.getInstance().getCliente(rs.getInt("cliente_id")));
+//                ArrayList<Produto> produtos = ProdutoDAO.getInstance().getProdutosPedido(rs.getInt("id"));
+//                pedido.setProdutos(produtos);
+                Pedido pedido = new Pedido();
                 ArrayList<Produto> produtos = ProdutoDAO.getInstance().getProdutosPedido(rs.getInt("id"));
-                pedido.setProdutos(produtos);
-
+                pedido.setId(rs.getInt("id"))
+                        .setTotal(rs.getFloat("total"))
+                        .setEndereco(EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id")))
+                        .setEstado(Factory.createPedidoEstado(rs.getString("estado")))
+                        .setEstabelecimentoId(rs.getInt("estabelecimento_id"))
+                        .setCliente(ClienteDAO.getInstance().getCliente(rs.getInt("cliente_id")))
+                        .setProdutos(produtos);
                 pedidos.add(pedido);
 
             }
@@ -146,21 +171,29 @@ public class PedidoDAO {
     public Pedido getPedido(int id) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
-        Pedido pedido = null;
+        Pedido pedido = new Pedido();
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from pedido where id ='" + id + "'");
             rs.first();
 
-            pedido = new Pedido(rs.getInt("id"),
-                    rs.getFloat("total"),
-                    EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id")),
-                    Factory.createPedidoEstado(rs.getString("estado")), rs.getInt("estabelecimento_id")
-            );
-            pedido.setCliente(ClienteDAO.getInstance().getCliente(rs.getInt("cliente_id")));
             ArrayList<Produto> produtos = ProdutoDAO.getInstance().getProdutosPedido(rs.getInt("id"));
-            pedido.setProdutos(produtos);
+            pedido.setId(rs.getInt("id"))
+                    .setTotal(rs.getFloat("total"))
+                    .setEndereco(EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id")))
+                    .setEstado(Factory.createPedidoEstado(rs.getString("estado")))
+                    .setEstabelecimentoId(rs.getInt("estabelecimento_id"))
+                    .setCliente(ClienteDAO.getInstance().getCliente(rs.getInt("cliente_id")))
+                    .setProdutos(produtos);
+//            pedido = new Pedido(rs.getInt("id"),
+//                    rs.getFloat("total"),
+//                    EnderecoDAO.getInstance().getEndereco(rs.getInt("endereco_id")),
+//                    Factory.createPedidoEstado(rs.getString("estado")), rs.getInt("estabelecimento_id")
+//            );
+//            pedido.setCliente(ClienteDAO.getInstance().getCliente(rs.getInt("cliente_id")));
+//            ArrayList<Produto> produtos = ProdutoDAO.getInstance().getProdutosPedido(rs.getInt("id"));
+//            pedido.setProdutos(produtos);
 
         } catch (SQLException e) {
             throw e;
