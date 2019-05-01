@@ -1,10 +1,12 @@
 package model;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Observable;
 
 import model.pedidoEstado.PedidoEstado;
 import model.pedidoEstado.PedidoEstadoMemento;
+import persistence.PedidoDAO;
 
 public class Pedido extends Observable {
 
@@ -144,7 +146,7 @@ public class Pedido extends Observable {
         notifyObservers();
     }
 
-    public String avancarHistorico() {
+    public String avancarHistorico() throws SQLException, ClassNotFoundException {
         if (historicoPedidoEstado.isEmpty()) {
             return "Historico vazio";
         }
@@ -153,12 +155,12 @@ public class Pedido extends Observable {
         }
         indexHistoricoPedidoEstado++;
         this.estado = historicoPedidoEstado.get(indexHistoricoPedidoEstado).getEstado();
-        
+        PedidoDAO.getInstance().update(this);
         return "Pedido movido de " + historicoPedidoEstado.get(indexHistoricoPedidoEstado - 1).getEstado().estadoString() + " para " + historicoPedidoEstado.get(indexHistoricoPedidoEstado).getEstado().estadoString();
 
     }
 
-    public String retrocederHistorico() {
+    public String retrocederHistorico() throws SQLException, ClassNotFoundException {
         if (historicoPedidoEstado.isEmpty()) {
             return "Historico vazio";
         }
@@ -167,6 +169,7 @@ public class Pedido extends Observable {
         }
         indexHistoricoPedidoEstado--;
         this.estado = historicoPedidoEstado.get(indexHistoricoPedidoEstado).getEstado();
+        PedidoDAO.getInstance().update(this);
         return "Pedido movido de " + historicoPedidoEstado.get(indexHistoricoPedidoEstado + 1).getEstado().estadoString() + " para " + historicoPedidoEstado.get(indexHistoricoPedidoEstado).getEstado().estadoString();
     }
 }
