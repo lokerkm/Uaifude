@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import model.pedidoEstado.PedidoEstado;
+import model.pedidoEstado.PedidoEstadoMemento;
 
 public class Pedido extends Observable {
 
@@ -14,43 +15,15 @@ public class Pedido extends Observable {
     private float total;
     private ArrayList<Produto> produtos = new ArrayList<>();
     private int estabelecimentoId;
+    private ArrayList<PedidoEstadoMemento> historicoPedidoEstado = new ArrayList<>();
+    private int indexHistoricoPedidoEstado;
 
-//    public Pedido(float total, Endereco endereco, PedidoEstado estado, int estabelecimentoId) {
-//        this.estabelecimentoId = estabelecimentoId;
-//        this.estado = estado;
-//        this.endereco = endereco;
-//        this.total = total;
-//
-//    }
-//
-//    public Pedido(int id, float total, Endereco endereco, PedidoEstado estado, int estabelecimentoId) {
-//        this.estabelecimentoId = estabelecimentoId;
-//        this.id = id;
-//        this.estado = estado;
-//        this.endereco = endereco;
-//        this.total = total;
-//    }
-//
-//    public Pedido(int id, float total) {
-//        this.id = id;
-//        this.total = total;
-//    }
     public int getId() {
         return id;
     }
 
     public Pedido setId(int id) {
         this.id = id;
-        return this;
-    }
-
-    public PedidoEstado getEstado() {
-        return estado;
-    }
-
-    public Pedido setEstado(PedidoEstado estado) {
-
-        this.estado = estado;
         return this;
     }
 
@@ -117,6 +90,34 @@ public class Pedido extends Observable {
         return this;
     }
 
+    public PedidoEstado getEstado() {
+        if (historicoPedidoEstado.isEmpty()) {
+            return estado;
+        } else {
+            return historicoPedidoEstado.get(indexHistoricoPedidoEstado).getEstado();
+        }
+
+    }
+
+    public Pedido setEstado(PedidoEstado estado) {
+        if (!this.estado.estadoString().equals(estado.estadoString())) {
+            if (historicoPedidoEstado.isEmpty()) {
+                indexHistoricoPedidoEstado = 0;
+            } else {
+                if (indexHistoricoPedidoEstado != historicoPedidoEstado.size() - 1) {
+                    while (indexHistoricoPedidoEstado != historicoPedidoEstado.size() - 1) {
+                        historicoPedidoEstado.remove(historicoPedidoEstado.size());
+
+                    }
+                }
+                indexHistoricoPedidoEstado = historicoPedidoEstado.size();
+            }
+            historicoPedidoEstado.add(new PedidoEstadoMemento(estado));
+        }
+        this.estado = estado;
+        return this;
+    }
+
     public String toCarrinho() {
         return estado.toCarrinho(this);
     }
@@ -143,4 +144,29 @@ public class Pedido extends Observable {
         notifyObservers();
     }
 
+    public String avancarHistorico() {
+        if (historicoPedidoEstado.isEmpty()) {
+            return "Historico vazio";
+        }
+        if (historicoPedidoEstado.size() - 1 == indexHistoricoPedidoEstado) {
+            return "Não possui estado sucedente";
+        }
+        indexHistoricoPedidoEstado++;
+        this.estado = historicoPedidoEstado.get(indexHistoricoPedidoEstado).getEstado();
+        
+        return "Pedido movido de " + historicoPedidoEstado.get(indexHistoricoPedidoEstado - 1).getEstado().estadoString() + " para " + historicoPedidoEstado.get(indexHistoricoPedidoEstado).getEstado().estadoString();
+
+    }
+
+    public String retrocederHistorico() {
+        if (historicoPedidoEstado.isEmpty()) {
+            return "Historico vazio";
+        }
+        if (0 == indexHistoricoPedidoEstado) {
+            return "Não possui estado precedente";
+        }
+        indexHistoricoPedidoEstado--;
+        this.estado = historicoPedidoEstado.get(indexHistoricoPedidoEstado).getEstado();
+        return "Pedido movido de " + historicoPedidoEstado.get(indexHistoricoPedidoEstado + 1).getEstado().estadoString() + " para " + historicoPedidoEstado.get(indexHistoricoPedidoEstado).getEstado().estadoString();
+    }
 }
