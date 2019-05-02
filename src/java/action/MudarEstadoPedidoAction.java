@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -22,20 +23,36 @@ public class MudarEstadoPedidoAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int pedidoId = Integer.parseInt(request.getParameter("pedidoId"));
         String acao = "to" + request.getParameter("acao");
-        Pedido pedido;
+        Pedido pedido = null;
 
         try {
-            pedido = PedidoDAO.getInstance().getPedido(pedidoId);
+
+            HttpSession sessao = request.getSession();
+            ArrayList<Pedido> pedidos = (ArrayList<Pedido>) sessao.getAttribute("pedidos");
+
+            int indexMudanca = -1;
+            for (int i = 0; i < pedidos.size(); i++) {
+                if (pedidos.get(i).getId() == pedidoId) {
+                    pedido = pedidos.get(i);
+                    indexMudanca = i;
+                }
+            }
+
             String tipoPedido = pedido.getEstado().estadoString();
             Method metodo = pedido.getClass().getMethod(acao);
             request.setAttribute("mensagem", metodo.invoke(pedido));
             if (!tipoPedido.equals(pedido.getEstado().estadoString())) {
                 PedidoDAO.getInstance().update(pedido);
+
+                if (indexMudanca != -1) {
+                    pedidos.set(indexMudanca, pedido);
+
+                }
             }
-            HttpSession sessao = request.getSession();
+
             if (sessao.getAttribute("tipo").equals("Estabelecimento")) {
-                Estabelecimento estabelecimento = (Estabelecimento) sessao.getAttribute("usuario");
-                sessao.setAttribute("pedidos", PedidoDAO.getInstance().getPedidosEstabelecimento(estabelecimento.getEstabelecimentoId()));
+
+                sessao.setAttribute("pedidos", pedidos);
 
                 RequestDispatcher view = request.getRequestDispatcher("painelInicial.jsp");
                 view.forward(request, response);

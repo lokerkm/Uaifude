@@ -21,15 +21,15 @@
                         <div class="card-body">
                             <p class="card-text" >Produto: ${produto.nome}</p>
                             <c:if test="${produto.promocao.getNome() == 'SemPromocao'}">
-                                    <small class="text-muted">Preço: R$ ${produto.preco}</small></c:if>
+                                <small class="text-muted">Preço: R$ ${produto.preco}</small></c:if>
 
-                                <c:if test="${produto.promocao.getNome() != 'SemPromocao'}">
-                                    <small class="text-muted">Preço: De:${produto.preco}
-                                        Por:${produto.getPrecoPosPromocao()}</small></c:if>
+                            <c:if test="${produto.promocao.getNome() != 'SemPromocao'}">
+                                <small class="text-muted">Preço: De:${produto.preco}
+                                    Por:${produto.getPrecoPosPromocao()}</small></c:if>
 
+                            </div>
                         </div>
                     </div>
-                </div>
 
 
             </c:forEach>
@@ -64,6 +64,17 @@
                         <input type="hidden" name="pedidoId" value="${pedido.id}" >
                         <input type="hidden" name="acao" value="Entregue" >
                         <button type="submit"  class="btn btn-primary">Declarar como entregue o pedido</button>
+                    </form>
+
+                    <form action="FrontController?action=RetrocederHistoricoPedido" method="post">
+                        <input type="hidden" name="pedidoId" value="${pedido.id}" >
+
+                        <button type="submit"  class="btn btn-secondary">Retroceder histórico</button>
+                    </form>
+                    <form action="FrontController?action=AvancarHistoricoPedido" method="post">
+                        <input type="hidden" name="pedidoId" value="${pedido.id}" >
+
+                        <button type="submit"  class="btn btn-secondary">Avançar histórico</button>
                     </form>
 
                 </div>

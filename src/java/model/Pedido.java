@@ -102,17 +102,24 @@ public class Pedido extends Observable {
     }
 
     public Pedido setEstado(PedidoEstado estado) {
-        if (!this.estado.estadoString().equals(estado.estadoString())) {
+        if (this.estado != null) {
+            if (!this.estado.estadoString().equals(estado.estadoString())) {
+                if (historicoPedidoEstado.isEmpty()) {
+                    indexHistoricoPedidoEstado = 0;
+                } else {
+                    if (indexHistoricoPedidoEstado != historicoPedidoEstado.size() - 1) {
+                        while (indexHistoricoPedidoEstado != historicoPedidoEstado.size() - 1) {
+                            historicoPedidoEstado.remove(historicoPedidoEstado.size());
+
+                        }
+                    }
+                    indexHistoricoPedidoEstado = historicoPedidoEstado.size();
+                }
+                historicoPedidoEstado.add(new PedidoEstadoMemento(estado));
+            }
+        } else {
             if (historicoPedidoEstado.isEmpty()) {
                 indexHistoricoPedidoEstado = 0;
-            } else {
-                if (indexHistoricoPedidoEstado != historicoPedidoEstado.size() - 1) {
-                    while (indexHistoricoPedidoEstado != historicoPedidoEstado.size() - 1) {
-                        historicoPedidoEstado.remove(historicoPedidoEstado.size());
-
-                    }
-                }
-                indexHistoricoPedidoEstado = historicoPedidoEstado.size();
             }
             historicoPedidoEstado.add(new PedidoEstadoMemento(estado));
         }
