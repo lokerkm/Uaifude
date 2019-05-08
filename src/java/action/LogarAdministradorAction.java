@@ -28,7 +28,7 @@ public class LogarAdministradorAction implements Action {
 
         try {
             Administrador adm = AdministradorDAO.getInstance().getAdministrador(login);
-            if (adm == null || !adm.getSenha().equals(senha)) {
+            if (adm == null || !listaUsuarios.contains(adm.getClass()) || !adm.getSenha().equals(senha)) {
                 response.sendRedirect("index.jsp");
             } else {
                 HttpSession sessao = request.getSession();

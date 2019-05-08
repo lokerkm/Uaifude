@@ -33,10 +33,10 @@ public class LogarEstabelecimentoAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String login = request.getParameter("txtLogin");
         String senha = request.getParameter("txtSenha");
-       
+
         try {
             Estabelecimento estabelecimento = EstabelecimentoDAO.getInstance().getEstabelecimento(login);
-            if (estabelecimento == null || !estabelecimento.getSenha().equals(senha)) {
+            if (estabelecimento == null || !listaUsuarios.contains(estabelecimento.getClass()) || !estabelecimento.getSenha().equals(senha)) {
                 superior.execute(request, response);
             } else {
                 estabelecimento.setProdutos(ProdutoDAO.getInstance().getProdutos(estabelecimento.getEstabelecimentoId()));

@@ -21,26 +21,26 @@ import persistence.PromocaoDAO;
 public class LogarClienteAction implements Action {
 
     private Action superior = new LogarEstabelecimentoAction();
-    protected ArrayList listaDocumentos = new ArrayList();
+    protected ArrayList listaUsuarios = new ArrayList();
 
     public LogarClienteAction() {
-        listaDocumentos.add(Cliente.class);
+        listaUsuarios.add(Cliente.class);
     }
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String login = request.getParameter("txtLogin");
+            String login = request.getParameter("txtLogin");
         String senha = request.getParameter("txtSenha");
         if (login.equals("") || senha.equals("")) {
             response.sendRedirect("index.jsp");
         }
         try {
-            
+
             Cliente cliente = ClienteDAO.getInstance().getCliente(login);
-           
-            if (cliente == null || !cliente.getSenha().equals(senha)) {
+
+            if (cliente == null || !listaUsuarios.contains(cliente.getClass()) || !cliente.getSenha().equals(senha)) {
                 superior.execute(request, response);
-               
+
             } else {
                 HttpSession sessao = request.getSession();
                 sessao.setAttribute("tipo", "Cliente");

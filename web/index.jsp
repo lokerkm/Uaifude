@@ -35,23 +35,17 @@
 
 
 
-            <div class="form-label-group">
-                <select class="custom-select" name="txtTipo">
-                    <option value="Administrador">Administrador</option>
-                    <option value="Cliente">Cliente</option>
-                    <option value="Estabelecimento">Estabelecimento</option>
-                </select>
-            </div>
+
 
 
 
             <button class="btn btn-lg btn-primary btn-block"  type="submit">Sign in</button>
-            
-           
+
+
         </form>
         <div class="form-signin">
-        <a href="cadastraCliente.jsp">Não tem conta? Cadastre-se</a></br>
-        <form name="CadastrarEstabelecimento" action="FrontController?action=PreparaCadastrarEstabelecimento" method="post">
+            <a href="cadastraCliente.jsp">Não tem conta? Cadastre-se</a></br>
+            <form name="CadastrarEstabelecimento" action="FrontController?action=PreparaCadastrarEstabelecimento" method="post">
                 <a href="javascript:document.CadastrarEstabelecimento.submit()">Quer fazer parte da nossa rede? Cadaste sua empresa</a>    
             </form>
         </div>
