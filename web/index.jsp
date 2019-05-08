@@ -16,7 +16,7 @@
         <!--<main role="main">-->
 
 
-        <form class="form-signin" action="FrontController?action=LogarUsuario" method="post">
+        <form class="form-signin" action="FrontController?action=LogarCliente" method="post">
 
             <div class="text-center mb-4">
                 <img class="mb-4" src="assets/img/uaifude.png" alt="" width="72" height="72">
