@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -29,17 +31,24 @@ public class LogarAdministradorAction implements Action {
         try {
             Administrador adm = AdministradorDAO.getInstance().getAdministrador(login);
             if (adm == null || !listaUsuarios.contains(adm.getClass()) || !adm.getSenha().equals(senha)) {
-                response.sendRedirect("index.jsp");
+                request.setAttribute("mensagem", "Senha ou login inválidos!");
+               RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+                view.forward(request, response);
             } else {
                 HttpSession sessao = request.getSession();
                 sessao.setAttribute("tipo", "Administrador");
                 sessao.setAttribute("usuario", adm);
-                response.sendRedirect("painelInicial.jsp");
+                request.setAttribute("mensagem", "Você está logado como administrador.");
+                RequestDispatcher view = request.getRequestDispatcher("painelInicial.jsp");
+                  view.forward(request, response);
             }
+        
         } catch (SQLException ex) {
-            Logger.getLogger(LogarUsuarioAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LogarAdministradorAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LogarUsuarioAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LogarAdministradorAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ServletException ex) {
+            Logger.getLogger(LogarAdministradorAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

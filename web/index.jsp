@@ -4,6 +4,9 @@
     Author     : Vitor
 --%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -14,7 +17,11 @@
     <body> 
         <%--<jsp:include page="header.jsp" />--%>
         <!--<main role="main">-->
+         <c:if test="${!empty mensagem}">
+        <div class="alert alert-success" role="alert" >
 
+            ${mensagem}</div>
+        </c:if>
 
         <form class="form-signin" action="FrontController?action=LogarCliente" method="post">
 
@@ -44,7 +51,7 @@
 
         </form>
         <div class="form-signin">
-            <a href="cadastraCliente.jsp">Não tem conta? Cadastre-se</a></br>
+            <a href="cadastraCliente.jsp">NÃ£o tem conta? Cadastre-se</a></br>
             <form name="CadastrarEstabelecimento" action="FrontController?action=PreparaCadastrarEstabelecimento" method="post">
                 <a href="javascript:document.CadastrarEstabelecimento.submit()">Quer fazer parte da nossa rede? Cadaste sua empresa</a>    
             </form>

@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -52,13 +54,17 @@ public class LogarClienteAction implements Action {
                 Pedido pedidoCarrinho = new Pedido().setId(0).setEndereco(cliente.getEndereco()).setEstado(Factory.createPedidoEstado("Carrinho")).setEstabelecimentoId(0);
                 sessao.setAttribute("carrinho", pedidoCarrinho);
                 sessao.setAttribute("promocoes", PromocaoDAO.getInstance().getPromocoes());
-                response.sendRedirect("painelInicial.jsp");
+                request.setAttribute("mensagem", "Você está logado como cliente.");
+                RequestDispatcher view = request.getRequestDispatcher("painelInicial.jsp");
+                view.forward(request, response);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(LogarUsuarioAction.class.getName()).log(Level.SEVERE, null, ex);
+        
+    }   catch (SQLException ex) {
+            Logger.getLogger(LogarClienteAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LogarUsuarioAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LogarClienteAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ServletException ex) {
+            Logger.getLogger(LogarClienteAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 }
