@@ -11,48 +11,51 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Combo;
 import model.Estabelecimento;
 import model.Pedido;
+import model.Combo;
 import model.Produto;
-import persistence.ComboDAO;
 import persistence.EstabelecimentoDAO;
+import persistence.ComboDAO;
 import persistence.ProdutoDAO;
 
-public class AdicionaProdutoAction implements Action {
+public class AdicionaComboAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int idProduto = Integer.parseInt(request.getParameter("produtoId"));
+        int idCombo = Integer.parseInt(request.getParameter("comboId"));
         int idEstabelecimeto = Integer.parseInt(request.getParameter("estabelecimentoId"));
 
         try {
             Estabelecimento estabelecimento = EstabelecimentoDAO.getInstance().getEstabelecimento(idEstabelecimeto);
-            Produto produto = ProdutoDAO.getInstance().getProduto(idProduto);
+            Combo combo = ComboDAO.getInstance().getCombo(idCombo);
             HttpSession sessao = request.getSession();
             Pedido pedidoCarrinho = (Pedido) sessao.getAttribute("carrinho");
             if (pedidoCarrinho.getProdutos().isEmpty() || pedidoCarrinho.getProdutos().get(0).getIdEstabelecimento() == estabelecimento.getEstabelecimentoId()) {
-                pedidoCarrinho.addProduto(produto);
+                for (int i = 0; i < combo.getProdutos().size(); i++) {
+                    pedidoCarrinho.addProduto(combo.getProdutos().get(i));
+                }
             } else {
-                ArrayList<Produto> produtos = ProdutoDAO.getInstance().getProdutosEstabelecimento(idEstabelecimeto);
                 ArrayList<Combo> combos = ComboDAO.getInstance().getCombosEstabelecimento(idEstabelecimeto);
+                ArrayList<Produto> produtos = ProdutoDAO.getInstance().getProdutosEstabelecimento(idEstabelecimeto);
+
                 sessao.setAttribute("carrinho", pedidoCarrinho);
                 request.setAttribute("estabelecimento", estabelecimento);
-                request.setAttribute("produtosEstabelecimento", produtos);
                 request.setAttribute("combosEstabelecimento", combos);
-                request.setAttribute("mensagemAddCarrinho", "Você  nao pode adicionar produtos de lojas diferentes ao carrinho.");
+                request.setAttribute("produtosEstabelecimento", produtos);
+                request.setAttribute("mensagemAddCarrinho", "Você  nao pode adicionar combos de lojas diferentes ao carrinho.");
 
                 RequestDispatcher view = request.getRequestDispatcher("paginaEstabelecimento.jsp");
                 view.forward(request, response);
             }
 
-            ArrayList<Produto> produtos = ProdutoDAO.getInstance().getProdutosEstabelecimento(idEstabelecimeto);
             ArrayList<Combo> combos = ComboDAO.getInstance().getCombosEstabelecimento(idEstabelecimeto);
+            ArrayList<Produto> produtos = ProdutoDAO.getInstance().getProdutosEstabelecimento(idEstabelecimeto);
             sessao.setAttribute("carrinho", pedidoCarrinho);
             request.setAttribute("estabelecimento", estabelecimento);
-            request.setAttribute("produtosEstabelecimento", produtos);
             request.setAttribute("combosEstabelecimento", combos);
-            request.setAttribute("mensagemAddCarrinho", "Você adicionou 1 " + produto.getNome() + " ao carrinho.");
+            request.setAttribute("produtosEstabelecimento", produtos);
+            request.setAttribute("mensagemAddCarrinho", "Você adicionou 1 " + combo.getNome() + " ao carrinho.");
 
             RequestDispatcher view = request.getRequestDispatcher("paginaEstabelecimento.jsp");
             view.forward(request, response);

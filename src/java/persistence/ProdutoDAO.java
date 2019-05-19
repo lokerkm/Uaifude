@@ -140,6 +140,38 @@ public class ProdutoDAO {
         return produtos;
     }
 
+    public ArrayList<Produto> getProdutosCombo(int comboId) throws ClassNotFoundException, SQLException {
+        Connection conn = null;
+        Statement st = null;
+        ArrayList<Produto> produtos = new ArrayList<>();
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT produto.* FROM `lista_produtos_combo`,produto WHERE id_combo='"
+                    + comboId + "' AND produto.id=lista_produtos_combo.id_produto");
+
+            while (rs.next()) {              
+                Produto produto = new Produto();
+                produto.setId(rs.getInt("id"))
+                        .setNome(rs.getString("nome"))
+                        .setPreco(rs.getFloat("preco"))
+                        .setDisponivel(rs.getBoolean("disponivel"))
+                        .setDescricao(rs.getString("descricao"))
+                        .setLinkImagem(rs.getString("linkImagem"))
+                        .setPromocao(PromocaoDAO.getInstance().getPromocao(rs.getInt("promocao_id")))
+                        .setIdEstabelecimento(rs.getInt("estabelecimento_id"));
+                produtos.add(produto);
+
+            }
+
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return produtos;
+    }
+
     public Produto getProduto(int id) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;

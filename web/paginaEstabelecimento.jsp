@@ -16,7 +16,36 @@
     </div></c:if>
     <div class="container">
         <div class="container">
+
             <div class="row">
+            <c:forEach items="${combosEstabelecimento}" var="combo">
+
+
+                <div class="col-md-4">
+                    <form action="FrontController?action=AdicionaCombo" method="post">
+                        <div class="card mb-4 shadow-sm">
+                            <img src="https://i.imgur.com/34uDFKR.png"  class="img-thumbnail">
+                            <div class="card-body">
+                                <p class="card-text" >Combo: ${combo.nome}</p>
+
+                                <small class="text-muted">Preço:${combo.getPreco()}  </small>
+                                <small class="text-muted">Descrição :${combo.getDescricao()}  </small>
+                                <input type="hidden" name="comboId" value="${combo.id}" >
+                                <input type="hidden" name="estabelecimentoId" value="${estabelecimento.getEstabelecimentoId()}" >
+                                <button type="submit"  class="btn btn-primary">Adicionar ao carrinho</button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+            </c:forEach>
+
+        </div>
+
+
+        <div class="row">
             <c:forEach items="${produtosEstabelecimento}" var="produto">
 
 

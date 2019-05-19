@@ -16,16 +16,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Combo;
 import model.Estabelecimento;
 import model.Produto;
 import persistence.ClienteDAO;
+import persistence.ComboDAO;
 import persistence.EstabelecimentoDAO;
 import persistence.ProdutoDAO;
 
-/**
- *
- * @author Aluno
- */
+
 public class LerEstabelecimentoAction implements Action {
 
     @Override
@@ -35,8 +34,10 @@ public class LerEstabelecimentoAction implements Action {
         try {
             Estabelecimento estabelecimento = EstabelecimentoDAO.getInstance().getEstabelecimento(id);
             ArrayList<Produto> produtos = ProdutoDAO.getInstance().getProdutosEstabelecimento(id);
+            ArrayList<Combo> combos = ComboDAO.getInstance().getCombosEstabelecimento(id);
             request.setAttribute("estabelecimento", estabelecimento);
             request.setAttribute("produtosEstabelecimento", produtos);
+            request.setAttribute("combosEstabelecimento", combos);
             request.setAttribute("mensagemAddCarrinho", null);
 
             RequestDispatcher view = request.getRequestDispatcher("paginaEstabelecimento.jsp");

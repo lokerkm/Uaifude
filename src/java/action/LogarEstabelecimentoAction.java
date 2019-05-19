@@ -16,6 +16,7 @@ import model.Estabelecimento;
 import model.Estabelecimento;
 import model.Pedido;
 import persistence.CategoriaDAO;
+import persistence.ComboDAO;
 import persistence.EstabelecimentoDAO;
 import persistence.EstabelecimentoDAO;
 import persistence.PedidoDAO;
@@ -23,19 +24,19 @@ import persistence.ProdutoDAO;
 import persistence.PromocaoDAO;
 
 public class LogarEstabelecimentoAction implements Action {
-
+    
     Action superior = new LogarAdministradorAction();
     protected ArrayList listaUsuarios = new ArrayList();
-
+    
     public LogarEstabelecimentoAction() {
         listaUsuarios.add(Estabelecimento.class);
     }
-
+    
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String login = request.getParameter("txtLogin");
         String senha = request.getParameter("txtSenha");
-
+        
         try {
             Estabelecimento estabelecimento = EstabelecimentoDAO.getInstance().getEstabelecimento(login);
             if (estabelecimento == null || !listaUsuarios.contains(estabelecimento.getClass()) || !estabelecimento.getSenha().equals(senha)) {
@@ -47,12 +48,13 @@ public class LogarEstabelecimentoAction implements Action {
                 sessao.setAttribute("usuario", estabelecimento);
                 sessao.setAttribute("pedidos", PedidoDAO.getInstance().getPedidosEstabelecimento(estabelecimento.getEstabelecimentoId()));
                 sessao.setAttribute("produtos", estabelecimento.getProdutos());
+                sessao.setAttribute("combos", ComboDAO.getInstance().getCombosEstabelecimento(estabelecimento.getEstabelecimentoId()));
                 sessao.setAttribute("promocoes", PromocaoDAO.getInstance().getPromocoes());
                 request.setAttribute("mensagem", "Você está logado como estabelecimento.");
-                 RequestDispatcher view = request.getRequestDispatcher("painelInicial.jsp");
-                 view.forward(request, response);
+                RequestDispatcher view = request.getRequestDispatcher("painelInicial.jsp");
+                view.forward(request, response);
             }
-        
+            
         } catch (SQLException ex) {
             Logger.getLogger(LogarEstabelecimentoAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -61,5 +63,5 @@ public class LogarEstabelecimentoAction implements Action {
             Logger.getLogger(LogarEstabelecimentoAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
 }

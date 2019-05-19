@@ -47,7 +47,8 @@
                             <a class="nav-link" href="categorias.jsp">Categorias</a></c:if>
 
 
-                        <c:if test = "${sessionScope.tipo == 'Administrador'}">
+                        <c:if test = "${sessionScope.tipo == 'Estabelecimento'}">
+                            <a class="nav-link" href="gerenciarCombos.jsp">Gerenciar Combos</a>
                         </c:if>
                     </li>
                     <li class="nav-item">
