@@ -21,10 +21,10 @@ public class ClienteDAO {
     private ClienteDAO() {
     }
 
-    public List<Cliente> getClientes() throws SQLException, ClassNotFoundException {
+    public ArrayList<Cliente> getClientes() throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
-        List<Cliente> clientes = new ArrayList<Cliente>();
+        ArrayList<Cliente> clientes = new ArrayList<Cliente>();
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
@@ -46,17 +46,6 @@ public class ClienteDAO {
                         .setCelular(rs.getString("celular"))
                         .setEndereco(endereco);
 
-//                Cliente cliente = new Cliente(rs.getInt("cliente.id"),
-//                        rs.getString("nome"),
-//                        rs.getString("cpf"),
-//                        rs.getString("nascimento"),
-//                        rs.getInt("usuario_id"),
-//                        rs.getString("login"),
-//                        rs.getString("senha"),
-//                        rs.getString("email"),
-//                        rs.getString("tipo"),
-//                        rs.getString("telefone"),
-//                        rs.getString("celular"), endereco);
                 clientes.add(cliente);
 
             }
@@ -93,17 +82,6 @@ public class ClienteDAO {
                     .setTelefone(rs.getString("telefone"))
                     .setCelular(rs.getString("celular"))
                     .setEndereco(endereco);
-//            cliente = new Cliente(rs.getInt("cliente.id"),
-//                    rs.getString("nome"),
-//                    rs.getString("cpf"),
-//                    rs.getString("nascimento"),
-//                    rs.getInt("usuario_id"),
-//                    rs.getString("login"),
-//                    rs.getString("senha"),
-//                    rs.getString("email"),
-//                    rs.getString("tipo"),
-//                    rs.getString("telefone"),
-//                    rs.getString("celular"), endereco);
 
         } catch (SQLException e) {
             throw e;
@@ -136,17 +114,7 @@ public class ClienteDAO {
                     .setTelefone(rs.getString("telefone"))
                     .setCelular(rs.getString("celular"))
                     .setEndereco(endereco);
-//            cliente = new Cliente(rs.getInt("cliente.id"),
-//                    rs.getString("nome"),
-//                    rs.getString("cpf"),
-//                    rs.getString("nascimento"),
-//                    rs.getInt("usuario_id"),
-//                    rs.getString("login"),
-//                    rs.getString("senha"),
-//                    rs.getString("email"),
-//                    rs.getString("tipo"),
-//                    rs.getString("telefone"),
-//                    rs.getString("celular"), endereco);
+
 
         } catch (SQLException e) {
             return null;

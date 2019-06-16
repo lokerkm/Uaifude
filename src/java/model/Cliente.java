@@ -1,6 +1,9 @@
 package model;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Observable;
+import persistence.ClienteDAO;
 
 public class Cliente extends Usuario {
 
@@ -8,24 +11,6 @@ public class Cliente extends Usuario {
     private String nome;
     private String cpf;
     private String nascimento;
-
-//    public Cliente(String nome, String cpf, String nascimento, String login, String senha, String email, String tipo, String telefone, String celular, Endereco endereco) {
-//        super(login, senha, email, tipo, telefone, celular, endereco);
-//
-//        this.nome = nome;
-//        this.cpf = cpf;
-//        this.nascimento = nascimento;
-//
-//    }
-//
-//    public Cliente(int id, String nome, String cpf, String nascimento, int usuarioId, String login, String senha, String email, String tipo, String telefone, String celular, Endereco endereco) {
-//        super(usuarioId, login, senha, email, tipo, telefone, celular, endereco);
-//        this.id = id;
-//        this.nome = nome;
-//        this.cpf = cpf;
-//        this.nascimento = nascimento;
-//
-//    }
 
     public int getClienteId() {
         return id;
@@ -70,5 +55,25 @@ public class Cliente extends Usuario {
             System.out.println("Email enviado para o cliente " + this.nome + " com o email " + this.getEmail() + ", o pedido  numero "
                     + pedido.getId() + " está no estado de " + pedido.getEstado().estadoString());
         }
+    }
+
+    public static Cliente obterCliente(String login) throws ClassNotFoundException, SQLException {
+        return ClienteDAO.getInstance().getCliente(login);
+    }
+
+    public static ArrayList<Cliente> obterClientes() throws ClassNotFoundException, SQLException {
+        return ClienteDAO.getInstance().getClientes();
+    }
+
+    public void gravar() throws SQLException, ClassNotFoundException {
+        ClienteDAO.getInstance().save(this);
+    }
+
+    public void alterar() throws SQLException, ClassNotFoundException {
+        ClienteDAO.getInstance().update(this);
+    }
+
+    public void excluir() throws SQLException, ClassNotFoundException {
+        ClienteDAO.getInstance().delete(this.getClienteId());
     }
 }

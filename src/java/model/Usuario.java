@@ -14,38 +14,6 @@ public class Usuario implements Observer {
     private String celular;
     private Endereco endereco;
 
-//    public Usuario(int id, String login, String senha, String email, String tipo, String telefone, String celular) {
-//        this.id = id;
-//        this.login = login;
-//        this.senha = senha;
-//        this.email = email;
-//        this.tipo = tipo;
-//        this.telefone = telefone;
-//        this.celular = celular;
-//    }
-//
-//    public Usuario(String login, String senha, String email, String tipo, String telefone, String celular, Endereco endereco) {
-//
-//        this.login = login;
-//        this.senha = senha;
-//        this.email = email;
-//        this.tipo = tipo;
-//        this.telefone = telefone;
-//        this.celular = celular;
-//        this.endereco = endereco;
-//    }
-//
-//    public Usuario(int id, String login, String senha, String email, String tipo, String telefone, String celular, Endereco endereco) {
-//        this.id = id;
-//        this.login = login;
-//        this.senha = senha;
-//        this.email = email;
-//        this.tipo = tipo;
-//        this.telefone = telefone;
-//        this.celular = celular;
-//        this.endereco = endereco;
-//    }
-
     public int getUsuarioId() {
         return id;
     }

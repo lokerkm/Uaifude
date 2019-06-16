@@ -1,16 +1,14 @@
 package model;
 
+import java.sql.SQLException;
+import persistence.AdministradorDAO;
+
 public class Administrador {
 
     private int id;
     private String login;
     private String senha;
 
-//    public Administrador(int id, String login, String senha) {
-//        this.id = id;
-//        this.login = login;
-//        this.senha = senha;
-//    }
     public int getId() {
         return id;
     }
@@ -38,4 +36,19 @@ public class Administrador {
         return this;
     }
 
+    public static Administrador obterAdministrador(String login) throws ClassNotFoundException, SQLException {
+        return AdministradorDAO.getInstance().getAdministrador(login);
+    }
+
+    public void gravar() throws SQLException, ClassNotFoundException {
+        AdministradorDAO.getInstance().save(this);
+    }
+
+    public void alterar() throws SQLException, ClassNotFoundException {
+        AdministradorDAO.getInstance().update(this);
+    }
+
+    public void excluir() throws SQLException, ClassNotFoundException {
+        AdministradorDAO.getInstance().delete(this.getId());
+    }
 }
